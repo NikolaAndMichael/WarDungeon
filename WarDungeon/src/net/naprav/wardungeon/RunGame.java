@@ -25,6 +25,7 @@ public class RunGame extends Canvas {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		RunGame run = new RunGame();
 		WindowFrame window = new WindowFrame("WarDungeon");
 	}
 }
