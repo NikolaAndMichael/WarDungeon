@@ -4,8 +4,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import net.naprav.wardungeon.entity.player.ArcherClass;
-
 public class RunGame extends Canvas {
 	private static final long serialVersionUID = 1203994186653691379L;
 
@@ -26,6 +24,8 @@ public class RunGame extends Canvas {
 	 */
 	public static void main(String[] args) {
 		RunGame run = new RunGame();
-		WindowFrame window = new WindowFrame("WarDungeon");
+		//WindowFrame window = new WindowFrame("WarDungeon");
+		//Below code used for testing login!
+		LoginScreen login = new LoginScreen("WarDungeon Login");
 	}
 }
