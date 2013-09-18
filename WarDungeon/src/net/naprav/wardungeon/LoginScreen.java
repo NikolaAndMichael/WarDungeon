@@ -50,7 +50,7 @@ public class LoginScreen extends JFrame {
 		this.setTitle(title);
 		this.setSize(size);
 		this.setVisible(true);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
 		this.setLayout(null);
