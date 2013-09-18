@@ -27,13 +27,15 @@ public class LoginScreen extends JFrame {
 	private static final Dimension size = new Dimension(WIDTH, HEIGHT);
 	
 	private ImageIcon image;
-	JLabel usernamelab;
-	JLabel passwordlab;
+	
+	JLabel usernameLabel;
+	JLabel passcodeLabel;
 	JTextField username;
-	JPasswordField password;
-	Action action;
+	JPasswordField passcode;
 	JButton login;
 	JPanel pane;
+	
+	Action action;
 	
 	/**
 	 * Sets the look and feel due to OS and sets up the basic login screen.
@@ -58,6 +60,7 @@ public class LoginScreen extends JFrame {
 		image = new ImageIcon("res/wardungeon_logo.png");
 		this.setIconImage(image.getImage());
 
+		action = new Action();
 		pane = new JPanel();
 		
 		pane.setBackground(Color.GREEN);
@@ -70,36 +73,38 @@ public class LoginScreen extends JFrame {
 		login.setVisible(true);
 		login.setSize(75, 20);
 		login.setLocation(710,500);
+		login.setToolTipText("Consider pressing this to login!");
+		login.addActionListener(action);
 		
-		passwordlab = new JLabel("Password:");
-		passwordlab.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		passwordlab.setVisible(true);
-		passwordlab.setSize(100,25);
-		passwordlab.setLocation(640, 471);
+		passcodeLabel = new JLabel("Password:");
+		passcodeLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passcodeLabel.setVisible(true);
+		passcodeLabel.setSize(100,25);
+		passcodeLabel.setLocation(640, 471);
 		
-		usernamelab = new JLabel("Username:");
-		usernamelab.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		usernamelab.setVisible(true);
-		usernamelab.setSize(100,25);
-		usernamelab.setLocation(640, 440);
+		usernameLabel = new JLabel("Username:");
+		usernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		usernameLabel.setVisible(true);
+		usernameLabel.setSize(100,25);
+		usernameLabel.setLocation(640, 440);
 		
-		password = new JPasswordField();
-		password.setVisible(true);
-		password.setSize(100,25);
-		password.setLocation(700, 440);
+		passcode = new JPasswordField();
+		passcode.setVisible(true);
+		passcode.setSize(100,25);
+		passcode.setLocation(700, 440);
+		passcode.setToolTipText("{insert password stuffs here}");
 		
-		username = new JTextField("");
+		username = new JTextField();
 		username.setVisible(true);
 		username.setSize(100,25);
 		username.setLocation(700, 470);
-		action = new Action();
-		login.addActionListener(action);
+		username.setToolTipText("{insert username stuffs here}");
 		
 		pane.add(login);
 		pane.add(username);
-		pane.add(password);
-		pane.add(usernamelab);
-		pane.add(passwordlab);
+		pane.add(passcode);
+		pane.add(usernameLabel);
+		pane.add(passcodeLabel);
 		this.setContentPane(pane);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,13 +120,23 @@ public class LoginScreen extends JFrame {
 		window.requestFocus();
 	}
 	
+	/**
+	 * Buffering 'paint' method for repainting well.
+	 * @param gfx
+	 */
+	/*
 	public void paint(Graphics gfx) {
 		Image image = this.createImage(this.getWidth(), this.getHeight());
 		Graphics graphics = image.getGraphics();
 		this.paintComponent(graphics);
 		gfx.drawImage(image, 0, 0, this);
 	}
-	
+	*/
+	/**
+	 * Method for painting crap to the screen.
+	 * @param gfx
+	 */
+	/*
 	public void paintComponent(Graphics gfx) {
 		super.paint(gfx);
 		
@@ -132,6 +147,7 @@ public class LoginScreen extends JFrame {
 		
 		this.repaint();
 	}
+	*/
 	
 	public class Action implements ActionListener {
 		public void actionPerformed(ActionEvent action) {
