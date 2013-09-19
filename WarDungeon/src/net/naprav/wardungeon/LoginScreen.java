@@ -192,6 +192,7 @@ public class LoginScreen extends JFrame {
 	public class Action implements ActionListener {
 		public void actionPerformed(ActionEvent action) {
 			loginGame();
+			FileManage filer = new FileManage();
 		}
 	}
 	
