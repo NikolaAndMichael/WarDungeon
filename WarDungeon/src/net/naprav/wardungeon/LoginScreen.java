@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
@@ -138,16 +140,20 @@ public class LoginScreen extends JFrame {
 	
 	public void registerAccount(URI uri) {
 		Desktop desk;
+		
 		if (Desktop.isDesktopSupported() ==  true) {
 			desk = Desktop.getDesktop();
+			System.out.println("Your desktop is supporting this program! Hurray!");
 		} else {
 			desk = null;
+			System.out.println("Your desktop is can't support this program! :(");
 		}
-	    if (desk != null && desk.isSupported(Desktop.Action.BROWSE)) {
+	   
+		if (desk != null && desk.isSupported(Desktop.Action.BROWSE)) {
 	        try {
 	            desk.browse(uri);
 	        } catch (Exception exc) {
-	            exc.printStackTrace();
+	            JOptionPane.showMessageDialog(null, "You can't browse for some reason!", "Alas, an error occured!", JOptionPane.ERROR_MESSAGE);
 	        }
 	    }
 	}
@@ -161,9 +167,10 @@ public class LoginScreen extends JFrame {
 	}
 	
 	/**
-	 * Buffering 'paint' method for repainting well.
+	 * Buffering 'paint' method for repainting the screen.
 	 * @param gfx
 	 */
+	
 	/*
 	public void paint(Graphics gfx) {
 		Image image = this.createImage(this.getWidth(), this.getHeight());
@@ -172,10 +179,12 @@ public class LoginScreen extends JFrame {
 		gfx.drawImage(image, 0, 0, this);
 	}
 	*/
+	
 	/**
 	 * Method for painting crap to the screen.
 	 * @param gfx
 	 */
+
 	/*
 	public void paintComponent(Graphics gfx) {
 		super.paint(gfx);
@@ -192,7 +201,8 @@ public class LoginScreen extends JFrame {
 	public class Action implements ActionListener {
 		public void actionPerformed(ActionEvent action) {
 			loginGame();
-			FileManage filer = new FileManage();
+			//Make sure to remove the comment below when made public!
+			//FileManage filer = new FileManage();
 		}
 	}
 	

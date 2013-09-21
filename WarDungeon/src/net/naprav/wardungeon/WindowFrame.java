@@ -28,6 +28,7 @@ public class WindowFrame extends JFrame {
 
 		game = new RunGame();
 		this.add(game);
+		game.begin();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
