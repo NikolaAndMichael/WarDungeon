@@ -102,8 +102,8 @@ public class RunGame extends Canvas implements Runnable {
 	 */
 	public static void main(String[] args) {
 		RunGame run = new RunGame();
-		//WindowFrame window = new WindowFrame("WarDungeon");
+		WindowFrame window = new WindowFrame("WarDungeon");
 		//Below code used for testing login!
-		LoginScreen login = new LoginScreen("WarDungeon Login");
+		//LoginScreen login = new LoginScreen("WarDungeon Login");
 	}
 }
