@@ -31,7 +31,7 @@ public class LoginScreen extends JFrame {
 	
 	private static final Dimension size = new Dimension(WIDTH, HEIGHT);
 	
-	private ImageIcon image;
+	private ImageIcon icon;
 	
 	JLabel usernameLabel;
 	JLabel passcodeLabel;
@@ -64,8 +64,8 @@ public class LoginScreen extends JFrame {
 
 		this.setLayout(null);
 		
-		image = new ImageIcon("res/wardungeon_logo.png");
-		this.setIconImage(image.getImage());
+		icon = new ImageIcon("res/wardungeon_logo.png");
+		this.setIconImage(icon.getImage());
 
 		action = new Action();
 		action2 = new Action2();

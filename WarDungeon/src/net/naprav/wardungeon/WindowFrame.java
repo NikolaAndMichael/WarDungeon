@@ -1,6 +1,7 @@
 package net.naprav.wardungeon;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -9,11 +10,11 @@ public class WindowFrame extends JFrame {
 	private static final long serialVersionUID = 1203994186653691379L;
 
 	public static final int WIDTH = 992;
-	public static final int HEIGHT = WIDTH / 16 * 10;
+	public static final int HEIGHT = 620;
 	public static final Dimension size = new Dimension(WIDTH, HEIGHT);
 
-	private ImageIcon image;
-
+	private ImageIcon icon;
+	
 	RunGame game;
 
 	public WindowFrame(String title) {
@@ -23,8 +24,8 @@ public class WindowFrame extends JFrame {
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 
-		image = new ImageIcon("res/wardungeon_logo.png");
-		this.setIconImage(image.getImage());
+		icon = new ImageIcon("res/wardungeon_logo.png");
+		this.setIconImage(icon.getImage());
 
 		game = new RunGame();
 		this.add(game);
