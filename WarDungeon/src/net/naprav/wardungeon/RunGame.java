@@ -50,9 +50,11 @@ public class RunGame extends Canvas implements Runnable {
 	public void render() {
 		BufferStrategy buffer = this.getBufferStrategy();
 		
+		//Clearing the screen to make room for the pixels! :D
+		mech.clearScreen();
 		//Rendering the pixels in the RenderMechanism class.
-		mech.renderStuffs();
-		for (int counter = 0; counter < (WIDTH * 100); counter++) {
+		mech.renderStuffs(20, 50);
+		for (int counter = 0; counter < allPixels.length; counter++) {
 			//Setting the pixels in this class to the ones in RenderMechanism.java.
 			allPixels[counter] = mech.allPixels[counter];
 		}

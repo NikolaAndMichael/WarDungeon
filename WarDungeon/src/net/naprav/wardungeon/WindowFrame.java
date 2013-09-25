@@ -9,9 +9,10 @@ import javax.swing.JFrame;
 public class WindowFrame extends JFrame {
 	private static final long serialVersionUID = 1203994186653691379L;
 
-	public static final int WIDTH = 992;
-	public static final int HEIGHT = 620;
-	public static final Dimension size = new Dimension(WIDTH, HEIGHT);
+	public static final int WIDTH = 330;
+	public static final int HEIGHT = 205;
+	public static final int SCALE = 3;
+	public static final Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
 	private ImageIcon icon;
 	
