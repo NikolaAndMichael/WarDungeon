@@ -22,7 +22,7 @@ public class RunGame extends Canvas implements Runnable {
 	private int[] allPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
 	//static Key key;
-	RenderMechanism mech;
+	RenderSystem system;
 	
 	/**
 	 * Added the main constructor.
@@ -34,7 +34,7 @@ public class RunGame extends Canvas implements Runnable {
 		this.setMinimumSize(size);
 		this.setMinimumSize(size);
 		
-		mech = new RenderMechanism(WIDTH, HEIGHT);
+		system = new RenderSystem(WIDTH, HEIGHT);
 	}
 
 	/**
@@ -51,12 +51,12 @@ public class RunGame extends Canvas implements Runnable {
 		BufferStrategy buffer = this.getBufferStrategy();
 		
 		//Clearing the screen to make room for the pixels! :D
-		mech.clearScreen();
+		system.clearScreen();
 		//Rendering the pixels in the RenderMechanism class.
-		mech.renderStuffs(20, 50);
+		system.changePixels(20, 50);
 		for (int counter = 0; counter < allPixels.length; counter++) {
 			//Setting the pixels in this class to the ones in RenderMechanism.java.
-			allPixels[counter] = mech.allPixels[counter];
+			allPixels[counter] = system.allPixels[counter];
 		}
 		
 		//Buffer is automatically null, so we can create one to render a number of buffers. (3)
@@ -65,6 +65,7 @@ public class RunGame extends Canvas implements Runnable {
 			return;
 		}
 		
+		//Graphics setup.
 		Graphics gfx = buffer.getDrawGraphics();
 		gfx.setColor(new Color(146, 17, 189));
 		gfx.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -117,7 +118,7 @@ public class RunGame extends Canvas implements Runnable {
 	public static void main(String[] args) {
 		//RunGame run = new RunGame();
 		WindowFrame window = new WindowFrame("WarDungeon");
-		//Below code used for testing login!
+		//Get rid of '//' below to test the login screen!
 		//LoginScreen login = new LoginScreen("WarDungeon Login");
 	}
 }
