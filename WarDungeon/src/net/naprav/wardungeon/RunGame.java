@@ -22,6 +22,7 @@ public class RunGame extends Canvas implements Runnable {
 	private int[] allPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
 	//static Key key;
+	RenderMechanism mech;
 	
 	/**
 	 * Added the main constructor.
@@ -32,6 +33,8 @@ public class RunGame extends Canvas implements Runnable {
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
 		this.setMinimumSize(size);
+		
+		mech = new RenderMechanism(WIDTH, HEIGHT);
 	}
 
 	/**
@@ -47,17 +50,24 @@ public class RunGame extends Canvas implements Runnable {
 	public void render() {
 		BufferStrategy buffer = this.getBufferStrategy();
 		
-		//buffer is automatically null, so we can create one to render a number of buffers. (3)
+		//Rendering the pixels in the RenderMechanism class.
+		mech.renderStuffs();
+		for (int counter = 0; counter < (WIDTH * 100); counter++) {
+			//Setting the pixels in this class to the ones in RenderMechanism.java.
+			allPixels[counter] = mech.allPixels[counter];
+		}
+		
+		//Buffer is automatically null, so we can create one to render a number of buffers. (3)
 		if (buffer == null) {
 			this.createBufferStrategy(3);
 			return;
 		}
 		
 		Graphics gfx = buffer.getDrawGraphics();
-		//Stuff with graphics goes between here...
 		gfx.setColor(new Color(146, 17, 189));
 		gfx.fillRect(0, 0, this.getWidth(), this.getHeight());
-		//and here.
+		//Draw stuffs here.
+		gfx.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
 		gfx.dispose();
 		buffer.show();
 	}
@@ -86,6 +96,7 @@ public class RunGame extends Canvas implements Runnable {
 		}
 	}	
 	
+	
 	/**
 	 * The run method is used to run the game itself in the thread.
 	 */
@@ -93,6 +104,7 @@ public class RunGame extends Canvas implements Runnable {
 		while (isRunning == true) {
 			this.tick();
 			this.render();
+			System.out.println("We're running baby! :D");
 		}
 	}
 	
@@ -101,7 +113,7 @@ public class RunGame extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		RunGame run = new RunGame();
+		//RunGame run = new RunGame();
 		WindowFrame window = new WindowFrame("WarDungeon");
 		//Below code used for testing login!
 		//LoginScreen login = new LoginScreen("WarDungeon Login");
