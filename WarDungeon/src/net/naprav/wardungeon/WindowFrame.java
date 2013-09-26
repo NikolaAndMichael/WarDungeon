@@ -18,9 +18,6 @@ public class WindowFrame extends JFrame {
 	
 	RunGame game;
 
-	public int frames;
-	public int updates;
-	
 	public WindowFrame(String title) {
 		this.setSize(size);
 		this.setVisible(true);
@@ -35,21 +32,6 @@ public class WindowFrame extends JFrame {
 		this.add(game);
 		game.begin();
 		
-		//Beware! This might not terminate properly!
-		/*
-		while (game.isRunning == true) {
-			frames = game.FPS;
-			updates = game.TPS;
-			this.setTitle(title + " | FPS: " + frames + ", " + "UPS: " + updates);
-			System.out.println(frames + ", " + updates);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException exc) {
-				exc.printStackTrace();
-			}
-		}
-		*/
-
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
