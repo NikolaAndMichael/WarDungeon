@@ -13,13 +13,15 @@ public class WindowFrame extends JFrame {
 	public static final int HEIGHT = 200;
 	public static final int SCALE = 3;
 	public static final Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
-
+	
 	private ImageIcon icon;
 	
 	RunGame game;
 
+	public int frames;
+	public int updates;
+	
 	public WindowFrame(String title) {
-		this.setTitle(title);
 		this.setSize(size);
 		this.setVisible(true);
 		this.setResizable(true);
@@ -29,8 +31,24 @@ public class WindowFrame extends JFrame {
 		this.setIconImage(icon.getImage());
 
 		game = new RunGame();
+		
 		this.add(game);
 		game.begin();
+		
+		//Beware! This might not terminate properly!
+		/*
+		while (game.isRunning == true) {
+			frames = game.FPS;
+			updates = game.TPS;
+			this.setTitle(title + " | FPS: " + frames + ", " + "UPS: " + updates);
+			System.out.println(frames + ", " + updates);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException exc) {
+				exc.printStackTrace();
+			}
+		}
+		*/
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

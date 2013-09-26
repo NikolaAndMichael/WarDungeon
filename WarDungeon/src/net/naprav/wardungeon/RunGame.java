@@ -16,17 +16,21 @@ public class RunGame extends Canvas implements Runnable {
 	private static final Dimension size = WindowFrame.size;
 
 	private Thread thread;
-	private boolean isRunning = false;
+	public boolean isRunning = false;
+	
+	public static int FPS = 0; //Frames per second.
+	public static int TPS = 0; //Ticks per second. (Updates per second)
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] allPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
 	//static Key key;
 	RenderSystem system;
+	static WindowFrame window;
 	
 	/**
 	 * Added the main constructor.
-	 */
+	 */ 
 	public RunGame() {
 		this.setVisible(true);
 		this.setSize(size);
@@ -53,7 +57,7 @@ public class RunGame extends Canvas implements Runnable {
 		//Clearing the screen to make room for the pixels! :D
 		system.clearScreen();
 		//Rendering the pixels in the RenderMechanism class.
-		system.changePixels(20, 50);
+		system.changePixels();
 		for (int counter = 0; counter < allPixels.length; counter++) {
 			//Setting the pixels in this class to the ones in RenderMechanism.java.
 			allPixels[counter] = system.allPixels[counter];
@@ -69,8 +73,9 @@ public class RunGame extends Canvas implements Runnable {
 		Graphics gfx = buffer.getDrawGraphics();
 		gfx.setColor(new Color(146, 17, 189));
 		gfx.fillRect(0, 0, this.getWidth(), this.getHeight());
-		//Draw stuffs here.
+		//Draw stuffs between here...
 		gfx.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+		//and here.
 		gfx.dispose();
 		buffer.show();
 	}
@@ -104,11 +109,35 @@ public class RunGame extends Canvas implements Runnable {
 	 * The run method is used to run the game itself in the thread.
 	 */
 	public void run() {
+		long previousTime = System.nanoTime();
+		long secondTimer = System.currentTimeMillis();
+			
+		final double nanoSeconds = 1000000000.0 / 60.0;
+		double omega = 0;
+		
 		while (isRunning == true) {
-			this.tick();
+			long currentTime = System.nanoTime();
+			omega += (currentTime - previousTime) / nanoSeconds;
+			previousTime = currentTime;
+			
+			while (omega >= 1) {
+				this.tick();
+				TPS++;
+				omega--;
+			}
+			
 			this.render();
-			System.out.println("We're running baby! :D");
+			FPS++;
+			
+			if ((System.currentTimeMillis() - secondTimer) > 1000) {
+				secondTimer += 1000;
+				//Un-comment out below code for console output of frames and updates.
+				//System.out.println(String.format("FPS: %s, UPS: %s", FPS, TPS));
+				FPS = 0;
+				TPS = 0;
+			}
 		}
+		this.finish();
 	}
 	
 	/**
@@ -117,7 +146,7 @@ public class RunGame extends Canvas implements Runnable {
 	 */
 	public static void main(String[] args) {
 		//RunGame run = new RunGame();
-		WindowFrame window = new WindowFrame("WarDungeon");
+		window = new WindowFrame("WarDungeon" + FPS + " ," + TPS);
 		//Get rid of '//' below to test the login screen!
 		//LoginScreen login = new LoginScreen("WarDungeon Login");
 	}
