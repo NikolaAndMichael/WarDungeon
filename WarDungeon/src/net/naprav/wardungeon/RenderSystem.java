@@ -30,19 +30,15 @@ public class RenderSystem {
 	/**
 	 * Setting the pixel data equal to something!
 	 */
-	public void changePixels() {
+	public void changePixels(int offsetX, int offsetY) {
 		for (int x = 0; x < this.width; x++) {
-			int xMove = x;
-			if (xMove < 0 || xMove >= width) {
-				break;
-			}
+			int xMove = x + offsetX;
 			for (int y = 0; y < this.height; y++) {
-				int yMove = y;
-				if (yMove < 0 || yMove >= height) {
-					break;
-				}
-				//The "& 63" refers to when we get to 63, go back to 0, thus looping.
-				int blockIndex = ((xMove / blockSize) & 63) + ((yMove / blockSize) & 63) * 64;
+				int yMove = y + offsetY;
+				// The "& 63" refers to when we get to 63, go back to 0, thus
+				// looping.
+				int blockIndex = ((xMove / blockSize) & 63)
+						+ ((yMove / blockSize) & 63) * 64;
 				allPixels[x + (y * width)] = block[blockIndex];
 			}
 		}

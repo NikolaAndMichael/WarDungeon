@@ -13,7 +13,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.SwingUtilities;
 
 public class RunGame extends Canvas implements Runnable {
-	
+
 	private static final long serialVersionUID = 1203994186653691379L;
 
 	private static final int WIDTH = WindowFrame.WIDTH;
@@ -26,8 +26,10 @@ public class RunGame extends Canvas implements Runnable {
 	public static int FPS = 0; // Frames per second.
 	public static int TPS = 0; // Ticks per second. (Updates per second)
 
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private int[] allPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
+			BufferedImage.TYPE_INT_RGB);
+	private int[] allPixels = ((DataBufferInt) image.getRaster()
+			.getDataBuffer()).getData();
 
 	// static Key key;
 	RenderSystem system;
@@ -45,11 +47,15 @@ public class RunGame extends Canvas implements Runnable {
 		system = new RenderSystem(WIDTH, HEIGHT);
 	}
 
+	int xMove = 0, yMove = 0;
+
 	/**
 	 * Responsible for the logic behind the game.
 	 */
 	public void tick() {
-
+		//Screw around with the numbers to set the speed at which the blocks move.
+		xMove+= 100;
+		yMove+= 100;
 	}
 
 	/*
@@ -60,8 +66,10 @@ public class RunGame extends Canvas implements Runnable {
 
 		// Clearing the screen to make room for the pixels! :D
 		system.clearScreen();
+
 		// Rendering the pixels in the RenderMechanism class.
-		system.changePixels();
+		system.changePixels(xMove, yMove);
+
 		for (int counter = 0; counter < allPixels.length; counter++) {
 			// Setting the pixels in this class to the ones in
 			// RenderMechanism.java.
@@ -71,11 +79,11 @@ public class RunGame extends Canvas implements Runnable {
 		// Buffer is automatically null, so we can create one to render a number
 		// of buffers. (3)
 		if (buffer == null) {
-			this.createBufferStrategy(3);
+			this.createBufferStrategy(2);
 			return;
 		}
 
-		//Graphics setup.
+		// Graphics setup.
 		Graphics gfx = buffer.getDrawGraphics();
 		gfx.setColor(new Color(146, 17, 189));
 		gfx.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -136,7 +144,8 @@ public class RunGame extends Canvas implements Runnable {
 
 			if ((System.currentTimeMillis() - secondTimer) > 1000) {
 				secondTimer += 1000;
-				//Un-comment out below code for console output of frames and updates.
+				// Un-comment out below code for console output of frames and
+				// updates.
 				System.out.println("FPS: " + FPS + ", " + "UPS:" + TPS);
 				FPS = 0;
 				TPS = 0;
