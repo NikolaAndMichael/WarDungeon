@@ -19,6 +19,7 @@ public class WindowFrame extends JFrame {
 	RunGame game;
 
 	public WindowFrame(String title) {
+		this.setTitle(title);
 		this.setSize(size);
 		this.setVisible(true);
 		this.setResizable(true);
@@ -34,4 +35,23 @@ public class WindowFrame extends JFrame {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	public WindowFrame(String title, int frame, int update) {
+		this.setTitle(title + " | " + "FPS: " + frame + ", UPS: " + update);
+		this.setSize(size);
+		this.setVisible(true);
+		this.setResizable(true);
+		this.setLocationRelativeTo(null);
+
+		icon = new ImageIcon("res/wardungeon_logo.png");
+		this.setIconImage(icon.getImage());
+
+		game = new RunGame();
+		
+		this.add(game);
+		game.begin();
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
 }
