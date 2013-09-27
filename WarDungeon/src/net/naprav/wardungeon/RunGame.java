@@ -54,8 +54,8 @@ public class RunGame extends Canvas implements Runnable {
 	 */
 	public void tick() {
 		//Screw around with the numbers to set the speed at which the blocks move.
-		xMove+= 100;
-		yMove+= 100;
+		xMove++;
+		yMove++;
 	}
 
 	/*
