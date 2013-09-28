@@ -3,14 +3,12 @@ package net.naprav.wardungeon;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Window;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-import javax.swing.SwingUtilities;
+import net.naprav.wardungeon.input.Key;
 
 public class RunGame extends Canvas implements Runnable {
 
@@ -23,17 +21,15 @@ public class RunGame extends Canvas implements Runnable {
 	private Thread thread;
 	public boolean isRunning = false;
 
-	public static int FPS = 0; // Frames per second.
-	public static int TPS = 0; // Ticks per second. (Updates per second)
+	public int FPS = 0; // Frames per second.
+	public int TPS = 0; // Ticks per second. (Updates per second)
 
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
-			BufferedImage.TYPE_INT_RGB);
-	private int[] allPixels = ((DataBufferInt) image.getRaster()
-			.getDataBuffer()).getData();
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private int[] allPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-	// static Key key;
-	RenderSystem system;
-
+	private Key key;
+	private RenderSystem system;
+	
 	/**
 	 * Added the main constructor.
 	 */
@@ -44,6 +40,9 @@ public class RunGame extends Canvas implements Runnable {
 		this.setMinimumSize(size);
 		this.setMinimumSize(size);
 
+		key = new Key();
+		this.addKeyListener(key);
+		
 		system = new RenderSystem(WIDTH, HEIGHT);
 	}
 
@@ -53,9 +52,30 @@ public class RunGame extends Canvas implements Runnable {
 	 * Responsible for the logic behind the game.
 	 */
 	public void tick() {
-		//Screw around with the numbers to set the speed at which the blocks move.
-		xMove++;
-		yMove++;
+		key.updateMovement();
+		if (key.up == true) {
+			yMove--;
+		} else if (key.down == true) {
+			yMove++;
+		} else if (key.left == true) {
+			xMove--;
+		} else if (key.right == true) {
+			xMove++;
+		} 
+		
+		if (key.up == true && key.left == true) {
+			yMove--;
+			xMove--;
+		} else if (key.up == true && key.right == true) {
+			yMove--;
+			xMove++;
+		} else if (key.down == true && key.left == true) {
+			yMove++;
+			xMove--;
+		} else if (key.down == true && key.right == true) {
+			yMove++;
+			xMove++;
+		}
 	}
 
 	/*
@@ -89,6 +109,10 @@ public class RunGame extends Canvas implements Runnable {
 		gfx.fillRect(0, 0, this.getWidth(), this.getHeight());
 		// Draw stuffs between here...
 		gfx.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+		if (key.showFPS == true) {
+			//Set it up so that it still works with the "per second" rule.
+			key.showPerSeconds(buffer, FPS, TPS);
+		}
 		// and here.
 		gfx.dispose();
 		buffer.show();

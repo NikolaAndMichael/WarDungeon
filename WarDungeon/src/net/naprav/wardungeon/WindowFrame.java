@@ -7,15 +7,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class WindowFrame extends JFrame {
+	
 	private static final long serialVersionUID = 1203994186653691379L;
 
 	public static final int WIDTH = 330;
 	public static final int HEIGHT = 200;
 	public static final int SCALE = 3;
 	public static final Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
-	
+
 	private ImageIcon icon;
-	
+
 	RunGame game;
 
 	public WindowFrame(String title) {
@@ -29,13 +30,16 @@ public class WindowFrame extends JFrame {
 		this.setIconImage(icon.getImage());
 
 		game = new RunGame();
-		
+
 		this.add(game);
 		game.begin();
+
+		this.requestFocus();
+		game.requestFocus();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	public WindowFrame(String title, int frame, int update) {
 		this.setTitle(title + " | " + "FPS: " + frame + ", UPS: " + update);
 		this.setSize(size);
@@ -47,10 +51,10 @@ public class WindowFrame extends JFrame {
 		this.setIconImage(icon.getImage());
 
 		game = new RunGame();
-		
+
 		this.add(game);
 		game.begin();
-		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
