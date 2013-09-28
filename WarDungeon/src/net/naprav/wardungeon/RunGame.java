@@ -8,6 +8,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import javax.swing.ImageIcon;
+
 import net.naprav.wardungeon.input.Key;
 
 public class RunGame extends Canvas implements Runnable {
@@ -29,7 +31,9 @@ public class RunGame extends Canvas implements Runnable {
 
 	private Key key;
 	private RenderSystem system;
-	
+
+	private ImageIcon icon;
+
 	/**
 	 * Added the main constructor.
 	 */
@@ -42,7 +46,9 @@ public class RunGame extends Canvas implements Runnable {
 
 		key = new Key();
 		this.addKeyListener(key);
-		
+
+		icon = new ImageIcon("res/gui/naprav.png");
+
 		system = new RenderSystem(WIDTH, HEIGHT);
 	}
 
@@ -61,8 +67,8 @@ public class RunGame extends Canvas implements Runnable {
 			xMove--;
 		} else if (key.right == true) {
 			xMove++;
-		} 
-		
+		}
+
 		if (key.up == true && key.left == true) {
 			yMove--;
 			xMove--;
@@ -78,6 +84,8 @@ public class RunGame extends Canvas implements Runnable {
 		}
 	}
 
+	int timer = 0;
+	
 	/*
 	 * Responsible for the actual rendering behind the game.
 	 */
@@ -105,12 +113,11 @@ public class RunGame extends Canvas implements Runnable {
 
 		// Graphics setup.
 		Graphics gfx = buffer.getDrawGraphics();
-		gfx.setColor(new Color(146, 17, 189));
-		gfx.fillRect(0, 0, this.getWidth(), this.getHeight());
 		// Draw stuffs between here...
+		// /* The code here is for showing the logo! */ gfx.drawImage(icon.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 		gfx.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
 		if (key.showFPS == true) {
-			//Set it up so that it still works with the "per second" rule.
+			// Set it up so that it still works with the "per second" rule.
 			key.showPerSeconds(buffer, FPS, TPS);
 		}
 		// and here.
