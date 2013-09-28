@@ -37,9 +37,8 @@ public class RenderSystem {
 				int yMove = y + offsetY;
 				// The "& 63" refers to when we get to 63, go back to 0, thus
 				// looping.
-				int blockIndex = ((xMove / blockSize) & 63)
-						+ ((yMove / blockSize) & 63) * 64;
-				allPixels[x + (y * width)] = block[blockIndex];
+				int blockIndex = ((xMove / blockSize) & 63) + ((yMove / blockSize) & 63) * 64;
+				allPixels[x + y * width] = SpriteImage.stonebrick.allPixels[(x & 31) + (y & 31) * 32];
 			}
 		}
 	}

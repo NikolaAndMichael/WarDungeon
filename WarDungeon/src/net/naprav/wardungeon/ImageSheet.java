@@ -8,13 +8,17 @@ import javax.imageio.ImageIO;
 public class ImageSheet {
 
 	public String pathway;
-	private final int SIZE;
+	public final int SIZE;
 	public int[] allPixels;
+	
+	public static ImageSheet block = new ImageSheet("/textures/blocks.png", 256);
 	
 	public ImageSheet(String path, int size) {
 		this.pathway = path;
 		this.SIZE = size;
 		allPixels = new int[SIZE * SIZE];
+		
+		this.loadImageToScreen(path, SIZE);
 	}
 	
 	public void loadImageToScreen(String pathway, int size) {
