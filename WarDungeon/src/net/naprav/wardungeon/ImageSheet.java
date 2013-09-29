@@ -13,6 +13,11 @@ public class ImageSheet {
 	
 	public static ImageSheet block = new ImageSheet("/textures/blocks.png", 256);
 	
+	/**
+	 * Sets the path for the image and the size of it too.
+	 * @param path
+	 * @param size
+	 */
 	public ImageSheet(String path, int size) {
 		this.pathway = path;
 		this.SIZE = size;
@@ -21,6 +26,11 @@ public class ImageSheet {
 		this.loadImageToScreen(path, SIZE);
 	}
 	
+	/**
+	 * Loads the image to the screen using a pathway and the size of the image.
+	 * @param pathway
+	 * @param size
+	 */
 	public void loadImageToScreen(String pathway, int size) {
 		try {
 			BufferedImage image = ImageIO.read(ImageSheet.class.getResource(pathway));

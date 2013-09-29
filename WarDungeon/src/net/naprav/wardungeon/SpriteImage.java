@@ -9,6 +9,13 @@ public class SpriteImage {
 	
 	public static SpriteImage stonebrick = new SpriteImage(ImageSheet.block, 1, 0, 32);
 	
+	/**
+	 * 
+	 * @param sheet
+	 * @param x
+	 * @param y
+	 * @param size
+	 */
 	public SpriteImage(ImageSheet sheet, int x, int y, int size) {
 		this.SIZE = size;
 		allPixels = new int[SIZE * SIZE];
