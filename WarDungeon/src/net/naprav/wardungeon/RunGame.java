@@ -1,7 +1,6 @@
 package net.naprav.wardungeon;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -47,7 +46,8 @@ public class RunGame extends Canvas implements Runnable {
 		key = new Key();
 		this.addKeyListener(key);
 
-		icon = new ImageIcon("res/gui/naprav.png");
+		// change to bufferedimage.
+		icon = new ImageIcon("res/textures/gui/naprav.png");
 
 		system = new RenderSystem(WIDTH, HEIGHT);
 	}

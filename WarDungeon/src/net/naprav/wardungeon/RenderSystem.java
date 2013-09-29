@@ -8,7 +8,8 @@ public class RenderSystem {
 	public int[] allPixels;
 
 	public int[] block = new int[64 * 64];
-	public int blockSize = 16;
+	private final int BLOCK_SIZE = 32;
+	private final int BLOCK_SIZE_MAX = BLOCK_SIZE - 1;
 	private Random random = new Random();
 
 	/**
@@ -37,8 +38,8 @@ public class RenderSystem {
 				int yMove = y + offsetY;
 				// The "& 63" refers to when we get to 63, go back to 0, thus
 				// looping.
-				int blockIndex = ((xMove / blockSize) & 63) + ((yMove / blockSize) & 63) * 64;
-				allPixels[x + y * width] = SpriteImage.stonebrick.allPixels[(x & 31) + (y & 31) * 32];
+				//int blockIndex = ((xMove / blockSize) & 63) + ((yMove / blockSize) & 63) * 64;
+				allPixels[x + y * width] = SpriteImage.stoneBrick.allPixels[(x & BLOCK_SIZE_MAX) + (y & BLOCK_SIZE_MAX) * BLOCK_SIZE];
 			}
 		}
 	}
