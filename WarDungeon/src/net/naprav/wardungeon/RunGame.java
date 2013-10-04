@@ -85,44 +85,48 @@ public class RunGame extends Canvas implements Runnable {
 	}
 
 	int timer = 0;
-	
+
 	/*
 	 * Responsible for the actual rendering behind the game.
 	 */
 	public void render() {
 		BufferStrategy buffer = this.getBufferStrategy();
 
-		// Clearing the screen to make room for the pixels! :D
-		system.clearScreen();
+		if (buffer != null) {
+			// Clearing the screen to make room for the pixels! :D
+			system.clearScreen();
 
-		// Rendering the pixels in the RenderMechanism class.
-		system.changePixels(xMove, yMove);
+			// Rendering the pixels in the RenderMechanism class.
+			system.changePixels(xMove, yMove);
 
-		for (int counter = 0; counter < allPixels.length; counter++) {
-			// Setting the pixels in this class to the ones in
-			// RenderMechanism.java.
-			allPixels[counter] = system.allPixels[counter];
+			for (int counter = 0; counter < allPixels.length; counter++) {
+				// Setting the pixels in this class to the ones in
+				// RenderMechanism.java.
+				allPixels[counter] = system.allPixels[counter];
+			}
+
+			// Graphics setup.
+			Graphics gfx = buffer.getDrawGraphics();
+			// Draw stuffs between here...
+			// /* The code here is for showing the logo! */
+			// gfx.drawImage(icon.getImage(), 0, 0, this.getWidth(),
+			// this.getHeight(), null);
+			gfx.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+			if (key.showFPS == true) {
+				// Set it up so that it still works with the "per second" rule.
+				key.showPerSeconds(buffer, FPS, TPS);
+			}
+			// and here.
+			gfx.dispose();
+			buffer.show();
+		} else {
+			// Buffer is automatically null, so we can create one to render a
+			// number
+			// of buffers. (3)
+			if (buffer == null) {
+				this.createBufferStrategy(2);
+			}
 		}
-
-		// Buffer is automatically null, so we can create one to render a number
-		// of buffers. (3)
-		if (buffer == null) {
-			this.createBufferStrategy(2);
-			return;
-		}
-
-		// Graphics setup.
-		Graphics gfx = buffer.getDrawGraphics();
-		// Draw stuffs between here...
-		// /* The code here is for showing the logo! */ gfx.drawImage(icon.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
-		gfx.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
-		if (key.showFPS == true) {
-			// Set it up so that it still works with the "per second" rule.
-			key.showPerSeconds(buffer, FPS, TPS);
-		}
-		// and here.
-		gfx.dispose();
-		buffer.show();
 	}
 
 	/**
