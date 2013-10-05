@@ -25,8 +25,10 @@ public class RunGame extends Canvas implements Runnable {
 	public int FPS = 0; // Frames per second.
 	public int TPS = 0; // Ticks per second. (Updates per second)
 
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private int[] allPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
+			BufferedImage.TYPE_INT_RGB);
+	private int[] allPixels = ((DataBufferInt) image.getRaster()
+			.getDataBuffer()).getData();
 
 	private Key key;
 	private RenderSystem system;
@@ -60,27 +62,27 @@ public class RunGame extends Canvas implements Runnable {
 	public void tick() {
 		key.updateMovement();
 		if (key.up == true) {
-			yMove--;
-		} else if (key.down == true) {
 			yMove++;
+		} else if (key.down == true) {
+			yMove--;
 		} else if (key.left == true) {
-			xMove--;
-		} else if (key.right == true) {
 			xMove++;
+		} else if (key.right == true) {
+			xMove--;
 		}
 
 		if (key.up == true && key.left == true) {
-			yMove--;
-			xMove--;
+			yMove++;
+			xMove++;
 		} else if (key.up == true && key.right == true) {
-			yMove--;
-			xMove++;
-		} else if (key.down == true && key.left == true) {
 			yMove++;
 			xMove--;
-		} else if (key.down == true && key.right == true) {
-			yMove++;
+		} else if (key.down == true && key.left == true) {
+			yMove--;
 			xMove++;
+		} else if (key.down == true && key.right == true) {
+			yMove--;
+			xMove--;
 		}
 	}
 
@@ -95,14 +97,13 @@ public class RunGame extends Canvas implements Runnable {
 		if (buffer != null) {
 			// Clearing the screen to make room for the pixels! :D
 			system.clearScreen();
-
 			// Rendering the pixels in the RenderMechanism class.
 			system.changePixels(xMove, yMove);
 
-			for (int counter = 0; counter < allPixels.length; counter++) {
+			for (int a = 0; a < allPixels.length; a++) {
 				// Setting the pixels in this class to the ones in
 				// RenderMechanism.java.
-				allPixels[counter] = system.allPixels[counter];
+				allPixels[a] = system.allPixels[a];
 			}
 
 			// Graphics setup.
@@ -123,9 +124,7 @@ public class RunGame extends Canvas implements Runnable {
 			// Buffer is automatically null, so we can create one to render a
 			// number
 			// of buffers. (3)
-			if (buffer == null) {
-				this.createBufferStrategy(2);
-			}
+			this.createBufferStrategy(3);
 		}
 	}
 
@@ -160,12 +159,12 @@ public class RunGame extends Canvas implements Runnable {
 		long previousTime = System.nanoTime();
 		long secondTimer = System.currentTimeMillis();
 
-		final double nanoSeconds = 1000000000.0 / 60.0;
+		final double designatedUpdates = 1000000000.0 / 60.0;
 		double omega = 0;
 
 		while (isRunning == true) {
 			long currentTime = System.nanoTime();
-			omega += (currentTime - previousTime) / nanoSeconds;
+			omega += (currentTime - previousTime) / designatedUpdates;
 			previousTime = currentTime;
 
 			while (omega >= 1) {
@@ -191,7 +190,6 @@ public class RunGame extends Canvas implements Runnable {
 
 	/**
 	 * The Main method.
-	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

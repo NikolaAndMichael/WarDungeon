@@ -9,10 +9,10 @@ public class SpriteImage {
 	private ImageSheet sheet;
 	
 	public static SpriteImage stone = new SpriteImage(ImageSheet.block, 0, 0, 32, 32);
-	public static SpriteImage stoneBrick = new SpriteImage(ImageSheet.block, 1, 0, 32, 32);
-	public static SpriteImage mossyStoneBrick = new SpriteImage(ImageSheet.block, 2, 0, 32, 32);
-	public static SpriteImage stoneBrick_wall = new SpriteImage(ImageSheet.block, 3, 0, 32, 32);
-	public static SpriteImage cobbleStone = new SpriteImage(ImageSheet.block, 4, 0, 32, 32);
+	public static SpriteImage stonebrick = new SpriteImage(ImageSheet.block, 1, 0, 32, 32);
+	public static SpriteImage mossystonebrick = new SpriteImage(ImageSheet.block, 2, 0, 32, 32);
+	public static SpriteImage stonebrick_wall = new SpriteImage(ImageSheet.block, 3, 0, 32, 32);
+	public static SpriteImage cobblestone = new SpriteImage(ImageSheet.block, 4, 0, 32, 32);
 	
 	public static SpriteImage logo = new SpriteImage(ImageSheet.company_logo, 0, 0, 900, 600);
 
