@@ -6,7 +6,7 @@ public class BlockSprite {
 	public final int SIZE;
 	public int[] pixels;
 
-	private SpriteSheet sheet;
+	public SpriteSheet sheet;
 
 	/**
 	 * Basic constructor. We have to get the SpriteSheet where the sprite is and we need the x/y coordinates and the size of it. Simple.
@@ -22,10 +22,16 @@ public class BlockSprite {
 		this.y = y * SIZE;
 		this.sheet = sheet;
 
+		pixels = new int[SIZE * SIZE];
 		loadBlock();
 	}
 
 	public static BlockSprite stone = new BlockSprite(SpriteSheet.block, 0, 0, 32);
+	public static BlockSprite stonebrick = new BlockSprite(SpriteSheet.block, 1, 0, 32);
+	public static BlockSprite mossystonebrick = new BlockSprite(SpriteSheet.block, 2, 0, 32);
+	public static BlockSprite cobblestone = new BlockSprite(SpriteSheet.block, 3, 0, 32);
+	
+	public static BlockSprite lava_1 = new BlockSprite(SpriteSheet.lava, 0, 0, 32);
 	
 	/**
 	 * Protected method loads the block into the pixels[] array as pixel data.
@@ -33,7 +39,7 @@ public class BlockSprite {
 	protected void loadBlock() {
 		for (int x = 0; x < SIZE; x++) {
 			for (int y = 0; y < SIZE; y++) {
-				pixels[x + (y * SIZE)] = ((this.x + x) + (this.y + y)) * sheet.SIZE;
+				pixels[x + (y * SIZE)] = sheet.pixels[(this.x + x) + (this.y + y) * sheet.SIZE];
 			}
 		}
 	}

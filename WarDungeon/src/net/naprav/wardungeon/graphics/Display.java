@@ -8,7 +8,7 @@ public class Display {
 	public int[] pixels;
 
 	private final int BLOCK_SIZE = 32;
-	private final int BLOCK_SIZE_MASK = BLOCK_SIZE - 1;
+	private final int BLOCK_MASK = BLOCK_SIZE - 1;
 	
 	/**
 	 * Sets the screen's width and height to match the pixels[] array in WarDungeon.java
@@ -40,8 +40,13 @@ public class Display {
 	/**
 	 * Basic method for rendering blocks to the level.
 	 */
-	public void renderBlock(int x, int y, Block block) {
-
+	public void renderBlock(int xMove, int yMove, Block block) {
+		for (int x = 0; x < WIDTH; x++) {
+			for (int y = 0; y < HEIGHT; y++) {
+				int index = (x & BLOCK_MASK) + (y & BLOCK_MASK) * BLOCK_SIZE;
+				pixels[x + (y * WIDTH)] = block.sprite.pixels[index];
+			}
+		}
 	}
 
 	/**

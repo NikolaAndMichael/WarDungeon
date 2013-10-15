@@ -1,7 +1,9 @@
 package net.naprav.wardungeon;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -103,6 +105,10 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 
+		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		gfx.setColor(Color.WHITE);
+		gfx.drawString("Version: 0.1 Indev", 5, 12);
+
 		gfx.dispose();
 		buffer.show();
 	}
@@ -111,9 +117,37 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * The main "run()" method; needed for any class that implements the Runnable.java interface.
 	 */
 	public void run() {
+		long pastTime = System.nanoTime();
+		long lastSecond = System.currentTimeMillis();
+
+		final float desig = 1_000_000_0F / 70F;
+		double single = 0;
+
+		int frames = 0, updates = 0;
+
 		while (isRunning == true) {
-			tick();
+			long currentTime = System.nanoTime();
+			single += (currentTime - pastTime) / desig;
+
+			pastTime = currentTime;
+
+			while (single >= 1) {
+				tick();
+				updates++;
+				single--;
+			}
+
+			frames++;
 			render();
+
+			if (System.currentTimeMillis() - lastSecond > 1000) {
+				lastSecond += 1000;
+
+				frame.setTitle("WarDungeon | FPS: " + frames);
+
+				frames = 0;
+				updates = 0;
+			}
 		}
 	}
 

@@ -28,6 +28,7 @@ public class SpriteSheet {
 	}
 
 	public static SpriteSheet block = new SpriteSheet("/textures/blocks_sheet.png", 256);
+	public static SpriteSheet lava = new SpriteSheet("/textures/lava_flow.png", 96);
 	
 	/**
 	 * This protected method helps to load the SpriteSheet's data into the pixels[] array.

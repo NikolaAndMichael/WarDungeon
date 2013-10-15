@@ -2,7 +2,7 @@ package net.naprav.wardungeon.block;
 
 import net.naprav.wardungeon.graphics.BlockSprite;
 
-public class Block {
+public abstract class Block {
 
 	protected boolean isCollidable;
 	protected boolean doesKill;
@@ -56,6 +56,5 @@ public class Block {
 	 * @param y
 	 * @param sprite
 	 */
-	protected void render(int x, int y, BlockSprite sprite) {
-	}
+	protected abstract void render(int x, int y, BlockSprite sprite);
 }

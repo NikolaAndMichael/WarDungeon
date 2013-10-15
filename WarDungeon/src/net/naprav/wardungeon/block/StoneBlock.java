@@ -9,6 +9,5 @@ public class StoneBlock extends Block {
 	}
 	
 	public void render(int x, int y, BlockSprite sprite) {
-		
 	}
 }
