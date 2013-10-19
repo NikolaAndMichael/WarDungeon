@@ -131,7 +131,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		long pastTime = System.nanoTime();
 		long lastSecond = System.currentTimeMillis();
 
-		final float desig = 1000000000F / 65F;
+		final float desig = 1_000_000_000F / 65F;
 		double single = 0;
 
 		int frames = 0, updates = 0;
