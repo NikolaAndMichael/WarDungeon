@@ -15,6 +15,7 @@ import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.BlockSprite;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
+import net.naprav.wardungeon.login.Login;
 
 public class WarDungeon extends Canvas implements Runnable {
 
@@ -39,7 +40,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
-	private WarDungeon() {
+	public WarDungeon() {
 		frame = new JFrame("WarDungeon");
 		display = new Display(WIDTH, HEIGHT);
 		key = new Keyboard(200);
@@ -61,7 +62,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	/**
 	 * Responsible for starting the game, the most important part. It also requests the focus of the Canvas and creates a buffer strategy.
 	 */
-	private void begin() {
+	public void begin() {
 		thread = new Thread(this, "WarDungeon");
 		this.createBufferStrategy(3);
 		this.requestFocus();
@@ -156,7 +157,6 @@ public class WarDungeon extends Canvas implements Runnable {
 
 				frame.setTitle("WarDungeon | FPS: " + frames);
 
-				System.out.println(updates + ", " + frames);
 				frames = 0;
 				updates = 0;
 			}
@@ -169,7 +169,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		WarDungeon dungeon = new WarDungeon();
-		dungeon.begin();
+		new Login();
 	}
 }
