@@ -42,9 +42,13 @@ public class Display {
 	 */
 	public void renderBlock(int xMove, int yMove, Block block) {
 		for (int x = 0; x < WIDTH; x++) {
+			int xPos = x + xMove;
 			for (int y = 0; y < HEIGHT; y++) {
+				int yPos = y + yMove;
+				if (xPos < 0 || yPos < 0 || xPos >= WIDTH || yPos >= HEIGHT) continue;
+				
 				int index = (x & BLOCK_MASK) + (y & BLOCK_MASK) * BLOCK_SIZE;
-				pixels[x + (y * WIDTH)] = block.sprite.pixels[index];
+				pixels[xPos + (yPos * WIDTH)] = block.sprite.pixels[index];
 			}
 		}
 	}

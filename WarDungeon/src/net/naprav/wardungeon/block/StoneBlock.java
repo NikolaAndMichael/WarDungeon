@@ -8,6 +8,8 @@ public class StoneBlock extends Block {
 		super(sprite, isCollidable, doesKill);
 	}
 	
+	public static StoneBlock block = new StoneBlock(BlockSprite.stone, false, false);
+	
 	public void render(int x, int y, BlockSprite sprite) {
 	}
 }

@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.BlockSprite;
 import net.naprav.wardungeon.graphics.Display;
+import net.naprav.wardungeon.listen.Keyboard;
 
 public class WarDungeon extends Canvas implements Runnable {
 
@@ -28,23 +29,26 @@ public class WarDungeon extends Canvas implements Runnable {
 	public int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
 
 	private Thread thread;
-	public static boolean isRunning = false;
+	public static volatile boolean isRunning = false;
 
 	JFrame frame;
 
 	Display display;
-
+	Keyboard key;
+	
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
 	private WarDungeon() {
 		frame = new JFrame("WarDungeon");
 		display = new Display(WIDTH, HEIGHT);
+		key = new Keyboard(200);
 
 		frame.setVisible(true);
 
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
+		this.addKeyListener(key);
 		frame.add(this);
 		frame.pack();
 
@@ -75,11 +79,18 @@ public class WarDungeon extends Canvas implements Runnable {
 		thread.join();
 	}
 
+	int xMove = 0, yMove = 0;
+	
 	/**
 	 * This method is responsible for updating the logic behind the game, i.e. Mobs, time, AI, etc.
 	 */
 	private void tick() {
-
+		key.checkForKeys();
+		
+		if (key.up) yMove++;
+		if (key.down) yMove--;
+		if (key.left) xMove++;
+		if (key.right) xMove--;
 	}
 
 	/**
@@ -87,7 +98,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	private void tickImage() {
 		display.clear();
-		display.renderBlock(0, 0, new StoneBlock(BlockSprite.stone, false, false));
+		display.renderBlock(xMove, yMove, StoneBlock.block);
 
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
@@ -120,7 +131,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		long pastTime = System.nanoTime();
 		long lastSecond = System.currentTimeMillis();
 
-		final float desig = 1_000_000_0F / 70F;
+		final float desig = 1000000000F / 65F;
 		double single = 0;
 
 		int frames = 0, updates = 0;
@@ -140,11 +151,12 @@ public class WarDungeon extends Canvas implements Runnable {
 			frames++;
 			render();
 
-			if (System.currentTimeMillis() - lastSecond > 1000) {
+			if ((System.currentTimeMillis() - lastSecond) > 1000) {
 				lastSecond += 1000;
 
 				frame.setTitle("WarDungeon | FPS: " + frames);
 
+				System.out.println(updates + ", " + frames);
 				frames = 0;
 				updates = 0;
 			}
