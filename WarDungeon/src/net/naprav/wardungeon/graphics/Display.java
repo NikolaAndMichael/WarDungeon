@@ -40,7 +40,7 @@ public class Display {
 	/**
 	 * Basic method for rendering blocks to the level.
 	 */
-	public void renderBlock(int xMove, int yMove, Block block) {
+	public void renderBlock(Block block, int xMove, int yMove) {
 		for (int x = 0; x < WIDTH; x++) {
 			int xPos = x + xMove;
 			for (int y = 0; y < HEIGHT; y++) {

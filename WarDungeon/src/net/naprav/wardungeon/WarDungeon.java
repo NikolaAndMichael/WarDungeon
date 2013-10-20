@@ -11,11 +11,9 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
-import net.naprav.wardungeon.block.StoneBlock;
-import net.naprav.wardungeon.graphics.BlockSprite;
+import net.naprav.wardungeon.block.LavaBlock;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
-import net.naprav.wardungeon.login.Login;
 
 public class WarDungeon extends Canvas implements Runnable {
 
@@ -99,8 +97,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	private void tickImage() {
 		display.clear();
-		display.renderBlock(xMove, yMove, StoneBlock.block);
-
+		display.renderBlock(LavaBlock.block, xMove, yMove);
+				
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
 		}
@@ -169,6 +167,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new Login();
+		//new Login();
+		new WarDungeon().begin();
 	}
 }
