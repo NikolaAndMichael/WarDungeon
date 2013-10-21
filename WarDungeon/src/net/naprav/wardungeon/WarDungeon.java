@@ -5,10 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import net.naprav.wardungeon.block.LavaBlock;
@@ -31,7 +33,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	public static volatile boolean isRunning = false;
 
 	JFrame frame;
-
+	
 	Display display;
 	Keyboard key;
 	
@@ -40,11 +42,13 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	public WarDungeon() {
 		frame = new JFrame("WarDungeon");
+		
 		display = new Display(WIDTH, HEIGHT);
 		key = new Keyboard(200);
 
 		frame.setVisible(true);
-
+		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
+		
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
 		this.addKeyListener(key);
@@ -64,6 +68,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		thread = new Thread(this, "WarDungeon");
 		this.createBufferStrategy(3);
 		this.requestFocus();
+		
 		thread.start();
 		isRunning = true;
 	}
@@ -117,7 +122,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		gfx.setColor(Color.WHITE);
-		gfx.drawString("Version: 0.1 Indev", 5, 12);
+		gfx.drawString("Version: 0.1 Indev", 3, 12);
 
 		gfx.dispose();
 		buffer.show();
