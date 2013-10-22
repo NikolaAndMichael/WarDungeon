@@ -15,7 +15,7 @@ public class LoginGame {
 			System.out.println(passcode);
 			frame.dispose();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException exc) {
 				exc.printStackTrace();
 			}

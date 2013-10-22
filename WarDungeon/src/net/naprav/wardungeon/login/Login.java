@@ -16,6 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import net.naprav.wardungeon.login.file.Directory;
+
 public class Login extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +38,7 @@ public class Login extends JPanel {
 	ScreenShot shot;
 	Register account;
 	LoginGame gamelogin;
+	Directory directory;
 
 	Action action;
 
@@ -45,6 +48,14 @@ public class Login extends JPanel {
 	JPasswordField passcode;
 
 	public Login() {
+		menu = new MainMenu(WIDTH, HEIGHT, "/login/login_screen.png");
+		shot = new ScreenShot(315, 177, "/login/splash.png");
+		directory = new Directory();
+
+		createWindow();
+	}
+
+	private final void createWindow() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception exc) {
@@ -52,9 +63,7 @@ public class Login extends JPanel {
 		}
 
 		frame = new JFrame("WarDungeon Login");
-		menu = new MainMenu(WIDTH, HEIGHT, "/login/login_screen.png");
-		shot = new ScreenShot(315, 177, "/login/splash.png");
-
+		
 		// MAKE SURE TO CHANGE TO THE NAPRAV REGISTER SITE!!!
 		account = new Register("www.google.ca");
 		gamelogin = new LoginGame();
@@ -95,7 +104,7 @@ public class Login extends JPanel {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	
 	private void updateLogin() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = menu.pixels[a];
@@ -129,6 +138,7 @@ public class Login extends JPanel {
 		public void actionPerformed(ActionEvent action) {
 			if (action.getSource() == login) {
 				gamelogin.attemptLogin(username.getText(), passcode.getText(), frame);
+				directory.createDirectories();
 			} else if (action.getSource() == register) {
 				account.registerAccount();
 			}

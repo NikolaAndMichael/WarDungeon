@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -13,9 +12,10 @@ import java.awt.image.DataBufferInt;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import net.naprav.wardungeon.block.LavaBlock;
+import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
+import net.naprav.wardungeon.login.Login;
 
 public class WarDungeon extends Canvas implements Runnable {
 
@@ -33,22 +33,22 @@ public class WarDungeon extends Canvas implements Runnable {
 	public static volatile boolean isRunning = false;
 
 	JFrame frame;
-	
+
 	Display display;
 	Keyboard key;
-	
+
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
 	public WarDungeon() {
 		frame = new JFrame("WarDungeon");
-		
+
 		display = new Display(WIDTH, HEIGHT);
 		key = new Keyboard(200);
 
 		frame.setVisible(true);
 		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
-		
+
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
 		this.addKeyListener(key);
@@ -68,7 +68,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		thread = new Thread(this, "WarDungeon");
 		this.createBufferStrategy(3);
 		this.requestFocus();
-		
+
 		thread.start();
 		isRunning = true;
 	}
@@ -84,13 +84,13 @@ public class WarDungeon extends Canvas implements Runnable {
 	}
 
 	int xMove = 0, yMove = 0;
-	
+
 	/**
 	 * This method is responsible for updating the logic behind the game, i.e. Mobs, time, AI, etc.
 	 */
 	private void tick() {
 		key.checkForKeys();
-		
+
 		if (key.up) yMove++;
 		if (key.down) yMove--;
 		if (key.left) xMove++;
@@ -102,8 +102,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	private void tickImage() {
 		display.clear();
-		display.renderBlock(LavaBlock.block, xMove, yMove);
-				
+		display.renderBlock(StoneBlock.block, xMove, yMove);
+
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
 		}
@@ -135,7 +135,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		long pastTime = System.nanoTime();
 		long lastSecond = System.currentTimeMillis();
 
-		final float desig = 1_000_000_000F / 65F;
+		final float desig = 1_000_000_000F / 70F;
 		double single = 0;
 
 		int frames = 0, updates = 0;
@@ -172,7 +172,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//new Login();
-		new WarDungeon().begin();
+		 new Login();
+		//new WarDungeon().begin();
 	}
 }
