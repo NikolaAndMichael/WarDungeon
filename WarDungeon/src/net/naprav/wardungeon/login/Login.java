@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -100,6 +101,7 @@ public class Login extends JPanel {
 		frame.setSize(size);
 		frame.setVisible(true);
 		frame.setResizable(false);
+		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
 		frame.setLocationRelativeTo(null);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
