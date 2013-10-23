@@ -12,18 +12,18 @@ import java.awt.image.DataBufferInt;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.login.Login;
+import net.naprav.wardungeon.player.KnightClass;
 
 public class WarDungeon extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 6601282971656374659L;
 
-	public static final int WIDTH = 330;
-	public static final int HEIGHT = 205;
-	private static final int SCALE = 3;
+	public static final int WIDTH = 460;
+	public static final int HEIGHT = 280;
+	private static final int SCALE = 2;
 	private final Dimension size = new Dimension((WIDTH * SCALE), (HEIGHT * SCALE));
 
 	private BufferedImage screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -102,7 +102,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	private void tickImage() {
 		display.clear();
-		display.renderBlock(StoneBlock.block, xMove, yMove);
+		// display.renderBlock(StoneBlock.block, xMove, yMove);
+		display.renderPlayer(KnightClass.knight, xMove, yMove);
 
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
@@ -172,7 +173,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		 new Login();
-		//new WarDungeon().begin();
+		// new Login();
+		new WarDungeon().begin();
 	}
 }

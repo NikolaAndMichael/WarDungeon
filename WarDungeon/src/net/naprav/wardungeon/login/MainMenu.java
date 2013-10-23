@@ -23,7 +23,11 @@ public class MainMenu {
 			BufferedImage image = ImageIO.read(MainMenu.class.getResource(pathway));
 			int width = image.getWidth();
 			int height = image.getHeight();
-			image.getRGB(0, 0, width, height, pixels, 0, width);
+			if (WIDTH == width && HEIGHT == height) {
+				image.getRGB(0, 0, width, height, pixels, 0, width);
+			} else {
+				System.out.println("Menu Screen is not the same size as declared! >:(");
+			}
 		} catch (IOException exc) {
 			exc.printStackTrace();
 		}

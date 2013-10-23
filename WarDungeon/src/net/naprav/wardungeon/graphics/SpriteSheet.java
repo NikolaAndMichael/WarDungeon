@@ -27,8 +27,10 @@ public class SpriteSheet {
 		}
 	}
 
-	public static SpriteSheet block = new SpriteSheet("/textures/blocks_sheet.png", 256);
-	public static SpriteSheet lava = new SpriteSheet("/textures/lava_flow.png", 96);
+	public static SpriteSheet block = new SpriteSheet("/textures/block/blocks_sheet.png", 256);
+	public static SpriteSheet lava = new SpriteSheet("/textures/block/lava_flow.png", 96);
+	
+	public static SpriteSheet player = new SpriteSheet("/textures/mob/player/class_sheet.png", 432);
 	
 	/**
 	 * This protected method helps to load the SpriteSheet's data into the pixels[] array.
@@ -37,9 +39,14 @@ public class SpriteSheet {
 	 * @throws IOException
 	 */
 	protected void loadSpriteSheet(String pathway) throws IOException {
-		BufferedImage sheet = ImageIO.read(SpriteSheet.class.getResource(pathway));
-		int width = sheet.getWidth();
-		int height = sheet.getHeight();
-		sheet.getRGB(0, 0, width, height, pixels, 0, width);
+		BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(pathway));
+		int width = image.getWidth();
+		int height = image.getHeight();
+		
+		if (width == SIZE && height == SIZE) {
+			image.getRGB(0, 0, width, height, pixels, 0, width);
+		} else {
+			System.out.println("SpriteSheet is not same size! >:(");
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package net.naprav.wardungeon.graphics;
 
 import net.naprav.wardungeon.block.Block;
+import net.naprav.wardungeon.player.Class;
 
 public class Display {
 
@@ -27,18 +28,11 @@ public class Display {
 	}
 
 	/**
-	 * Basic model for rendering images to the screen.
-	 */
-	// public void render() {
-	// for (int x = 0; x < WIDTH; x++) {
-	// for (int y = 0; y < HEIGHT; y++) {
-	// pixels[x + (y * WIDTH)] = 0x123456;
-	// }
-	// }
-	// }
-
-	/**
 	 * Basic method for rendering blocks to the level.
+	 * 
+	 * @param block
+	 * @param xMove
+	 * @param yMove
 	 */
 	public void renderBlock(Block block, int xMove, int yMove) {
 		for (int x = 0; x < WIDTH; x++) {
@@ -46,9 +40,30 @@ public class Display {
 			for (int y = 0; y < HEIGHT; y++) {
 				int yPos = y + yMove;
 				if (xPos < 0 || yPos < 0 || xPos >= WIDTH || yPos >= HEIGHT) continue;
-				
+
 				int index = (x & BLOCK_MASK) + (y & BLOCK_MASK) * BLOCK_SIZE;
 				pixels[xPos + (yPos * WIDTH)] = block.sprite.pixels[index];
+			}
+		}
+	}
+
+	/**
+	 * The standard method for rendering the player class to the screen.
+	 * 
+	 * @param player
+	 * @param xMove
+	 * @param yMove
+	 */
+	public void renderPlayer(Class player, int xMove, int yMove) {
+		for (int x = 0; x < 48; x++) {
+			int xPos = x + xMove;
+			for (int y = 0; y < 48; y++) {
+				int yPos = y + yMove;
+				if (xPos < 0 || yPos < 0 || xPos >= WIDTH || yPos >= HEIGHT) continue;
+
+				// Below code is kind of derp, but don't worry about it. :)
+				int index = (x & 63) + (y & 63) * 64;
+				pixels[xPos + (yPos * WIDTH)] = player.sprite.pixels[index];
 			}
 		}
 	}

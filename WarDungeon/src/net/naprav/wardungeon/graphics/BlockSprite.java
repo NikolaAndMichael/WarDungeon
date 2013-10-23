@@ -4,9 +4,9 @@ public class BlockSprite {
 
 	private int x, y;
 	public final int SIZE;
-	public int[] pixels;
+	private SpriteSheet sheet;
 
-	public SpriteSheet sheet;
+	public int[] pixels;
 
 	/**
 	 * Basic constructor. We have to get the SpriteSheet where the sprite is and we need the x/y coordinates and the size of it. Simple.
@@ -41,7 +41,7 @@ public class BlockSprite {
 	/**
 	 * Protected method loads the block into the pixels[] array as pixel data.
 	 */
-	protected void loadBlock() {
+	private final void loadBlock() {
 		for (int x = 0; x < SIZE; x++) {
 			for (int y = 0; y < SIZE; y++) {
 				pixels[x + (y * SIZE)] = sheet.pixels[(this.x + x) + (this.y + y) * sheet.SIZE];
