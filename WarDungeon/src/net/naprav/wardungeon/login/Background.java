@@ -5,12 +5,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class MainMenu {
+public class Background {
 
 	private final int WIDTH, HEIGHT;
 	public int[] pixels;
 	
-	public MainMenu(int width, int height, String pathway) {
+	public Background(int width, int height, String pathway) {
 		WIDTH = width;
 		HEIGHT = height;
 		pixels = new int[WIDTH * HEIGHT];
@@ -20,7 +20,7 @@ public class MainMenu {
 	
 	private void loadMenuScreen(String pathway) {
 		try {
-			BufferedImage image = ImageIO.read(MainMenu.class.getResource(pathway));
+			BufferedImage image = ImageIO.read(Background.class.getResource(pathway));
 			int width = image.getWidth();
 			int height = image.getHeight();
 			if (WIDTH == width && HEIGHT == height) {

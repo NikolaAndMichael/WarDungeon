@@ -1,5 +1,7 @@
 package net.naprav.wardungeon.graphics;
 
+import net.naprav.wardungeon.Menu;
+import net.naprav.wardungeon.Naprav;
 import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.player.Class;
 
@@ -10,6 +12,9 @@ public class Display {
 
 	private final int BLOCK_SIZE = 32;
 	private final int BLOCK_MASK = BLOCK_SIZE - 1;
+	
+	Menu menu;
+	Naprav naprav;
 	
 	/**
 	 * Sets the screen's width and height to match the pixels[] array in WarDungeon.java
@@ -22,9 +27,8 @@ public class Display {
 		HEIGHT = height;
 		pixels = new int[WIDTH * HEIGHT];
 
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = 0x000000;
-		}
+		menu = new Menu("/textures/gui/title_screen.png", 460, 280);
+		naprav = new Naprav("/textures/gui/naprav.png", 460, 280);
 	}
 
 	/**
@@ -68,6 +72,21 @@ public class Display {
 		}
 	}
 
+	public void renderMenu() {
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = menu.pixels[a];
+		}
+	}
+
+	/**
+	 * Method for rendering the company logo!
+	 */
+	public void renderNaprav() {
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = naprav.pixels[a];
+		}
+	}
+	
 	/**
 	 * Clear's the screen to update it constantly.
 	 */

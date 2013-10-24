@@ -19,8 +19,7 @@ public class LoginGame {
 			} catch (InterruptedException exc) {
 				exc.printStackTrace();
 			}
-			WarDungeon dungeon = new WarDungeon();
-			dungeon.begin();
+			new WarDungeon().begin();
 		}
 	}
 }

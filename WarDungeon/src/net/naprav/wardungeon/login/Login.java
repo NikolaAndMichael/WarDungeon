@@ -36,7 +36,7 @@ public class Login extends JPanel {
 	public int[] shotPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	JFrame frame;
-	MainMenu menu;
+	Background background;
 	ScreenShot shot;
 	Register account;
 	LoginGame gamelogin;
@@ -50,7 +50,7 @@ public class Login extends JPanel {
 	JPasswordField passcode;
 
 	public Login() {
-		menu = new MainMenu(WIDTH, HEIGHT, "/login/login_screen.png");
+		background = new Background(WIDTH, HEIGHT, "/login/login_screen.png");
 		shot = new ScreenShot(293, 162, "/login/splash.png");
 		directory = new Directory();
 
@@ -110,7 +110,7 @@ public class Login extends JPanel {
 	
 	private void updateLogin() {
 		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = menu.pixels[a];
+			pixels[a] = background.pixels[a];
 		}
 
 		for (int a = 0; a < shotPixels.length; a++) {

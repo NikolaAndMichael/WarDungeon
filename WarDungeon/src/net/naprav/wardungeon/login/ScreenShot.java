@@ -21,10 +21,14 @@ public class ScreenShot {
 
 	private void loadScreenShot(String pathway) {
 		try {
-			BufferedImage image = ImageIO.read(MainMenu.class.getResource(pathway));
+			BufferedImage image = ImageIO.read(ScreenShot.class.getResource(pathway));
 			int width = image.getWidth();
 			int height = image.getHeight();
-			image.getRGB(0, 0, width, height, splashPixels, 0, width);
+			if (WIDTH == width && HEIGHT == height) {
+				image.getRGB(0, 0, width, height, splashPixels, 0, width);
+			} else {
+				System.out.println("Screenshot's not the same as declared! >:(");
+			}
 		} catch (IOException exc) {
 			exc.printStackTrace();
 		}

@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
-import net.naprav.wardungeon.login.Login;
 import net.naprav.wardungeon.player.KnightClass;
 
 public class WarDungeon extends Canvas implements Runnable {
@@ -28,9 +27,6 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	private BufferedImage screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	public int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
-
-	private BufferedImage naprav_logo = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private int[] logo = ((DataBufferInt) naprav_logo.getRaster().getDataBuffer()).getData();
 
 	private Thread thread;
 	public static volatile boolean isRunning = false;
@@ -49,8 +45,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	public WarDungeon() {
 		frame = new JFrame("WarDungeon");
 
-		display = new Display(WIDTH, HEIGHT);
 		naprav = new Naprav("/textures/gui/naprav.png", WIDTH, HEIGHT);
+		display = new Display(WIDTH, HEIGHT);
 		key = new Keyboard(200);
 
 		frame.setVisible(true);
@@ -98,14 +94,10 @@ public class WarDungeon extends Canvas implements Runnable {
 	private void tick() {
 		key.checkForKeys();
 
-		if (key.up)
-			yMove++;
-		if (key.down)
-			yMove--;
-		if (key.left)
-			xMove++;
-		if (key.right)
-			xMove--;
+		if (key.up) yMove++;
+		if (key.down) yMove--;
+		if (key.left) xMove++;
+		if (key.right) xMove--;
 	}
 
 	/**
@@ -125,8 +117,18 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * Setting the pixels of the array in Naprav.java to the ones in this class.
 	 */
 	private void setUpNaprav() {
-		for (int a = 0; a < logo.length; a++) {
-			logo[a] = naprav.logo[a];
+		display.renderNaprav();
+		
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = display.pixels[a];
+		}
+	}
+
+	private void setUpMenu() {
+		display.renderMenu();
+
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = display.pixels[a];
 		}
 	}
 
@@ -149,19 +151,18 @@ public class WarDungeon extends Canvas implements Runnable {
 		buffer.show();
 	}
 
-	/**
-	 * Method for rendering the company logo!
-	 * 
-	 * @throws InterruptedException
-	 */
-	private final void renderNaprav() throws InterruptedException {
+	private void renderNaprav() {
 		Graphics gfx = this.getGraphics();
 
-		setUpNaprav();
-		gfx.drawImage(naprav_logo, 0, 0, getWidth(), getHeight(), null);
+		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 		gfx.dispose();
+	}
+	
+	private void renderMenu() {
+		Graphics gfx = this.getGraphics();
 
-		Thread.sleep(3000);
+		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
+		gfx.dispose();
 	}
 
 	/**
@@ -174,17 +175,20 @@ public class WarDungeon extends Canvas implements Runnable {
 		final float desig = 1_000_000_000F / 70F;
 		double single = 0;
 
-		int frames = 0, updates = 0;
+		int frames = 0;
 
 		while (isRunning == true) {
 			if (state == 0) {
-				try {
-					renderNaprav();
+				setUpNaprav();
+				renderNaprav();
+				if ((System.currentTimeMillis() - lastSecond) > 3000) {
+					lastSecond += 1000;
 					state++;
-				} catch (InterruptedException exc) {
-					exc.printStackTrace();
 				}
 			} else if (state == 1) {
+				setUpMenu();
+				renderMenu();
+			} else if (state == 2) {
 				long currentTime = System.nanoTime();
 				single += (currentTime - pastTime) / desig;
 
@@ -192,7 +196,6 @@ public class WarDungeon extends Canvas implements Runnable {
 
 				while (single >= 1) {
 					tick();
-					updates++;
 					single--;
 				}
 
@@ -205,7 +208,6 @@ public class WarDungeon extends Canvas implements Runnable {
 					frame.setTitle("WarDungeon | FPS: " + frames);
 
 					frames = 0;
-					updates = 0;
 				}
 
 			}
