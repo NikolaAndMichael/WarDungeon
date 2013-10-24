@@ -29,13 +29,19 @@ public class WarDungeon extends Canvas implements Runnable {
 	private BufferedImage screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	public int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
 
+	private BufferedImage naprav_logo = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private int[] logo = ((DataBufferInt) naprav_logo.getRaster().getDataBuffer()).getData();
+
 	private Thread thread;
 	public static volatile boolean isRunning = false;
+
+	public int state = 0;
 
 	JFrame frame;
 
 	Display display;
 	Keyboard key;
+	Naprav naprav;
 
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
@@ -44,6 +50,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		frame = new JFrame("WarDungeon");
 
 		display = new Display(WIDTH, HEIGHT);
+		naprav = new Naprav("/textures/gui/naprav.png", WIDTH, HEIGHT);
 		key = new Keyboard(200);
 
 		frame.setVisible(true);
@@ -91,10 +98,14 @@ public class WarDungeon extends Canvas implements Runnable {
 	private void tick() {
 		key.checkForKeys();
 
-		if (key.up) yMove++;
-		if (key.down) yMove--;
-		if (key.left) xMove++;
-		if (key.right) xMove--;
+		if (key.up)
+			yMove++;
+		if (key.down)
+			yMove--;
+		if (key.left)
+			xMove++;
+		if (key.right)
+			xMove--;
 	}
 
 	/**
@@ -107,6 +118,15 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
+		}
+	}
+
+	/**
+	 * Setting the pixels of the array in Naprav.java to the ones in this class.
+	 */
+	private void setUpNaprav() {
+		for (int a = 0; a < logo.length; a++) {
+			logo[a] = naprav.logo[a];
 		}
 	}
 
@@ -130,6 +150,21 @@ public class WarDungeon extends Canvas implements Runnable {
 	}
 
 	/**
+	 * Method for rendering the company logo!
+	 * 
+	 * @throws InterruptedException
+	 */
+	private final void renderNaprav() throws InterruptedException {
+		Graphics gfx = this.getGraphics();
+
+		setUpNaprav();
+
+		gfx.drawImage(naprav_logo, 0, 0, getWidth(), getHeight(), null);
+
+		Thread.sleep(3000);
+	}
+
+	/**
 	 * The main "run()" method; needed for any class that implements the Runnable.java interface.
 	 */
 	public void run() {
@@ -142,27 +177,37 @@ public class WarDungeon extends Canvas implements Runnable {
 		int frames = 0, updates = 0;
 
 		while (isRunning == true) {
-			long currentTime = System.nanoTime();
-			single += (currentTime - pastTime) / desig;
+			if (state == 0) {
+				try {
+					renderNaprav();
+					state++;
+				} catch (InterruptedException exc) {
+					exc.printStackTrace();
+				}
+			} else if (state == 1) {
+				long currentTime = System.nanoTime();
+				single += (currentTime - pastTime) / desig;
 
-			pastTime = currentTime;
+				pastTime = currentTime;
 
-			while (single >= 1) {
-				tick();
-				updates++;
-				single--;
-			}
+				while (single >= 1) {
+					tick();
+					updates++;
+					single--;
+				}
 
-			frames++;
-			render();
+				frames++;
+				render();
 
-			if ((System.currentTimeMillis() - lastSecond) > 1000) {
-				lastSecond += 1000;
+				if ((System.currentTimeMillis() - lastSecond) > 1000) {
+					lastSecond += 1000;
 
-				frame.setTitle("WarDungeon | FPS: " + frames);
+					frame.setTitle("WarDungeon | FPS: " + frames);
 
-				frames = 0;
-				updates = 0;
+					frames = 0;
+					updates = 0;
+				}
+
 			}
 		}
 	}
