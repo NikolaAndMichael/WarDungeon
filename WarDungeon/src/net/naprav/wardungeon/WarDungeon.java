@@ -158,8 +158,8 @@ public class WarDungeon extends Canvas implements Runnable {
 		Graphics gfx = this.getGraphics();
 
 		setUpNaprav();
-
 		gfx.drawImage(naprav_logo, 0, 0, getWidth(), getHeight(), null);
+		gfx.dispose();
 
 		Thread.sleep(3000);
 	}
