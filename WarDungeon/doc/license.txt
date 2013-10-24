@@ -1,0 +1,5 @@
+The code found in this project is copyright Naprav © 2013. In no way is anyone but the creators and members 
+of Naprav Specifications allowed to utilize this code for public and/or commercial usage. The viewer is 
+allowed to read and see the code for themselves, but is in no way allowed to modify or take the code for 
+their own usage. The code found in this project may be used for demonstrational purposes at most and is 
+not allowed for anything else, unless granted by a member of Naprav Specifications themselves.
