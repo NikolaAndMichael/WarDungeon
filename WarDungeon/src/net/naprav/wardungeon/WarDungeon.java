@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
+import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.player.KnightClass;
 
 public class WarDungeon extends Canvas implements Runnable {
@@ -38,7 +39,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	Display display;
 	Keyboard key;
-	Naprav naprav;
+	Mouser mouse;
 
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
@@ -46,9 +47,9 @@ public class WarDungeon extends Canvas implements Runnable {
 	public WarDungeon() {
 		frame = new JFrame("WarDungeon");
 
-		naprav = new Naprav("/textures/gui/naprav.png", WIDTH, HEIGHT);
 		display = new Display(WIDTH, HEIGHT);
 		key = new Keyboard(200);
+		mouse = new Mouser();
 
 		frame.setVisible(true);
 		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
@@ -56,8 +57,12 @@ public class WarDungeon extends Canvas implements Runnable {
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
 		this.addKeyListener(key);
+		this.addMouseListener(mouse);
+		this.addMouseMotionListener(mouse);
+
 		frame.add(this);
 		frame.pack();
+		frame.setResizable(false);
 
 		frame.setMinimumSize(size);
 
@@ -94,6 +99,10 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	private void tick() {
 		key.checkForKeys();
+		int x = mouse.x;
+		int y = mouse.y;
+		System.out.println(x);
+		System.out.println(y);
 
 		if (key.up) yMove++;
 		if (key.down) yMove--;
@@ -103,7 +112,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	final int centerX = (WIDTH / 2) - (48 / 2);
 	final int centerY = (HEIGHT / 2) - (48 / 2);
-	
+
 	/**
 	 * This method is used to to update anything on the image, i.e. Animations, level explosions :D, etc.
 	 */
@@ -111,25 +120,6 @@ public class WarDungeon extends Canvas implements Runnable {
 		display.clear();
 		display.renderBlock(StoneBlock.block, xMove, yMove);
 		display.renderPlayer(KnightClass.knight, centerX, centerY);
-
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-	}
-
-	/**
-	 * Setting the pixels of the array in Naprav.java to the ones in this class.
-	 */
-	private void setUpNaprav() {
-		display.renderNaprav();
-		
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-	}
-
-	private void setUpMenu() {
-		display.renderMenu();
 
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
@@ -155,18 +145,77 @@ public class WarDungeon extends Canvas implements Runnable {
 		buffer.show();
 	}
 
-	private void renderNaprav() {
+	private final void renderNaprav() {
+		display.renderNaprav();
+
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = display.pixels[a];
+		}
+
+		Graphics gfx = this.getGraphics();
+
+		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
+		gfx.dispose();
+	}
+
+	private final void renderOptions() {
+		display.renderOptions();
+
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = display.pixels[a];
+		}
+
 		Graphics gfx = this.getGraphics();
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 		gfx.dispose();
 	}
 	
-	private void renderMenu() {
+	private final void renderCredits() {
+		display.renderCredits();
+
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = display.pixels[a];
+		}
+
 		Graphics gfx = this.getGraphics();
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 		gfx.dispose();
+	}
+	
+	private final void renderMenu() {
+		display.renderMenu();
+
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = display.pixels[a];
+		}
+
+		Graphics gfx = this.getGraphics();
+
+		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
+		gfx.dispose();
+	}
+
+	private final void listenForMouse() {
+		int xClick = mouse.xClick;
+		int yClick = mouse.yClick;
+
+		if (pixels[10000] == display.pixels[10000]) {
+			if ((xClick > 235 && xClick < 427) && (yClick > 225 && yClick < 300)) {
+				state++;
+				return;
+			} else if ((xClick > 516 && xClick < 706) && (yClick > 228 && yClick < 305)) {
+				state += 2;
+				return;
+			} else if ((xClick > 243 && xClick < 432) && (yClick > 434 && yClick < 511)) {
+				state += 3;
+				return;
+			} else if ((xClick > 515 && xClick < 706) && (yClick > 437 && yClick < 513)) {
+				state += 4;
+				return;
+			}
+		}
 	}
 
 	/**
@@ -182,15 +231,14 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		while (isRunning == true) {
 			if (state == 0) {
-				setUpNaprav();
 				renderNaprav();
 				if ((System.currentTimeMillis() - lastSecond) > 1750) {
 					lastSecond += 1000;
 					state++;
 				}
 			} else if (state == 1) {
-				setUpMenu();
 				renderMenu();
+				listenForMouse();
 			} else if (state == 2) {
 				long currentTime = System.nanoTime();
 				single += (currentTime - pastTime) / desig;
@@ -212,7 +260,12 @@ public class WarDungeon extends Canvas implements Runnable {
 
 					frames = 0;
 				}
-
+			} else if (state == 3) {
+				renderOptions();
+			} else if (state == 4) {
+				renderCredits();
+			} else if (state == 5) {
+				System.exit(0);
 			}
 		}
 	}
@@ -223,7 +276,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//new Login();
+		// new Login();
 		new WarDungeon().begin();
 	}
 }

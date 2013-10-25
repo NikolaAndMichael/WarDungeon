@@ -1,8 +1,10 @@
 package net.naprav.wardungeon.graphics;
 
-import net.naprav.wardungeon.Menu;
-import net.naprav.wardungeon.Naprav;
 import net.naprav.wardungeon.block.Block;
+import net.naprav.wardungeon.gui.Credits;
+import net.naprav.wardungeon.gui.Menu;
+import net.naprav.wardungeon.gui.Naprav;
+import net.naprav.wardungeon.gui.Option;
 import net.naprav.wardungeon.player.Class;
 
 public class Display {
@@ -15,6 +17,8 @@ public class Display {
 	
 	Menu menu;
 	Naprav naprav;
+	Option option;
+	Credits credit;
 	
 	/**
 	 * Sets the screen's width and height to match the pixels[] array in WarDungeon.java
@@ -27,8 +31,10 @@ public class Display {
 		HEIGHT = height;
 		pixels = new int[WIDTH * HEIGHT];
 
-		menu = new Menu("/textures/gui/title_screen.png", 460, 280);
 		naprav = new Naprav("/textures/gui/naprav.png", 460, 280);
+		menu = new Menu("/textures/gui/title_screen.png", 460, 280);
+		option = new Option("/textures/gui/options.png", 460, 280);
+		credit = new Credits("/textures/gui/credits.png", 460, 280);
 	}
 
 	/**
@@ -84,6 +90,18 @@ public class Display {
 	public void renderNaprav() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = naprav.pixels[a];
+		}
+	}
+	
+	public void renderCredits() {
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = credit.pixels[a];
+		}
+	}
+	
+	public void renderOptions() {
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = option.pixels[a];
 		}
 	}
 	

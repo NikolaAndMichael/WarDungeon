@@ -1,4 +1,4 @@
-package net.naprav.wardungeon;
+package net.naprav.wardungeon.gui;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
