@@ -12,6 +12,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.player.KnightClass;
@@ -100,13 +101,16 @@ public class WarDungeon extends Canvas implements Runnable {
 		if (key.right) xMove--;
 	}
 
+	final int centerX = (WIDTH / 2) - (48 / 2);
+	final int centerY = (HEIGHT / 2) - (48 / 2);
+	
 	/**
 	 * This method is used to to update anything on the image, i.e. Animations, level explosions :D, etc.
 	 */
 	private void tickImage() {
 		display.clear();
-		// display.renderBlock(StoneBlock.block, xMove, yMove);
-		display.renderPlayer(KnightClass.knight, xMove, yMove);
+		display.renderBlock(StoneBlock.block, xMove, yMove);
+		display.renderPlayer(KnightClass.knight, centerX, centerY);
 
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
@@ -144,7 +148,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 
 		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		gfx.setColor(Color.WHITE);
+		gfx.setColor(new Color(125, 125, 125));
 		gfx.drawString("Version: 0.1 Indev", 3, 12);
 
 		gfx.dispose();
@@ -169,11 +173,10 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * The main "run()" method; needed for any class that implements the Runnable.java interface.
 	 */
 	public void run() {
-		long pastTime = System.nanoTime();
-		long lastSecond = System.currentTimeMillis();
+		long pastTime = System.nanoTime(), lastSecond = System.currentTimeMillis();
 
 		final float desig = 1_000_000_000F / 70F;
-		double single = 0;
+		float single = 0;
 
 		int frames = 0;
 
@@ -181,7 +184,7 @@ public class WarDungeon extends Canvas implements Runnable {
 			if (state == 0) {
 				setUpNaprav();
 				renderNaprav();
-				if ((System.currentTimeMillis() - lastSecond) > 3000) {
+				if ((System.currentTimeMillis() - lastSecond) > 1750) {
 					lastSecond += 1000;
 					state++;
 				}
@@ -220,7 +223,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// new Login();
+		//new Login();
 		new WarDungeon().begin();
 	}
 }
