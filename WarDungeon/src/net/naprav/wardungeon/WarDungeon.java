@@ -16,7 +16,6 @@ import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
-import net.naprav.wardungeon.login.Login;
 import net.naprav.wardungeon.player.KnightClass;
 
 public class WarDungeon extends Canvas implements Runnable {
@@ -237,8 +236,6 @@ public class WarDungeon extends Canvas implements Runnable {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		System.out.println(xClick + ", " + yClick);
-
 		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
 			state = 1;
 			applySettings();
@@ -256,8 +253,6 @@ public class WarDungeon extends Canvas implements Runnable {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		System.out.println(xClick + ", " + yClick);
-
 		if ((xClick > 717 && xClick < 907) && (yClick > 464 && yClick < 542)) {
 			state = 1;
 			return;
@@ -268,7 +263,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * The method for applying the settings to the game.
 	 */
 	private void applySettings() {
-
 	}
 
 	/**
@@ -329,7 +323,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new Login();
-		// new WarDungeon().begin();
+		// new Login();
+		new WarDungeon().begin();
 	}
 }
