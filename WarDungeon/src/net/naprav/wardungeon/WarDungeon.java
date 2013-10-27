@@ -58,7 +58,6 @@ public class WarDungeon extends Canvas implements Runnable {
 		this.setMinimumSize(size);
 		this.addKeyListener(key);
 		this.addMouseListener(mouse);
-		this.addMouseMotionListener(mouse);
 
 		frame.add(this);
 		frame.pack();
@@ -99,10 +98,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	private void tick() {
 		key.checkForKeys();
-		int x = mouse.x;
-		int y = mouse.y;
-		System.out.println(x);
-		System.out.println(y);
 
 		if (key.up) yMove++;
 		if (key.down) yMove--;
@@ -110,13 +105,14 @@ public class WarDungeon extends Canvas implements Runnable {
 		if (key.right) xMove--;
 	}
 
-	final int centerX = (WIDTH / 2) - (48 / 2);
-	final int centerY = (HEIGHT / 2) - (48 / 2);
-
 	/**
 	 * This method is used to to update anything on the image, i.e. Animations, level explosions :D, etc.
 	 */
 	private void tickImage() {
+
+		final int centerY = (HEIGHT / 2) - (48 / 2);
+		final int centerX = (WIDTH / 2) - (48 / 2);
+
 		display.clear();
 		display.renderBlock(StoneBlock.block, xMove, yMove);
 		display.renderPlayer(KnightClass.knight, centerX, centerY);
@@ -170,7 +166,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 		gfx.dispose();
 	}
-	
+
 	private final void renderCredits() {
 		display.renderCredits();
 
@@ -183,7 +179,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 		gfx.dispose();
 	}
-	
+
 	private final void renderMenu() {
 		display.renderMenu();
 
@@ -197,25 +193,58 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.dispose();
 	}
 
-	private final void listenForMouse() {
+	private final void listenForMouseClickInMenu() {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		if (pixels[10000] == display.pixels[10000]) {
-			if ((xClick > 235 && xClick < 427) && (yClick > 225 && yClick < 300)) {
-				state++;
-				return;
-			} else if ((xClick > 516 && xClick < 706) && (yClick > 228 && yClick < 305)) {
-				state += 2;
-				return;
-			} else if ((xClick > 243 && xClick < 432) && (yClick > 434 && yClick < 511)) {
-				state += 3;
-				return;
-			} else if ((xClick > 515 && xClick < 706) && (yClick > 437 && yClick < 513)) {
-				state += 4;
-				return;
-			}
+		if ((xClick > 235 && xClick < 427) && (yClick > 225 && yClick < 300)) {
+			// Starts game.
+			state++;
+			return;
+		} else if ((xClick > 516 && xClick < 706) && (yClick > 228 && yClick < 305)) {
+			// Goes to options.
+			state += 2;
+			return;
+		} else if ((xClick > 243 && xClick < 432) && (yClick > 434 && yClick < 511)) {
+			// Goes to credits.
+			state += 3;
+			return;
+		} else if ((xClick > 515 && xClick < 706) && (yClick > 437 && yClick < 513)) {
+			System.exit(0);
 		}
+	}
+
+	
+	private final void listenForMouseClickInOptions() {
+		int xClick = mouse.xClick;
+		int yClick = mouse.yClick;
+
+		System.out.println(xClick + ", " + yClick);
+
+		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
+			state = 1;
+			applySettings();
+			return;
+		} else if ((xClick > 715 && xClick < 905) && (yClick > 470 && yClick < 548)) {
+			state = 1;
+			return;
+		}
+	}
+
+	private final void listenForMouseClickInCredits() {
+		int xClick = mouse.xClick;
+		int yClick = mouse.yClick;
+
+		System.out.println(xClick + ", " + yClick);
+
+		if ((xClick > 717 && xClick < 907) && (yClick > 464 && yClick < 542)) {
+			state = 1;
+			return;
+		}
+	}
+
+	private void applySettings() {
+
 	}
 
 	/**
@@ -238,7 +267,7 @@ public class WarDungeon extends Canvas implements Runnable {
 				}
 			} else if (state == 1) {
 				renderMenu();
-				listenForMouse();
+				listenForMouseClickInMenu();
 			} else if (state == 2) {
 				long currentTime = System.nanoTime();
 				single += (currentTime - pastTime) / desig;
@@ -262,10 +291,10 @@ public class WarDungeon extends Canvas implements Runnable {
 				}
 			} else if (state == 3) {
 				renderOptions();
+				listenForMouseClickInOptions();
 			} else if (state == 4) {
 				renderCredits();
-			} else if (state == 5) {
-				System.exit(0);
+				listenForMouseClickInCredits();
 			}
 		}
 	}

@@ -14,12 +14,12 @@ public class Display {
 
 	private final int BLOCK_SIZE = 32;
 	private final int BLOCK_MASK = BLOCK_SIZE - 1;
-	
+
 	Menu menu;
 	Naprav naprav;
 	Option option;
 	Credits credit;
-	
+
 	/**
 	 * Sets the screen's width and height to match the pixels[] array in WarDungeon.java
 	 * 
@@ -92,19 +92,19 @@ public class Display {
 			pixels[a] = naprav.pixels[a];
 		}
 	}
-	
+
 	public void renderCredits() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = credit.pixels[a];
 		}
 	}
-	
+
 	public void renderOptions() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = option.pixels[a];
 		}
 	}
-	
+
 	/**
 	 * Clear's the screen to update it constantly.
 	 */
