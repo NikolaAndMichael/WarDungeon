@@ -6,7 +6,14 @@ import javax.swing.JOptionPane;
 import net.naprav.wardungeon.WarDungeon;
 
 public class LoginGame {
-	
+
+	/**
+	 * Method for attempting login into the game.
+	 * 
+	 * @param username
+	 * @param passcode
+	 * @param frame
+	 */
 	public void attemptLogin(String username, String passcode, JFrame frame) {
 		if (username.equals("") || passcode.equals("")) {
 			JOptionPane.showMessageDialog(null, "Put in your credentials!", "Hey you!", JOptionPane.ERROR_MESSAGE);
@@ -19,7 +26,9 @@ public class LoginGame {
 			} catch (InterruptedException exc) {
 				exc.printStackTrace();
 			}
-			new WarDungeon().begin();
+			WarDungeon dungeon = new WarDungeon();
+			dungeon.begin();
+			dungeon.requestFocus();
 		}
 	}
 }

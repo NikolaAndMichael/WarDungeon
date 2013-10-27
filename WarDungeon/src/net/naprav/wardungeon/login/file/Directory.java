@@ -13,6 +13,9 @@ public class Directory {
 	String user;
 	Server server;
 
+	/**
+	 * Main constructor for setting up the directories on the user's computer.
+	 */
 	public Directory() {
 		user = System.getProperty("user.home");
 		server = new Server();
@@ -24,19 +27,22 @@ public class Directory {
 		createSaves = new File(user + "\\AppData\\Roaming\\[WarDungeon]\\saves");
 	}
 
+	/**
+	 * Method for creating the directories and checking if the user is up to date.
+	 */
 	public void createDirectories() {
 		if (!server.checkIsUpToDate() || !createDir.exists() || !createVersionHistory.exists() || !createBin.exists() || !createScreenShots.exists() || !createSaves.exists()) {
 			System.out.println("Player is not up to date: adding up all files...");
 			System.out.println(server.upToDate);
-			
+
 			server.tickUser();
-			
+
 			createDir.mkdir();
 			createVersionHistory.mkdir();
 			createBin.mkdir();
 			createScreenShots.mkdir();
 			createSaves.mkdir();
-			
+
 			server.setIsUpToDate(true);
 		} else {
 			System.out.println("Player's up to date!");

@@ -78,6 +78,9 @@ public class Display {
 		}
 	}
 
+	/**
+	 * Method for rendering the menu.
+	 */
 	public void renderMenu() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = menu.pixels[a];
@@ -93,12 +96,18 @@ public class Display {
 		}
 	}
 
+	/**
+	 * Method for rendering the credits.
+	 */
 	public void renderCredits() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = credit.pixels[a];
 		}
 	}
 
+	/**
+	 * Method for rendering the options.
+	 */
 	public void renderOptions() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = option.pixels[a];

@@ -10,6 +10,13 @@ public class Menu {
 	private final int WIDTH, HEIGHT;
 	public int[] pixels;
 	
+	/**
+	 * Main constructor for creating the main menu GUI.
+	 * 
+	 * @param pathway
+	 * @param width
+	 * @param height
+	 */
 	public Menu(String pathway, int width, int height) {
 		WIDTH = width;
 		HEIGHT = height;
@@ -22,6 +29,12 @@ public class Menu {
 		}
 	}
 
+	/**
+	 * Method for loading the main menu image to the screen.
+	 * 
+	 * @param pathway
+	 * @throws IOException
+	 */
 	private final void loadMenu(String pathway) throws IOException {
 		BufferedImage menu = ImageIO.read(Menu.class.getResource(pathway));
 		int width = menu.getWidth(), height = menu.getHeight();

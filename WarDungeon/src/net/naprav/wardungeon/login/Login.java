@@ -49,6 +49,9 @@ public class Login extends JPanel {
 	JTextField username;
 	JPasswordField passcode;
 
+	/**
+	 * Main constructor for the login screen.
+	 */
 	public Login() {
 		background = new Background(WIDTH, HEIGHT, "/login/login_screen.png");
 		shot = new ScreenShot(293, 162, "/login/splash.png");
@@ -57,6 +60,9 @@ public class Login extends JPanel {
 		createWindow();
 	}
 
+	/**
+	 * Creates a JFrame for the content to reside in.
+	 */
 	private final void createWindow() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -73,11 +79,13 @@ public class Login extends JPanel {
 		action = new Action();
 
 		login = new JButton("Login!");
+		login.setBackground(new Color(25, 25, 25));
 		login.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		login.setBounds(85, 400, 100, 25);
 		login.addActionListener(action);
 
 		register = new JButton("Register!");
+		register.setBackground(new Color(25, 25, 25));
 		register.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		register.setBounds(85, 430, 100, 25);
 		register.addActionListener(action);
@@ -108,6 +116,9 @@ public class Login extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	/**
+	 * Updates the login of any components.
+	 */
 	private void updateLogin() {
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = background.pixels[a];
@@ -118,6 +129,9 @@ public class Login extends JPanel {
 		}
 	}
 
+	/**
+	 * Paints the JPanel.
+	 */
 	public void paintComponent(Graphics gfx) {
 		super.paintComponent(gfx);
 

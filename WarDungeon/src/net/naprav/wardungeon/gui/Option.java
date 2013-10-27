@@ -10,6 +10,13 @@ public class Option {
 	private final int WIDTH, HEIGHT;
 	public int[] pixels;
 	
+	/**
+	 * Main constructor for creating the options GUI.
+	 * 
+	 * @param pathway
+	 * @param width
+	 * @param height
+	 */
 	public Option(String pathway, int width, int height) {
 		WIDTH = width;
 		HEIGHT = height;
@@ -22,6 +29,12 @@ public class Option {
 		}
 	}
 
+	/**
+	 * Method for loading the options image to the screen.
+	 * 
+	 * @param pathway
+	 * @throws IOException
+	 */
 	private final void loadOptions(String pathway) throws IOException {
 		BufferedImage menu = ImageIO.read(Menu.class.getResource(pathway));
 		int width = menu.getWidth(), height = menu.getHeight();

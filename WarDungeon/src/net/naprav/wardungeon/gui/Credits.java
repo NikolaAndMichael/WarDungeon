@@ -9,11 +9,18 @@ public class Credits {
 
 	private final int WIDTH, HEIGHT;
 	public int[] pixels;
-	
+
+	/**
+	 * Main constructor for creating the credits GUI.
+	 * 
+	 * @param pathway
+	 * @param width
+	 * @param height
+	 */
 	public Credits(String pathway, int width, int height) {
 		WIDTH = width;
 		HEIGHT = height;
-		
+
 		pixels = new int[WIDTH * HEIGHT];
 		try {
 			loadCredits(pathway);
@@ -22,6 +29,12 @@ public class Credits {
 		}
 	}
 
+	/**
+	 * Method for loading the credits image to the screen.
+	 * 
+	 * @param pathway
+	 * @throws IOException
+	 */
 	private final void loadCredits(String pathway) throws IOException {
 		BufferedImage menu = ImageIO.read(Menu.class.getResource(pathway));
 		int width = menu.getWidth(), height = menu.getHeight();

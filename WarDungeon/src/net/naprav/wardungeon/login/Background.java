@@ -9,15 +9,27 @@ public class Background {
 
 	private final int WIDTH, HEIGHT;
 	public int[] pixels;
-	
+
+	/**
+	 * Main constructor for background image of Login.
+	 * 
+	 * @param width
+	 * @param height
+	 * @param pathway
+	 */
 	public Background(int width, int height, String pathway) {
 		WIDTH = width;
 		HEIGHT = height;
 		pixels = new int[WIDTH * HEIGHT];
-		
+
 		loadMenuScreen(pathway);
-	} 
-	
+	}
+
+	/**
+	 * Method for rendering the menu screen.
+	 * 
+	 * @param pathway
+	 */
 	private void loadMenuScreen(String pathway) {
 		try {
 			BufferedImage image = ImageIO.read(Background.class.getResource(pathway));

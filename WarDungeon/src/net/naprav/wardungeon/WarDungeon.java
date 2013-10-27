@@ -16,6 +16,7 @@ import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
+import net.naprav.wardungeon.login.Login;
 import net.naprav.wardungeon.player.KnightClass;
 
 public class WarDungeon extends Canvas implements Runnable {
@@ -141,6 +142,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		buffer.show();
 	}
 
+	/**
+	 * Method for rendering the Naprav logo to the screen.
+	 */
 	private final void renderNaprav() {
 		display.renderNaprav();
 
@@ -154,6 +158,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.dispose();
 	}
 
+	/**
+	 * Method for rendering the options GUI.
+	 */
 	private final void renderOptions() {
 		display.renderOptions();
 
@@ -167,6 +174,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.dispose();
 	}
 
+	/**
+	 * Method for rendering the credits GUI.
+	 */
 	private final void renderCredits() {
 		display.renderCredits();
 
@@ -180,6 +190,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.dispose();
 	}
 
+	/**
+	 * Method for rendering the main menu GUI.
+	 */
 	private final void renderMenu() {
 		display.renderMenu();
 
@@ -193,6 +206,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.dispose();
 	}
 
+	/**
+	 * The method for listening for mouse clicks in the main menu.
+	 */
 	private final void listenForMouseClickInMenu() {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
@@ -214,7 +230,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		}
 	}
 
-	
+	/**
+	 * The method for listening for mouse clicks in options.
+	 */
 	private final void listenForMouseClickInOptions() {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
@@ -231,6 +249,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		}
 	}
 
+	/**
+	 * The method for listening to mouse clicks in the credits.
+	 */
 	private final void listenForMouseClickInCredits() {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
@@ -243,6 +264,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		}
 	}
 
+	/**
+	 * The method for applying the settings to the game.
+	 */
 	private void applySettings() {
 
 	}
@@ -305,7 +329,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// new Login();
-		new WarDungeon().begin();
+		new Login();
+		// new WarDungeon().begin();
 	}
 }

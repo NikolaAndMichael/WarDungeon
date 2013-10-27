@@ -4,6 +4,13 @@ import net.naprav.wardungeon.graphics.BlockSprite;
 
 public class LavaBlock extends Block {
 
+	/**
+	 * Main constructor for the LavaBlock.
+	 * 
+	 * @param sprite
+	 * @param isCollidable
+	 * @param doesKill
+	 */
 	public LavaBlock(BlockSprite sprite, boolean isCollidable, boolean doesKill) {
 		super(sprite, isCollidable, doesKill);
 	}
@@ -14,7 +21,10 @@ public class LavaBlock extends Block {
 	public static LavaBlock block_4 = new LavaBlock(BlockSprite.lava_4, false, true);
 	public static LavaBlock block_5 = new LavaBlock(BlockSprite.lava_5, false, true);
 	public static LavaBlock block_6 = new LavaBlock(BlockSprite.lava_6, false, true);
-	
+
+	/**
+	 * Method for rendering the LavaBlock.
+	 */
 	protected void render(int x, int y, BlockSprite sprite) {
 	}
 }

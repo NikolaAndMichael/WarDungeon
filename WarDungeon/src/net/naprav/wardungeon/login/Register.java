@@ -9,10 +9,17 @@ public class Register {
 	URI URI;
 	Desktop desktop;
 	
+	/**
+	 * Constructor for sending the user to register themselves.
+	 * @param url
+	 */
 	public Register(String url) {
 		URL = url;
 	}
 	
+	/**
+	 * Method for opening the default browser on the user's desktop and sending them to create a Naprav account.
+	 */
 	public void registerAccount() {
 		try {
 			desktop = Desktop.getDesktop();
