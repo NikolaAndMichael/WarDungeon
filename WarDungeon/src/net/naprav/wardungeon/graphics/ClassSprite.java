@@ -26,9 +26,9 @@ public class ClassSprite {
 		loadPlayer();
 	}
 
-	public static ClassSprite knight = new ClassSprite(SpriteSheet.player, 0, 0, 64);
-	public static ClassSprite mage = new ClassSprite(SpriteSheet.player, 0, 3, 48);
-	public static ClassSprite archer = new ClassSprite(SpriteSheet.player, 0, 6, 48);
+	public static ClassSprite knight = new ClassSprite(SpriteSheet.knight, 0, 0, 64);
+	public static ClassSprite mage = new ClassSprite(SpriteSheet.wizard, 0, 0, 64);
+	public static ClassSprite archer = new ClassSprite(SpriteSheet.archer, 0, 0, 64);
 
 	/**
 	 * Method for loading the player to the pixels[] array.

@@ -33,7 +33,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	private Thread thread;
 	public static volatile boolean isRunning = false;
 
-	public int state = 0;
+	public byte state = 0;
 
 	JFrame frame;
 
@@ -214,15 +214,15 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		if ((xClick > 235 && xClick < 427) && (yClick > 225 && yClick < 300)) {
 			// Starts game.
-			state++;
+			state = 50;
 			return;
 		} else if ((xClick > 516 && xClick < 706) && (yClick > 228 && yClick < 305)) {
 			// Goes to options.
-			state += 2;
+			state = 2;
 			return;
 		} else if ((xClick > 243 && xClick < 432) && (yClick > 434 && yClick < 511)) {
 			// Goes to credits.
-			state += 3;
+			state = 3;
 			return;
 		} else if ((xClick > 515 && xClick < 706) && (yClick > 437 && yClick < 513)) {
 			System.exit(0);
@@ -237,10 +237,12 @@ public class WarDungeon extends Canvas implements Runnable {
 		int yClick = mouse.yClick;
 
 		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
-			state = 1;
+			// Applies settings and returns to menu.
 			applySettings();
+			state = 1;
 			return;
 		} else if ((xClick > 715 && xClick < 905) && (yClick > 470 && yClick < 548)) {
+			// Returns to menu.
 			state = 1;
 			return;
 		}
@@ -254,6 +256,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		int yClick = mouse.yClick;
 
 		if ((xClick > 717 && xClick < 907) && (yClick > 464 && yClick < 542)) {
+			// Returns to menu.
 			state = 1;
 			return;
 		}
@@ -263,6 +266,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * The method for applying the settings to the game.
 	 */
 	private void applySettings() {
+
 	}
 
 	/**
@@ -276,22 +280,31 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		int frames = 0;
 
+		// Remove for actual game itself.
+		state = 50;
+
 		while (isRunning == true) {
 			if (state == 0) {
 				renderNaprav();
 				if ((System.currentTimeMillis() - lastSecond) > 1750) {
+					// Wait 1.75 seconds and then go to the menu.
 					lastSecond += 1000;
-					state++;
+					state = 1;
 				}
 			} else if (state == 1) {
 				renderMenu();
 				listenForMouseClickInMenu();
 			} else if (state == 2) {
+				renderOptions();
+				listenForMouseClickInOptions();
+			} else if (state == 3) {
+				renderCredits();
+				listenForMouseClickInCredits();
+			} else {
 				long currentTime = System.nanoTime();
 				single += (currentTime - pastTime) / desig;
 
 				pastTime = currentTime;
-
 				while (single >= 1) {
 					tick();
 					single--;
@@ -302,17 +315,9 @@ public class WarDungeon extends Canvas implements Runnable {
 
 				if ((System.currentTimeMillis() - lastSecond) > 1000) {
 					lastSecond += 1000;
-
 					frame.setTitle("WarDungeon | FPS: " + frames);
-
 					frames = 0;
 				}
-			} else if (state == 3) {
-				renderOptions();
-				listenForMouseClickInOptions();
-			} else if (state == 4) {
-				renderCredits();
-				listenForMouseClickInCredits();
 			}
 		}
 	}

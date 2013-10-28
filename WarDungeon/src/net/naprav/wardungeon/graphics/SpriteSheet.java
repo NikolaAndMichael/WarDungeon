@@ -30,7 +30,9 @@ public class SpriteSheet {
 	public static SpriteSheet block = new SpriteSheet("/textures/block/blocks_sheet.png", 256);
 	public static SpriteSheet lava = new SpriteSheet("/textures/block/lava_flow.png", 96);
 	
-	public static SpriteSheet player = new SpriteSheet("/textures/mob/player/class_sheet.png", 432);
+	public static SpriteSheet knight = new SpriteSheet("/textures/mob/player/knight_sheet.png", 384);
+	public static SpriteSheet wizard = new SpriteSheet("/textures/mob/player/wizard_sheet.png", 384);
+	public static SpriteSheet archer = new SpriteSheet("/textures/mob/player/archer_sheet.png", 384);
 	
 	/**
 	 * This protected method helps to load the SpriteSheet's data into the pixels[] array.
