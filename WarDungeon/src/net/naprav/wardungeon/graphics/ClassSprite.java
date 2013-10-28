@@ -18,17 +18,28 @@ public class ClassSprite {
 	 */
 	public ClassSprite(SpriteSheet sheet, int x, int y, int size) {
 		SIZE = size;
-		this.x = x * SIZE;
-		this.y = y * SIZE;
+		this.x = x * 48;
+		this.y = y * 48;
 		this.sheet = sheet;
 
 		pixels = new int[SIZE * SIZE];
 		loadPlayer();
 	}
 
-	public static ClassSprite knight = new ClassSprite(SpriteSheet.knight, 0, 0, 64);
-	public static ClassSprite mage = new ClassSprite(SpriteSheet.wizard, 0, 0, 64);
-	public static ClassSprite archer = new ClassSprite(SpriteSheet.archer, 0, 0, 64);
+	public static ClassSprite knight_south = new ClassSprite(SpriteSheet.knight, 0, 0, 64);
+	public static ClassSprite knight_north = new ClassSprite(SpriteSheet.knight, 1, 0, 64);
+	public static ClassSprite knight_east = new ClassSprite(SpriteSheet.knight, 2, 0, 64);
+	public static ClassSprite knight_west = new ClassSprite(SpriteSheet.knight, 3, 0, 64);
+	
+	public static ClassSprite wizard_south = new ClassSprite(SpriteSheet.wizard, 0, 0, 64);
+	public static ClassSprite wizard_north = new ClassSprite(SpriteSheet.wizard, 1, 0, 64);
+	public static ClassSprite wizard_east = new ClassSprite(SpriteSheet.wizard, 2, 0, 64);
+	public static ClassSprite wizard_west = new ClassSprite(SpriteSheet.wizard, 3, 0, 64);
+	
+	public static ClassSprite archer_south = new ClassSprite(SpriteSheet.archer, 0, 0, 64);
+	public static ClassSprite archer_north = new ClassSprite(SpriteSheet.archer, 1, 0, 64);
+	public static ClassSprite archer_east = new ClassSprite(SpriteSheet.archer, 2, 0, 64);
+	public static ClassSprite archer_west = new ClassSprite(SpriteSheet.archer, 3, 0, 64);
 
 	/**
 	 * Method for loading the player to the pixels[] array.

@@ -13,10 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import net.naprav.wardungeon.block.StoneBlock;
+import net.naprav.wardungeon.graphics.ClassSprite;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
+import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
+import net.naprav.wardungeon.player.WizardClass;
 
 public class WarDungeon extends Canvas implements Runnable {
 
@@ -41,6 +44,10 @@ public class WarDungeon extends Canvas implements Runnable {
 	Keyboard key;
 	Mouser mouse;
 
+	KnightClass knight;
+	WizardClass wizard;
+	ArcherClass archer;
+	
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
@@ -50,7 +57,14 @@ public class WarDungeon extends Canvas implements Runnable {
 		display = new Display(WIDTH, HEIGHT);
 		key = new Keyboard(200);
 		mouse = new Mouser();
-
+		
+		knight = new KnightClass(ClassSprite.knight_south, 2, 5, 5);
+		wizard = new WizardClass(ClassSprite.wizard_south, 2, 6, 4);
+		archer = new ArcherClass(ClassSprite.archer_south, 4, 5, 3);
+		knight.setDirection('S');
+		wizard.setDirection('S');
+		archer.setDirection('S');
+		
 		frame.setVisible(true);
 		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
 
@@ -99,10 +113,33 @@ public class WarDungeon extends Canvas implements Runnable {
 	private void tick() {
 		key.checkForKeys();
 
-		if (key.up) yMove++;
-		if (key.down) yMove--;
-		if (key.left) xMove++;
-		if (key.right) xMove--;
+		if (key.up) {
+			yMove++;
+			knight.setDirection('N');
+			wizard.setDirection('N');
+			archer.setDirection('N');
+		} 
+		
+		if (key.down) {
+			yMove--;
+			knight.setDirection('S');
+			wizard.setDirection('S');
+			archer.setDirection('S');
+		} 
+		
+		if (key.left) {
+			xMove++;
+			knight.setDirection('W');
+			wizard.setDirection('W');
+			archer.setDirection('W');
+		} 
+		
+		if (key.right) {
+			xMove--;
+			knight.setDirection('E');
+			wizard.setDirection('E');
+			archer.setDirection('E');
+		} 
 	}
 
 	/**
@@ -115,7 +152,8 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		display.clear();
 		display.renderBlock(StoneBlock.block, xMove, yMove);
-		display.renderPlayer(KnightClass.knight, centerX, centerY);
+		
+		display.renderPlayer(archer, centerX, centerY);
 
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
