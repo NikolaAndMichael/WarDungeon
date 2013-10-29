@@ -3,7 +3,7 @@ package net.naprav.wardungeon.player;
 import net.naprav.wardungeon.graphics.ClassSprite;
 import net.naprav.wardungeon.graphics.Display;
 
-public class WizardClass extends Class {
+public class WizardClass extends PlayerClass {
 
 	public char direction;
 	

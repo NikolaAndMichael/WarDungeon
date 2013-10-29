@@ -153,7 +153,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		display.clear();
 		display.renderBlock(StoneBlock.block, xMove, yMove);
 		
-		display.renderPlayer(archer, centerX, centerY);
+		display.renderPlayer(knight, centerX, centerY);
 
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];

@@ -5,7 +5,7 @@ import net.naprav.wardungeon.gui.Credits;
 import net.naprav.wardungeon.gui.Menu;
 import net.naprav.wardungeon.gui.Naprav;
 import net.naprav.wardungeon.gui.Option;
-import net.naprav.wardungeon.player.Class;
+import net.naprav.wardungeon.player.PlayerClass;
 
 public class Display {
 
@@ -64,7 +64,7 @@ public class Display {
 	 * @param xMove
 	 * @param yMove
 	 */
-	public void renderPlayer(Class player, int xMove, int yMove) {
+	public void renderPlayer(PlayerClass player, int xMove, int yMove) {
 		for (int x = 0; x < 48; x++) {
 			int xPos = x + xMove;
 			for (int y = 0; y < 48; y++) {

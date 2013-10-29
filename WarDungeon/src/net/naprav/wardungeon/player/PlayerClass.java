@@ -3,7 +3,7 @@ package net.naprav.wardungeon.player;
 import net.naprav.wardungeon.graphics.ClassSprite;
 import net.naprav.wardungeon.graphics.Display;
 
-public abstract class Class {
+public abstract class PlayerClass {
 
 	protected final int SPEED;
 	protected final int ATTACK;
@@ -20,7 +20,7 @@ public abstract class Class {
 	 * @param attack
 	 * @param defense
 	 */
-	public Class(ClassSprite sprite, int speed, int attack, int defense) {
+	public PlayerClass(ClassSprite sprite, int speed, int attack, int defense) {
 		this.sprite = sprite;
 		SPEED = speed;
 		ATTACK = attack;
