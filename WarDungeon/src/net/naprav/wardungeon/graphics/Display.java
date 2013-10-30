@@ -1,5 +1,7 @@
 package net.naprav.wardungeon.graphics;
 
+import java.awt.image.BufferedImage;
+
 import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.gui.Credits;
 import net.naprav.wardungeon.gui.Menu;
@@ -70,10 +72,8 @@ public class Display {
 			for (int y = 0; y < 48; y++) {
 				int yPos = y + yMove;
 				if (xPos < 0 || yPos < 0 || xPos >= WIDTH || yPos >= HEIGHT) continue;
-
-				// Below code is kind of derp, but don't worry about it. :)
-				int index = (x & 63) + (y & 63) * 64;
-				pixels[xPos + (yPos * WIDTH)] = player.sprite.pixels[index];
+				int colour = player.sprite.pixels[x + y * 64];
+                if (colour != 0x000000) pixels[xPos + yPos * WIDTH] = colour;
 			}
 		}
 	}

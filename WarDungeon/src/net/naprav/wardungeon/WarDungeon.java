@@ -47,7 +47,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	KnightClass knight;
 	WizardClass wizard;
 	ArcherClass archer;
-	
+
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
@@ -57,14 +57,14 @@ public class WarDungeon extends Canvas implements Runnable {
 		display = new Display(WIDTH, HEIGHT);
 		key = new Keyboard(200);
 		mouse = new Mouser();
-		
+
 		knight = new KnightClass(ClassSprite.knight_south, 2, 5, 5);
 		wizard = new WizardClass(ClassSprite.wizard_south, 2, 6, 4);
 		archer = new ArcherClass(ClassSprite.archer_south, 4, 5, 3);
 		knight.setDirection('S');
 		wizard.setDirection('S');
 		archer.setDirection('S');
-		
+
 		frame.setVisible(true);
 		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
 
@@ -118,28 +118,28 @@ public class WarDungeon extends Canvas implements Runnable {
 			knight.setDirection('N');
 			wizard.setDirection('N');
 			archer.setDirection('N');
-		} 
-		
+		}
+
 		if (key.down) {
 			yMove--;
 			knight.setDirection('S');
 			wizard.setDirection('S');
 			archer.setDirection('S');
-		} 
-		
+		}
+
 		if (key.left) {
 			xMove++;
 			knight.setDirection('W');
 			wizard.setDirection('W');
 			archer.setDirection('W');
-		} 
-		
+		}
+
 		if (key.right) {
 			xMove--;
 			knight.setDirection('E');
 			wizard.setDirection('E');
 			archer.setDirection('E');
-		} 
+		}
 	}
 
 	/**
@@ -152,9 +152,17 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		display.clear();
 		display.renderBlock(StoneBlock.block, xMove, yMove);
-		
+
 		display.renderPlayer(knight, centerX, centerY);
 
+		for (int x = 0; x < screen.getWidth(); ++x) {
+			for (int y = 0; y < screen.getHeight(); ++y) {
+				if ((screen.getRGB(x, y) & 0) == 0) {
+					screen.setRGB(x, y, 0);
+				}
+			}
+		}
+		
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
 		}
