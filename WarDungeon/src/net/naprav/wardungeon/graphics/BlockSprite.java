@@ -30,6 +30,7 @@ public class BlockSprite {
 	public static BlockSprite stonebrick = new BlockSprite(SpriteSheet.block, 1, 0, 32);
 	public static BlockSprite mossystonebrick = new BlockSprite(SpriteSheet.block, 2, 0, 32);
 	public static BlockSprite cobblestone = new BlockSprite(SpriteSheet.block, 3, 0, 32);
+	public static BlockSprite icestonebrick = new BlockSprite(SpriteSheet.block, 4, 0, 32);
 	
 	public static BlockSprite lava_1 = new BlockSprite(SpriteSheet.lava, 0, 0, 32);
 	public static BlockSprite lava_2 = new BlockSprite(SpriteSheet.lava, 1, 0, 32);

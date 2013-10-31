@@ -1,5 +1,7 @@
 package net.naprav.wardungeon;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,11 +10,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
+import java.net.MalformedURLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import net.naprav.wardungeon.block.StoneBlock;
+import net.naprav.wardungeon.block.StoneBrickBlock;
 import net.naprav.wardungeon.graphics.ClassSprite;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
@@ -39,7 +43,9 @@ public class WarDungeon extends Canvas implements Runnable {
 	public byte state = 0;
 
 	JFrame frame;
-
+	AudioClip clip;
+	File select = new File("res/sounds/sound/selection.wav");
+	
 	Display display;
 	Keyboard key;
 	Mouser mouse;
@@ -79,6 +85,12 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		frame.setMinimumSize(size);
 
+		try {
+			addSoundPlayer();
+		} catch (MalformedURLException exc) {
+			exc.printStackTrace();
+		}
+		
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -105,6 +117,10 @@ public class WarDungeon extends Canvas implements Runnable {
 		thread.join();
 	}
 
+	public final void addSoundPlayer() throws MalformedURLException {
+			clip = Applet.newAudioClip(select.toURL());
+	}
+	
 	int xMove = 0, yMove = 0;
 
 	/**
@@ -151,7 +167,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		final int centerX = (WIDTH / 2) - (48 / 2);
 
 		display.clear();
-		display.renderBlock(StoneBlock.block, xMove, yMove);
+		display.renderBlock(StoneBrickBlock.block, xMove, yMove);
 
 		display.renderPlayer(knight, centerX, centerY);
 
@@ -260,17 +276,21 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		if ((xClick > 235 && xClick < 427) && (yClick > 225 && yClick < 300)) {
 			// Starts game.
+			clip.play();
 			state = 50;
 			return;
 		} else if ((xClick > 516 && xClick < 706) && (yClick > 228 && yClick < 305)) {
 			// Goes to options.
+			clip.play();
 			state = 2;
 			return;
 		} else if ((xClick > 243 && xClick < 432) && (yClick > 434 && yClick < 511)) {
 			// Goes to credits.
+			clip.play();
 			state = 3;
 			return;
 		} else if ((xClick > 515 && xClick < 706) && (yClick > 437 && yClick < 513)) {
+			clip.play();
 			System.exit(0);
 		}
 	}
@@ -284,11 +304,13 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
 			// Applies settings and returns to menu.
+			clip.play();
 			applySettings();
 			state = 1;
 			return;
 		} else if ((xClick > 715 && xClick < 905) && (yClick > 470 && yClick < 548)) {
 			// Returns to menu.
+			clip.play();
 			state = 1;
 			return;
 		}
@@ -303,6 +325,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		if ((xClick > 717 && xClick < 907) && (yClick > 464 && yClick < 542)) {
 			// Returns to menu.
+			clip.play();
 			state = 1;
 			return;
 		}
@@ -327,7 +350,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		int frames = 0;
 
 		// Remove for actual game itself.
-		state = 50;
+		//state = 50;
 
 		while (isRunning == true) {
 			if (state == 0) {
