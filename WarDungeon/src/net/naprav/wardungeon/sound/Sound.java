@@ -1,4 +1,4 @@
-package net.naprav.wardungeon.listen;
+package net.naprav.wardungeon.sound;
 
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
@@ -8,13 +8,13 @@ import javax.sound.sampled.Clip;
 public class Sound {
 
 	private Clip clip;
-
+	
 	public Sound(String filepath) {
 		File file = new File(filepath);
 		try {
 			clip = AudioSystem.getClip();
-			AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
-			clip.open(inputStream);
+			AudioInputStream stream = AudioSystem.getAudioInputStream(file);
+			clip.open(stream);
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
@@ -25,9 +25,5 @@ public class Sound {
 		
 		clip.setFramePosition(0);
 		clip.start();
-	}
-
-	public void stopSound() {
-		clip.stop();
 	}
 }

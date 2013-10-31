@@ -17,10 +17,10 @@ import net.naprav.wardungeon.graphics.ClassSprite;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
-import net.naprav.wardungeon.listen.Sound;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.WizardClass;
+import net.naprav.wardungeon.sound.Sound;
 
 public class WarDungeon extends Canvas implements Runnable {
 
@@ -56,8 +56,8 @@ public class WarDungeon extends Canvas implements Runnable {
 		frame = new JFrame("WarDungeon");
 
 		display = new Display(WIDTH, HEIGHT);
-		key = new Keyboard(200);
 		sound = new Sound("res/noise/sound/selection.wav");
+		key = new Keyboard(200);
 		mouse = new Mouser();
 
 		knight = new KnightClass(ClassSprite.knight_south, 2, 5, 5);
