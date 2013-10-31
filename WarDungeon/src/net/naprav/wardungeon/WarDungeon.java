@@ -20,6 +20,7 @@ import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.WizardClass;
+import net.naprav.wardungeon.sound.Music;
 import net.naprav.wardungeon.sound.Sound;
 
 public class WarDungeon extends Canvas implements Runnable {
@@ -44,6 +45,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	Keyboard key;
 	Mouser mouse;
 	Sound sound;
+	Music music;
 	
 	KnightClass knight;
 	WizardClass wizard;
@@ -57,6 +59,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		display = new Display(WIDTH, HEIGHT);
 		sound = new Sound("res/noise/sound/selection.wav");
+		music = new Music("res/noise/music/menu.wav");
 		key = new Keyboard(200);
 		mouse = new Mouser();
 
@@ -341,11 +344,12 @@ public class WarDungeon extends Canvas implements Runnable {
 		while (isRunning == true) {
 			if (state == 0) {
 				renderNaprav();
-				if ((System.currentTimeMillis() - lastSecond) > 1750) {
-					// Wait 1.75 seconds and then go to the menu.
+				if ((System.currentTimeMillis() - lastSecond) > 2000) {
+					// Wait 2 seconds and then go to the menu.
 					lastSecond += 1000;
 					state = 1;
 				}
+				music.playMusic();
 			} else if (state == 1) {
 				renderMenu();
 				listenForMouseClickInMenu();

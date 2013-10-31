@@ -1,15 +1,16 @@
 package net.naprav.wardungeon.sound;
 
 import java.io.File;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class Sound {
+public class Music {
 
 	private Clip clip;
 	
-	public Sound(String filepath) {
+	public Music(String filepath) {
 		File file = new File(filepath);
 		try {
 			AudioInputStream stream = AudioSystem.getAudioInputStream(file);
@@ -19,11 +20,13 @@ public class Sound {
 			exc.printStackTrace();
 		}
 	}
-
-	public void playSound() {
-		if (clip.isActive()) clip.stop();
+	
+	int loops = 5;
+	
+	public void playMusic() {
+		loops++;
 		
 		clip.setFramePosition(0);
-		clip.start();
+		clip.loop(loops);
 	}
 }
