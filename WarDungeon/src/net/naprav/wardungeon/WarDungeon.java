@@ -340,7 +340,9 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		// Remove for actual game itself.
 		//state = 50;
-
+		
+		music.playMusic();
+		
 		while (isRunning == true) {
 			if (state == 0) {
 				renderNaprav();
@@ -349,7 +351,6 @@ public class WarDungeon extends Canvas implements Runnable {
 					lastSecond += 1000;
 					state = 1;
 				}
-				music.playMusic();
 			} else if (state == 1) {
 				renderMenu();
 				listenForMouseClickInMenu();
@@ -360,6 +361,8 @@ public class WarDungeon extends Canvas implements Runnable {
 				renderCredits();
 				listenForMouseClickInCredits();
 			} else {
+				music.stopMusic();
+				
 				long currentTime = System.nanoTime();
 				single += (currentTime - pastTime) / desig;
 

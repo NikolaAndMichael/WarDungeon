@@ -21,12 +21,16 @@ public class Music {
 		}
 	}
 	
-	int loops = 5;
+	int loops = 100;
 	
 	public void playMusic() {
 		loops++;
 		
 		clip.setFramePosition(0);
 		clip.loop(loops);
+	}
+	
+	public void stopMusic() {
+		if (clip.isActive()) clip.stop();
 	}
 }
