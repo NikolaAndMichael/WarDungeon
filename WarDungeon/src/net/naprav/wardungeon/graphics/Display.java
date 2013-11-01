@@ -1,12 +1,11 @@
 package net.naprav.wardungeon.graphics;
 
-import java.awt.image.BufferedImage;
-
 import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.gui.Credits;
 import net.naprav.wardungeon.gui.Menu;
 import net.naprav.wardungeon.gui.Naprav;
 import net.naprav.wardungeon.gui.Option;
+import net.naprav.wardungeon.gui.Select;
 import net.naprav.wardungeon.player.PlayerClass;
 
 public class Display {
@@ -21,6 +20,7 @@ public class Display {
 	Naprav naprav;
 	Option option;
 	Credits credit;
+	Select select;
 
 	/**
 	 * Sets the screen's width and height to match the pixels[] array in WarDungeon.java
@@ -37,6 +37,7 @@ public class Display {
 		menu = new Menu("/textures/gui/title_screen.png", 460, 280);
 		option = new Option("/textures/gui/options.png", 460, 280);
 		credit = new Credits("/textures/gui/credits.png", 460, 280);
+		select = new Select("/textures/gui/selection.png", 460, 280);
 	}
 
 	/**
@@ -114,6 +115,12 @@ public class Display {
 		}
 	}
 
+	public void renderSelection() {
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = select.pixels[a];
+		}
+	}
+	
 	/**
 	 * Clear's the screen to update it constantly.
 	 */

@@ -18,8 +18,8 @@ public class MobSprite {
 	 */
 	public MobSprite(SpriteSheet sheet, int x, int y, int size) {
 		SIZE = size;
-		this.x = x * 48;
-		this.y = y * 48;
+		this.x = x * SIZE;
+		this.y = y * SIZE;
 		this.sheet = sheet;
 
 		pixels = new int[SIZE * SIZE];

@@ -21,10 +21,8 @@ public class Music {
 		}
 	}
 	
-	int loops = 100;
-	
 	public void playMusic() {
-		loops++;
+		int loops = 10000000;
 		
 		clip.setFramePosition(0);
 		clip.loop(loops);

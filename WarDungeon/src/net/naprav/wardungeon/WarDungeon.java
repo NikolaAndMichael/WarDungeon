@@ -19,6 +19,7 @@ import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
+import net.naprav.wardungeon.player.PlayerClass;
 import net.naprav.wardungeon.player.WizardClass;
 import net.naprav.wardungeon.sound.Music;
 import net.naprav.wardungeon.sound.Sound;
@@ -39,6 +40,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	public static volatile boolean isRunning = false;
 
 	public byte state = 0;
+	public byte player_select = 0;
 
 	JFrame frame;
 	Display display;
@@ -46,11 +48,11 @@ public class WarDungeon extends Canvas implements Runnable {
 	Mouser mouse;
 	Sound sound;
 	Music music;
-	
+
 	KnightClass knight;
 	WizardClass wizard;
 	ArcherClass archer;
-
+	
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
@@ -62,17 +64,18 @@ public class WarDungeon extends Canvas implements Runnable {
 		music = new Music("res/noise/music/menu.wav");
 		key = new Keyboard(200);
 		mouse = new Mouser();
+		
+		frame.setVisible(true);
+		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
 
 		knight = new KnightClass(ClassSprite.knight_south, 2, 5, 5);
 		wizard = new WizardClass(ClassSprite.wizard_south, 2, 6, 4);
 		archer = new ArcherClass(ClassSprite.archer_south, 4, 5, 3);
+		
 		knight.setDirection('S');
 		wizard.setDirection('S');
 		archer.setDirection('S');
-
-		frame.setVisible(true);
-		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
-
+		
 		this.setPreferredSize(size);
 		this.setMinimumSize(size);
 		this.addKeyListener(key);
@@ -158,7 +161,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		display.clear();
 		display.renderBlock(StoneBrickBlock.block, xMove, yMove);
 
-		display.renderPlayer(knight, centerX, centerY);
+		display.renderPlayer(getPlayer(), centerX, centerY);
 
 		for (int x = 0; x < screen.getWidth(); ++x) {
 			for (int y = 0; y < screen.getHeight(); ++y) {
@@ -167,7 +170,7 @@ public class WarDungeon extends Canvas implements Runnable {
 				}
 			}
 		}
-		
+
 		for (int a = 0; a < pixels.length; a++) {
 			pixels[a] = display.pixels[a];
 		}
@@ -256,6 +259,19 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.dispose();
 	}
 
+	private final void renderSelection() {
+		display.renderSelection();
+
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = display.pixels[a];
+		}
+
+		Graphics gfx = this.getGraphics();
+
+		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
+		gfx.dispose();
+	}
+
 	/**
 	 * The method for listening for mouse clicks in the main menu.
 	 */
@@ -263,12 +279,14 @@ public class WarDungeon extends Canvas implements Runnable {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		if ((xClick > 235 && xClick < 427) && (yClick > 225 && yClick < 300)) {
-			// Starts game.
+		System.out.println(xClick + ", " + yClick);
+		
+		if ((xClick > 23 && xClick < 215) && (yClick > 322 && yClick < 401)) {
+			// Goes to selection screen.
 			sound.playSound();
-			state = 50;
+			state = 4;
 			return;
-		} else if ((xClick > 516 && xClick < 706) && (yClick > 228 && yClick < 305)) {
+		} else if ((xClick > 718 && xClick < 907) && (yClick > 328 && yClick < 403)) {
 			// Goes to options.
 			sound.playSound();
 			state = 2;
@@ -320,6 +338,38 @@ public class WarDungeon extends Canvas implements Runnable {
 		}
 	}
 
+	private final PlayerClass getPlayer() {
+		if (player_select == 1) return knight;
+		if (player_select == 2) return wizard;
+		if (player_select == 3) return archer;
+		return knight;
+	}
+	
+	private final void listenForMouseClickInSelection() {
+		int xClick = mouse.xClick;
+		int yClick = mouse.yClick;
+
+		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
+			// Enters game with knight.
+			player_select = 1;
+			sound.playSound();
+			state = 50;
+			return;
+		} if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
+			// Enters game with wizard.
+			player_select = 2;
+			sound.playSound();
+			state = 50;
+			return;
+		} if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
+			// Enters game with archer.
+			player_select = 3;
+			sound.playSound();
+			state = 50;
+			return;
+		}
+	}
+
 	/**
 	 * The method for applying the settings to the game.
 	 */
@@ -339,10 +389,10 @@ public class WarDungeon extends Canvas implements Runnable {
 		int frames = 0;
 
 		// Remove for actual game itself.
-		//state = 50;
-		
-		music.playMusic();
-		
+		// state = 50;
+
+		//music.playMusic();
+
 		while (isRunning == true) {
 			if (state == 0) {
 				renderNaprav();
@@ -360,9 +410,12 @@ public class WarDungeon extends Canvas implements Runnable {
 			} else if (state == 3) {
 				renderCredits();
 				listenForMouseClickInCredits();
+			} else if (state == 4) {
+				renderSelection();
+				listenForMouseClickInSelection();
 			} else {
 				music.stopMusic();
-				
+
 				long currentTime = System.nanoTime();
 				single += (currentTime - pastTime) / desig;
 
