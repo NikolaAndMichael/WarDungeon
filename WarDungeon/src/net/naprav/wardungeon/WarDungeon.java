@@ -196,83 +196,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	}
 
 	/**
-	 * Method for rendering the Naprav logo to the screen.
-	 */
-	private final void renderNaprav() {
-		display.renderNaprav();
-
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-
-		Graphics gfx = this.getGraphics();
-
-		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.dispose();
-	}
-
-	/**
-	 * Method for rendering the options GUI.
-	 */
-	private final void renderOptions() {
-		display.renderOptions();
-
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-
-		Graphics gfx = this.getGraphics();
-
-		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.dispose();
-	}
-
-	/**
-	 * Method for rendering the credits GUI.
-	 */
-	private final void renderCredits() {
-		display.renderCredits();
-
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-
-		Graphics gfx = this.getGraphics();
-
-		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.dispose();
-	}
-
-	/**
-	 * Method for rendering the main menu GUI.
-	 */
-	private final void renderMenu() {
-		display.renderMenu();
-
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-
-		Graphics gfx = this.getGraphics();
-
-		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.dispose();
-	}
-
-	private final void renderSelection() {
-		display.renderSelection();
-
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-
-		Graphics gfx = this.getGraphics();
-
-		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.dispose();
-	}
-
-	/**
 	 * The method for listening for mouse clicks in the main menu.
 	 */
 	private final void listenForMouseClickInMenu() {
@@ -393,23 +316,23 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		while (isRunning == true) {
 			if (state == 0) {
-				renderNaprav();
+				display.renderNaprav(this, screen, pixels);
 				if ((System.currentTimeMillis() - lastSecond) > 2000) {
 					// Wait 2 seconds and then go to the menu.
 					lastSecond += 1000;
 					state = 1;
 				}
 			} else if (state == 1) {
-				renderMenu();
+				display.renderMenu(this, screen, pixels);
 				listenForMouseClickInMenu();
 			} else if (state == 2) {
-				renderOptions();
+				display.renderOptions(this, screen, pixels);
 				listenForMouseClickInOptions();
 			} else if (state == 3) {
-				renderCredits();
+				display.renderCredits(this, screen, pixels);
 				listenForMouseClickInCredits();
 			} else if (state == 4) {
-				renderSelection();
+				display.renderSelection(this, screen, pixels);
 				listenForMouseClickInSelection();
 			} else {
 				music.stopMusic();

@@ -1,5 +1,9 @@
 package net.naprav.wardungeon.graphics;
 
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.gui.Credits;
 import net.naprav.wardungeon.gui.Menu;
@@ -80,46 +84,76 @@ public class Display {
 	}
 
 	/**
-	 * Method for rendering the menu.
+	 * Method for rendering the main menu GUI.
 	 */
-	public void renderMenu() {
+	public final void renderMenu(Canvas canvas, BufferedImage image, int[] screen) {
 		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = menu.pixels[a];
+			screen[a] = menu.pixels[a];
 		}
+
+		Graphics gfx = canvas.getGraphics();
+
+		gfx.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		gfx.dispose();
 	}
+
 
 	/**
 	 * Method for rendering the company logo!
 	 */
-	public void renderNaprav() {
+	public final void renderNaprav(Canvas canvas, BufferedImage image, int[] screen) {
 		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = naprav.pixels[a];
+			screen[a] = naprav.pixels[a];
 		}
+
+		Graphics gfx = canvas.getGraphics();
+
+		gfx.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		gfx.dispose();
 	}
+
 
 	/**
 	 * Method for rendering the credits.
 	 */
-	public void renderCredits() {
+	public final void renderCredits(Canvas canvas, BufferedImage image, int[] screen) {
 		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = credit.pixels[a];
+			screen[a] = credit.pixels[a];
 		}
+
+		Graphics gfx = canvas.getGraphics();
+
+		gfx.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		gfx.dispose();
 	}
+
 
 	/**
 	 * Method for rendering the options.
 	 */
-	public void renderOptions() {
+	public final void renderOptions(Canvas canvas, BufferedImage image, int[] screen) {
 		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = option.pixels[a];
+			screen[a] = option.pixels[a];
 		}
+
+		Graphics gfx = canvas.getGraphics();
+
+		gfx.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		gfx.dispose();
 	}
 
-	public void renderSelection() {
+
+	public final void renderSelection(Canvas canvas, BufferedImage image, int[] screen) {
 		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = select.pixels[a];
+			screen[a] = select.pixels[a];
 		}
+
+		Graphics gfx = canvas.getGraphics();
+
+		gfx.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		gfx.dispose();
 	}
+
 	
 	/**
 	 * Clear's the screen to update it constantly.
