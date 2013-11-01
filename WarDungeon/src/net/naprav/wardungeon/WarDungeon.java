@@ -279,8 +279,6 @@ public class WarDungeon extends Canvas implements Runnable {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		System.out.println(xClick + ", " + yClick);
-		
 		if ((xClick > 23 && xClick < 215) && (yClick > 322 && yClick < 401)) {
 			// Goes to selection screen.
 			sound.playSound();
