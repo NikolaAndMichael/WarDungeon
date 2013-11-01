@@ -37,7 +37,7 @@ public class Display {
 		menu = new Menu("/textures/gui/title_screen.png", 460, 280);
 		option = new Option("/textures/gui/options.png", 460, 280);
 		credit = new Credits("/textures/gui/credits.png", 460, 280);
-		select = new Select("/textures/gui/selection.png", 460, 280);
+		select = new Select("/textures/gui/class_selection.png", 460, 280);
 	}
 
 	/**
