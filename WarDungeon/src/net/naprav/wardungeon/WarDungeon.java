@@ -17,6 +17,7 @@ import net.naprav.wardungeon.graphics.ClassSprite;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
+import net.naprav.wardungeon.login.Login;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.PlayerClass;
@@ -312,7 +313,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		// Remove for actual game itself.
 		// state = 50;
 
-		//music.playMusic();
+		music.playMusic();
 
 		while (isRunning == true) {
 			if (state == 0) {
@@ -364,7 +365,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// new Login();
-		new WarDungeon().begin();
+		new Login();
+		//new WarDungeon().begin();
 	}
 }

@@ -21,11 +21,13 @@ public class LoginGame {
 			System.out.println(username);
 			System.out.println(passcode);
 			frame.dispose();
+			
 			try {
-				Thread.sleep(500);
+				Thread.sleep(700);
 			} catch (InterruptedException exc) {
 				exc.printStackTrace();
 			}
+			
 			WarDungeon dungeon = new WarDungeon();
 			dungeon.begin();
 			dungeon.requestFocus();

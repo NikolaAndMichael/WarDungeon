@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class ScreenShot {
 
-	// Default should be 293 x 162px.
+	// Default should be 586 x 324px.
 	private final int WIDTH, HEIGHT;
 	public int[] splashPixels;
 

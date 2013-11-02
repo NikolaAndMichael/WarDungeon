@@ -32,7 +32,7 @@ public class Login extends JPanel {
 	private BufferedImage screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	public int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
 
-	private BufferedImage image = new BufferedImage(293, 162, BufferedImage.TYPE_INT_RGB);
+	private BufferedImage image = new BufferedImage(586, 324, BufferedImage.TYPE_INT_RGB);
 	public int[] shotPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	JFrame frame;
@@ -54,7 +54,7 @@ public class Login extends JPanel {
 	 */
 	public Login() {
 		background = new Background(WIDTH, HEIGHT, "/login/login_screen.png");
-		shot = new ScreenShot(293, 162, "/login/splash.png");
+		shot = new ScreenShot(586, 324, "/login/splash.png");
 		directory = new Directory();
 
 		createWindow();
@@ -138,7 +138,7 @@ public class Login extends JPanel {
 		updateLogin();
 		
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.drawImage(image, 300, 30, 586, 324, null);
+		gfx.drawImage(image, 295, 25, 586, 324, null);
 
 		gfx.setColor(new Color(90, 90, 90));
 		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
