@@ -79,13 +79,13 @@ public class Login extends JPanel {
 		action = new Action();
 
 		login = new JButton("Login!");
-		login.setBackground(new Color(25, 25, 25));
+		login.setBackground(new Color(23, 23, 23));
 		login.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		login.setBounds(85, 400, 100, 25);
 		login.addActionListener(action);
 
 		register = new JButton("Register!");
-		register.setBackground(new Color(25, 25, 25));
+		register.setBackground(new Color(23, 23, 23));
 		register.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		register.setBounds(85, 430, 100, 25);
 		register.addActionListener(action);
@@ -140,12 +140,12 @@ public class Login extends JPanel {
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 		gfx.drawImage(image, 295, 25, 586, 324, null);
 
-		gfx.setColor(new Color(90, 90, 90));
+		gfx.setColor(new Color(105, 105, 105));
 		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		gfx.drawString("Naprav © 2013", 3, (getHeight() - 4));
 		gfx.drawString("\"WarDungeon\" is a trademark of Naprav Specifications.", (getWidth() - 302), (getHeight() - 3));
 
-		gfx.setColor(new Color(115, 115, 115));
+		gfx.setColor(new Color(120, 120, 120));
 		gfx.drawString("Username:", 105, 285);
 		gfx.drawString("Password:", 105, 345);
 	}
