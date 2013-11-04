@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.gui.Credits;
+import net.naprav.wardungeon.gui.LevelSelect;
 import net.naprav.wardungeon.gui.Menu;
 import net.naprav.wardungeon.gui.Naprav;
 import net.naprav.wardungeon.gui.Option;
@@ -25,6 +26,7 @@ public class Display {
 	Option option;
 	Credits credit;
 	Select select;
+	LevelSelect level_select;
 
 	/**
 	 * Sets the screen's width and height to match the pixels[] array in WarDungeon.java
@@ -42,6 +44,7 @@ public class Display {
 		option = new Option("/textures/gui/options.png", 460, 280);
 		credit = new Credits("/textures/gui/credits.png", 460, 280);
 		select = new Select("/textures/gui/class_selection.png", 460, 280);
+		level_select = new LevelSelect("/textures/gui/level_selection.png", 460, 280);
 	}
 
 	/**
@@ -154,6 +157,16 @@ public class Display {
 		gfx.dispose();
 	}
 
+	public final void renderLevelSelect(Canvas canvas, BufferedImage image, int[] screen) {
+		for (int a = 0; a < pixels.length; a++) {
+			screen[a] = level_select.pixels[a];
+		}
+
+		Graphics gfx = canvas.getGraphics();
+
+		gfx.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		gfx.dispose();
+	}
 	
 	/**
 	 * Clear's the screen to update it constantly.
