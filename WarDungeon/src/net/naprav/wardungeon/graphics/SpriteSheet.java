@@ -28,6 +28,7 @@ public class SpriteSheet {
 	}
 
 	public static SpriteSheet block = new SpriteSheet("/textures/block/blocks_sheet.png", 256);
+	public static SpriteSheet wall = new SpriteSheet("/textures/block/wall_sheet.png", 256);
 	public static SpriteSheet lava = new SpriteSheet("/textures/block/lava_flow.png", 96);
 	
 	public static SpriteSheet knight = new SpriteSheet("/textures/mob/player/knight_sheet.png", 384);

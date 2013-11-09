@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.awt.image.RescaleOp;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -61,14 +60,11 @@ public class WarDungeon extends Canvas implements Runnable {
 	public WarDungeon() {
 		frame = new JFrame("WarDungeon");
 
-		display = new Display(WIDTH, HEIGHT);
+		display = new Display(screen);
 		sound = new Sound("res/noise/sound/selection.wav");
 		music = new Music("res/noise/music/menu.wav");
 		key = new Keyboard(200);
 		mouse = new Mouser();
-
-		frame.setVisible(true);
-		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
 
 		knight = new KnightClass(ClassSprite.knight_south, 2, 5, 5);
 		wizard = new WizardClass(ClassSprite.wizard_south, 2, 6, 4);
@@ -78,18 +74,22 @@ public class WarDungeon extends Canvas implements Runnable {
 		wizard.setDirection('S');
 		archer.setDirection('S');
 
-		this.setPreferredSize(size);
-		this.setMinimumSize(size);
+		this.setSize(size);
 		this.addKeyListener(key);
 		this.addMouseListener(mouse);
 
+		frame.setVisible(true);
+		frame.setMinimumSize(size);
+		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
+		
+		frame.setResizable(false);
+		frame.setMinimumSize(size);
+		frame.setSize(size);
+		frame.setLocationRelativeTo(null);
+		
 		frame.add(this);
 		frame.pack();
-		frame.setResizable(false);
-
-		frame.setMinimumSize(size);
-
-		frame.setLocationRelativeTo(null);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -337,15 +337,17 @@ public class WarDungeon extends Canvas implements Runnable {
 	public void run() {
 		long pastTime = System.nanoTime(), lastSecond = System.currentTimeMillis();
 
-		final float desig = 1_000_000_000F / 70F;
+		final float desig = 1_000_000_000F / 60F;
 		float single = 0;
 
 		int frames = 0;
 
 		// Remove for actual game itself.
-		// state = 50;
+		//state = 50;
 
-		music.playMusic();
+		if (state != 50) {
+			music.playMusic();
+		}
 
 		while (isRunning == true) {
 			if (state == 0) {
@@ -405,7 +407,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// new Login();
-		new WarDungeon().begin();
+		//new Login();
+		WarDungeon dungeon = new WarDungeon();
+		dungeon.begin();
 	}
 }

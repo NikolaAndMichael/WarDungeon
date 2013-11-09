@@ -108,10 +108,10 @@ public class Login extends JPanel {
 		frame.setContentPane(this);
 
 		frame.setSize(size);
-		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
 		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

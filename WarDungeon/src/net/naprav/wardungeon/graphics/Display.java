@@ -15,12 +15,11 @@ import net.naprav.wardungeon.player.PlayerClass;
 
 public class Display {
 
-	private final int WIDTH, HEIGHT;
+	public final int WIDTH, HEIGHT;
 	public int[] pixels;
 
-	private final int BLOCK_SIZE = 32;
-	private final int BLOCK_MASK = BLOCK_SIZE - 1;
-
+	public int xOffset, yOffset;
+	
 	Menu menu;
 	Naprav naprav;
 	Option option;
@@ -34,9 +33,9 @@ public class Display {
 	 * @param width
 	 * @param height
 	 */
-	public Display(int width, int height) {
-		WIDTH = width;
-		HEIGHT = height;
+	public Display(BufferedImage image) {
+		WIDTH = image.getWidth();
+		HEIGHT = image.getHeight();
 		pixels = new int[WIDTH * HEIGHT];
 
 		naprav = new Naprav("/textures/gui/naprav.png", 460, 280);
@@ -55,18 +54,26 @@ public class Display {
 	 * @param yMove
 	 */
 	public void renderBlock(Block block, int xMove, int yMove) {
+		xMove += xOffset;
+		yMove += yOffset;
+		
 		for (int x = 0; x < WIDTH; x++) {
 			int xPos = x + xMove;
 			for (int y = 0; y < HEIGHT; y++) {
 				int yPos = y + yMove;
+				
 				if (xPos < 0 || yPos < 0 || xPos >= WIDTH || yPos >= HEIGHT) continue;
-
-				int index = (x & BLOCK_MASK) + (y & BLOCK_MASK) * BLOCK_SIZE;
+				int index = (x & 31) + (y & 31) * 32;
 				pixels[xPos + (yPos * WIDTH)] = block.sprite.pixels[index];
 			}
 		}
 	}
 
+	public void setBlockOffset(int xOff, int yOff) {
+		xOffset = xOff;
+		yOffset = yOff;
+	}
+	
 	/**
 	 * The standard method for rendering the player class to the screen.
 	 * 
