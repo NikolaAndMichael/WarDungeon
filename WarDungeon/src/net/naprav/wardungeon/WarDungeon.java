@@ -81,22 +81,22 @@ public class WarDungeon extends Canvas implements Runnable {
 		frame.setVisible(true);
 		frame.setMinimumSize(size);
 		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
-		
+
 		frame.setResizable(false);
 		frame.setMinimumSize(size);
 		frame.setSize(size);
 		frame.setLocationRelativeTo(null);
-		
+
 		frame.add(this);
 		frame.pack();
-		
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
 	 * Responsible for starting the game, the most important part. It also requests the focus of the Canvas and creates a buffer strategy.
 	 */
-	public void begin() {
+	public synchronized void begin() {
 		thread = new Thread(this, "WarDungeon");
 		this.createBufferStrategy(3);
 		this.requestFocus();
@@ -110,7 +110,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * 
 	 * @throws InterruptedException
 	 */
-	public void finish() throws InterruptedException {
+	public synchronized void finish() throws InterruptedException {
 		isRunning = false;
 		thread.join();
 	}
@@ -120,7 +120,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	/**
 	 * This method is responsible for updating the logic behind the game, i.e. Mobs, time, AI, etc.
 	 */
-	private void tick() {
+	private synchronized void tick() {
 		key.checkForKeys();
 
 		if (key.up) {
@@ -181,7 +181,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	/**
 	 * Method responsible for rendering the logic in the "update()" method to the screen.
 	 */
-	private void render() {
+	private synchronized void render() {
 		BufferStrategy buffer = this.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
 
@@ -321,7 +321,7 @@ public class WarDungeon extends Canvas implements Runnable {
 			return;
 		}
 	}
-	
+
 	/**
 	 * The method for applying the settings to the game.
 	 */
@@ -343,7 +343,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		int frames = 0;
 
 		// Remove for actual game itself.
-		//state = 50;
+		// state = 50;
 
 		if (state != 50) {
 			music.playMusic();
@@ -407,7 +407,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//new Login();
+		// new Login();
 		WarDungeon dungeon = new WarDungeon();
 		dungeon.begin();
 	}
