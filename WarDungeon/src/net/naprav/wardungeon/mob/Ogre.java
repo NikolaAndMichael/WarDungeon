@@ -1,14 +1,13 @@
 package net.naprav.wardungeon.mob;
 
-import net.naprav.wardungeon.graphics.ClassSprite;
 import net.naprav.wardungeon.graphics.Display;
-import net.naprav.wardungeon.graphics.MobSprite;
+import net.naprav.wardungeon.graphics.MobTexture;
 
 public class Ogre extends Mob {
 
 	public char direction;
 	
-	public Ogre(MobSprite sprite, int speed, int attack, int defense) {
+	public Ogre(MobTexture sprite, int speed, int attack, int defense) {
 		super(sprite, speed, attack, defense);
 	}
 

@@ -1,6 +1,6 @@
 package net.naprav.wardungeon.player;
 
-import net.naprav.wardungeon.graphics.ClassSprite;
+import net.naprav.wardungeon.graphics.ClassTexture;
 import net.naprav.wardungeon.graphics.Display;
 
 public abstract class PlayerClass {
@@ -9,7 +9,7 @@ public abstract class PlayerClass {
 	protected final int ATTACK;
 	protected final int DEFENSE;
 
-	public ClassSprite sprite;
+	public ClassTexture sprite;
 	protected int[] pixels;
 
 	/**
@@ -20,7 +20,7 @@ public abstract class PlayerClass {
 	 * @param attack
 	 * @param defense
 	 */
-	public PlayerClass(ClassSprite sprite, int speed, int attack, int defense) {
+	public PlayerClass(ClassTexture sprite, int speed, int attack, int defense) {
 		this.sprite = sprite;
 		SPEED = speed;
 		ATTACK = attack;
@@ -30,6 +30,4 @@ public abstract class PlayerClass {
 	protected abstract void takesDamage(int damage);
 
 	protected abstract void tick();
-
-	protected abstract void render(int x, int y, Display display);
 }

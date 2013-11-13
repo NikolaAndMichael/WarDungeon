@@ -13,8 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import net.naprav.wardungeon.block.StoneBrickBlock;
-import net.naprav.wardungeon.graphics.ClassSprite;
+import net.naprav.wardungeon.graphics.ClassTexture;
 import net.naprav.wardungeon.graphics.Display;
+import net.naprav.wardungeon.gui.UIListener;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.player.ArcherClass;
@@ -40,14 +41,15 @@ public class WarDungeon extends Canvas implements Runnable {
 	public static volatile boolean isRunning = false;
 	public static volatile boolean inGame = false;
 
-	public byte state = 0;
-	public byte player_select = 0;
+	public static char state = 'N';
+	private byte player_select = 0;
 
 	JFrame frame;
+	
 	Display display;
+	UIListener listen;
 	Keyboard key;
 	Mouser mouse;
-	Sound sound;
 	Music music;
 
 	KnightClass knight;
@@ -61,34 +63,29 @@ public class WarDungeon extends Canvas implements Runnable {
 		frame = new JFrame("WarDungeon");
 
 		display = new Display(screen);
-		sound = new Sound("res/noise/sound/selection.wav");
-		music = new Music("res/noise/music/menu.wav");
 		key = new Keyboard(200);
 		mouse = new Mouser();
+		listen = new UIListener(mouse);
 
-		knight = new KnightClass(ClassSprite.knight_south, 2, 5, 5);
-		wizard = new WizardClass(ClassSprite.wizard_south, 2, 6, 4);
-		archer = new ArcherClass(ClassSprite.archer_south, 4, 5, 3);
+		addPlayerClasses();
 
 		knight.setDirection('S');
 		wizard.setDirection('S');
 		archer.setDirection('S');
 
-		this.setSize(size);
-		this.addKeyListener(key);
-		this.addMouseListener(mouse);
-
-		frame.setVisible(true);
-		frame.setMinimumSize(size);
-		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
-
-		frame.setResizable(false);
-		frame.setMinimumSize(size);
-		frame.setSize(size);
-		frame.setLocationRelativeTo(null);
+		setPreferredSize(size);
+		setMaximumSize(size);
+		setMinimumSize(size);
+		addKeyListener(key);
+		addMouseListener(mouse);
 
 		frame.add(this);
 		frame.pack();
+		
+		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		frame.setVisible(true);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -153,40 +150,20 @@ public class WarDungeon extends Canvas implements Runnable {
 	}
 
 	/**
-	 * This method is used to to update anything on the image, i.e. Animations, level explosions :D, etc.
-	 */
-	private void tickImage() {
-
-		final int centerY = (HEIGHT / 2) - (48 / 2);
-		final int centerX = (WIDTH / 2) - (48 / 2);
-
-		display.clear();
-		display.renderBlock(StoneBrickBlock.block, xMove, yMove);
-
-		display.renderPlayer(getPlayer(), centerX, centerY);
-
-		for (int x = 0; x < screen.getWidth(); ++x) {
-			for (int y = 0; y < screen.getHeight(); ++y) {
-				if ((screen.getRGB(x, y) & 0) == 0) {
-					screen.setRGB(x, y, 0);
-				}
-			}
-		}
-
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = display.pixels[a];
-		}
-	}
-
-	/**
 	 * Method responsible for rendering the logic in the "update()" method to the screen.
 	 */
 	private synchronized void render() {
 		BufferStrategy buffer = this.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
 
-		tickImage();
+		final int centerY = (HEIGHT / 2) - (48 / 2);
+		final int centerX = (WIDTH / 2) - (48 / 2);
 
+		display.clear();
+		display.renderBlock(StoneBrickBlock.block, xMove, yMove);
+		display.renderPlayer(getPlayer(), centerX, centerY);
+		display.alignPixels(pixels);
+		
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 
 		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -197,139 +174,22 @@ public class WarDungeon extends Canvas implements Runnable {
 		buffer.show();
 	}
 
-	/**
-	 * The method for listening for mouse clicks in the main menu.
-	 */
-	private final void listenForMouseClickInMenu() {
-		int xClick = mouse.xClick;
-		int yClick = mouse.yClick;
-
-		if ((xClick > 23 && xClick < 215) && (yClick > 322 && yClick < 401)) {
-			// Goes to selection screen.
-			sound.playSound();
-			state = 4;
-			return;
-		} else if ((xClick > 718 && xClick < 907) && (yClick > 328 && yClick < 403)) {
-			// Goes to options.
-			sound.playSound();
-			state = 2;
-			return;
-		} else if ((xClick > 243 && xClick < 432) && (yClick > 434 && yClick < 511)) {
-			// Goes to credits.
-			sound.playSound();
-			state = 3;
-			return;
-		} else if ((xClick > 515 && xClick < 706) && (yClick > 437 && yClick < 513)) {
-			sound.playSound();
-			System.exit(0);
-		}
+	public static void setState(char setState) {
+		state = setState;
 	}
-
-	/**
-	 * The method for listening for mouse clicks in options.
-	 */
-	private final void listenForMouseClickInOptions() {
-		int xClick = mouse.xClick;
-		int yClick = mouse.yClick;
-
-		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
-			// Applies settings and returns to menu.
-			sound.playSound();
-			applySettings();
-			state = 1;
-			return;
-		} else if ((xClick > 715 && xClick < 905) && (yClick > 470 && yClick < 548)) {
-			// Returns to menu.
-			sound.playSound();
-			state = 1;
-			return;
-		}
+	
+	private final void addPlayerClasses() {
+		knight = new KnightClass(ClassTexture.knight_south, 2, 5, 5);
+		wizard = new WizardClass(ClassTexture.wizard_south, 2, 6, 4);
+		archer = new ArcherClass(ClassTexture.archer_south, 4, 5, 3);
 	}
-
-	/**
-	 * The method for listening to mouse clicks in the credits.
-	 */
-	private final void listenForMouseClickInCredits() {
-		int xClick = mouse.xClick;
-		int yClick = mouse.yClick;
-
-		if ((xClick > 717 && xClick < 907) && (yClick > 464 && yClick < 542)) {
-			// Returns to menu.
-			sound.playSound();
-			state = 1;
-			return;
-		}
-	}
-
+	
 	private final PlayerClass getPlayer() {
 		if (player_select == 1) return knight;
 		if (player_select == 2) return wizard;
 		if (player_select == 3) return archer;
 		return knight;
 	}
-
-	private final void listenForMouseClickInSelection() {
-		int xClick = mouse.xClick;
-		int yClick = mouse.yClick;
-
-		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
-			// Enters game with knight.
-			player_select = 1;
-			sound.playSound();
-			state = 5;
-			return;
-		}
-		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
-			// Enters game with wizard.
-			player_select = 2;
-			sound.playSound();
-			state = 5;
-			return;
-		}
-		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
-			// Enters game with archer.
-			player_select = 3;
-			sound.playSound();
-			state = 5;
-			return;
-		}
-	}
-
-	private final void listenForMouseClickInLevelSelection() {
-		int xClick = mouse.xClick;
-		int yClick = mouse.yClick;
-
-		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
-			// Enters game with knight.
-			player_select = 1;
-			sound.playSound();
-			state = 50;
-			return;
-		}
-		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
-			// Enters game with wizard.
-			player_select = 2;
-			sound.playSound();
-			state = 50;
-			return;
-		}
-		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
-			// Enters game with archer.
-			player_select = 3;
-			sound.playSound();
-			state = 50;
-			return;
-		}
-	}
-
-	/**
-	 * The method for applying the settings to the game.
-	 */
-	private void applySettings() {
-
-	}
-
-	int increase = 100;
 
 	/**
 	 * The main "run()" method; needed for any class that implements the Runnable.java interface.
@@ -346,34 +206,37 @@ public class WarDungeon extends Canvas implements Runnable {
 		// state = 50;
 
 		if (state != 50) {
-			music.playMusic();
+			//Music.playTitleMusic();
 		}
 
 		while (isRunning == true) {
-			if (state == 0) {
-				display.renderNaprav(this, screen, pixels);
+			if (state == 'N') {
+				display.renderNaprav(this);
 				if ((System.currentTimeMillis() - lastSecond) > 2000) {
 					// Wait 2 seconds and then go to the menu.
 					lastSecond += 1000;
-					state = 1;
+					state = 'M';
 				}
-			} else if (state == 1) {
-				display.renderMenu(this, screen, pixels);
-				listenForMouseClickInMenu();
-			} else if (state == 2) {
-				display.renderOptions(this, screen, pixels);
-				listenForMouseClickInOptions();
-			} else if (state == 3) {
-				display.renderCredits(this, screen, pixels);
-				listenForMouseClickInCredits();
-			} else if (state == 4) {
-				display.renderSelection(this, screen, pixels);
-				listenForMouseClickInSelection();
-			} else if (state == 5) {
-				display.renderLevelSelect(this, screen, pixels);
-				listenForMouseClickInLevelSelection();
+			} else if (state == 'M') {
+				display.renderMenu(this);
+				listen.listenInMenu();
+				System.out.println(state);
+			} else if (state == 'O') {
+				display.renderOptions(this);
+				listen.listenInOptions();
+			} else if (state == 'C') {
+				display.renderCredits(this);
+				listen.listenInCredits();
+			} else if (state == 'S') {
+				display.renderClassSelect(this);
+				listen.listenInClassSelection();
+			} else if (state == 'L') {
+				display.renderLevelSelect(this);
+				listen.listenInLevelSelection();
+			} else if (state == 'Q') {
+				System.exit(0);
 			} else {
-				music.stopMusic();
+				Music.stopTitleMusic();
 				break;
 			}
 		}

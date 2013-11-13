@@ -8,10 +8,12 @@ import javax.sound.sampled.Clip;
 
 public class Music {
 
-	private Clip clip;
+	private static Clip clip;
+	private static File file;
 	
-	public Music(String filepath) {
-		File file = new File(filepath);
+	public static void playTitleMusic() {
+		file = new File("res/noise/music/menu.wav");
+		
 		try {
 			AudioInputStream stream = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
@@ -19,16 +21,14 @@ public class Music {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-	}
-	
-	public void playMusic() {
+		
 		int loops = 10000000;
 		
 		clip.setFramePosition(0);
 		clip.loop(loops);
 	}
 	
-	public void stopMusic() {
+	public static void stopTitleMusic() {
 		if (clip.isActive()) clip.stop();
 	}
 }

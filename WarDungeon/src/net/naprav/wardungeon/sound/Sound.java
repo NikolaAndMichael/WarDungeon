@@ -1,16 +1,19 @@
 package net.naprav.wardungeon.sound;
 
 import java.io.File;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Sound {
 
-	private Clip clip;
+	private static Clip clip;
+	private static File file;
 	
-	public Sound(String filepath) {
-		File file = new File(filepath);
+	public static void pushButtonSound() {
+		file = new File("res/noise/sound/selection.wav");
+		
 		try {
 			AudioInputStream stream = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
@@ -18,9 +21,7 @@ public class Sound {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-	}
-
-	public void playSound() {
+		
 		if (clip.isActive()) clip.stop();
 		
 		clip.setFramePosition(0);

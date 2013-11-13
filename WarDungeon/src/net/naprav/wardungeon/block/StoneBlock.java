@@ -1,6 +1,7 @@
 package net.naprav.wardungeon.block;
 
-import net.naprav.wardungeon.graphics.BlockSprite;
+import net.naprav.wardungeon.graphics.BlockTexture;
+
 
 public class StoneBlock extends Block {
 
@@ -11,15 +12,15 @@ public class StoneBlock extends Block {
 	 * @param isCollidable
 	 * @param doesKill
 	 */
-	public StoneBlock(BlockSprite sprite, boolean isCollidable, boolean doesKill) {
+	public StoneBlock(BlockTexture sprite, boolean isCollidable, boolean doesKill) {
 		super(sprite, isCollidable, doesKill);
 	}
 
-	public static StoneBlock block = new StoneBlock(BlockSprite.stone, false, false);
+	public static StoneBlock block = new StoneBlock(BlockTexture.stone, false, false);
 
 	/**
 	 * Method for rendering the StoneBlock.
 	 */
-	public void render(int x, int y, BlockSprite sprite) {
+	public void render(int x, int y, BlockTexture sprite) {
 	}
 }

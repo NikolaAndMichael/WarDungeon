@@ -1,7 +1,6 @@
 package net.naprav.wardungeon.player;
 
-import net.naprav.wardungeon.graphics.ClassSprite;
-import net.naprav.wardungeon.graphics.Display;
+import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class WizardClass extends PlayerClass {
 
@@ -15,31 +14,35 @@ public class WizardClass extends PlayerClass {
 	 * @param attack
 	 * @param defense
 	 */
-	public WizardClass(ClassSprite sprite, int speed, int attack, int defense) {
+	public WizardClass(ClassTexture sprite, int speed, int attack, int defense) {
 		super(sprite, speed, attack, defense);
 	}
 
 	public void setDirection(char direct) {
 		direction = direct;
 		if (direction == 'S') {
-			this.sprite = ClassSprite.wizard_south;
+			this.sprite = ClassTexture.wizard_south;
 		} else if (direction == 'N') {
-			this.sprite = ClassSprite.wizard_north;
+			this.sprite = ClassTexture.wizard_north;
 		} else if (direction == 'W') {
-			this.sprite = ClassSprite.wizard_west;
+			this.sprite = ClassTexture.wizard_west;
 		} else if (direction == 'E') {
-			this.sprite = ClassSprite.wizard_east;
+			this.sprite = ClassTexture.wizard_east;
 		} else {
 			System.out.println("Put in a legit direction!");
 		}
 	}
 	
+	/**
+	 * The method for allowing the class to take damage.
+	 */
 	public void takesDamage(int damage) {
+
 	}
 
+	/**
+	 * Method for updating the class.
+	 */
 	public void tick() {
-	}
-
-	public void render(int x, int y, Display display) {
 	}
 }

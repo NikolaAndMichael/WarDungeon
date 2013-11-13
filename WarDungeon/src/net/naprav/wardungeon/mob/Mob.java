@@ -1,7 +1,7 @@
 package net.naprav.wardungeon.mob;
 
 import net.naprav.wardungeon.graphics.Display;
-import net.naprav.wardungeon.graphics.MobSprite;
+import net.naprav.wardungeon.graphics.MobTexture;
 
 public abstract class Mob {
 
@@ -9,7 +9,7 @@ public abstract class Mob {
 	protected final int ATTACK;
 	protected final int DEFENSE;
 
-	public MobSprite sprite;
+	public MobTexture sprite;
 	protected int[] pixels;
 
 	/**
@@ -20,7 +20,7 @@ public abstract class Mob {
 	 * @param attack
 	 * @param defense
 	 */
-	public Mob(MobSprite sprite, int speed, int attack, int defense) {
+	public Mob(MobTexture sprite, int speed, int attack, int defense) {
 		this.sprite = sprite;
 		SPEED = speed;
 		ATTACK = attack;

@@ -1,13 +1,13 @@
 package net.naprav.wardungeon.block;
 
-import net.naprav.wardungeon.graphics.BlockSprite;
+import net.naprav.wardungeon.graphics.BlockTexture;
 
 public abstract class Block {
 
 	protected boolean isCollidable;
 	protected boolean doesKill;
 
-	public BlockSprite sprite;
+	public BlockTexture sprite;
 	protected int[] pixels;
 	
 	/**
@@ -17,7 +17,7 @@ public abstract class Block {
 	 * @param isCollidable
 	 * @param doesKill
 	 */
-	public Block(BlockSprite sprite, boolean isCollidable, boolean doesKill) {
+	public Block(BlockTexture sprite, boolean isCollidable, boolean doesKill) {
 		this.sprite = sprite;
 		this.isCollidable = isCollidable;
 		this.doesKill = doesKill;
@@ -56,5 +56,5 @@ public abstract class Block {
 	 * @param y
 	 * @param sprite
 	 */
-	protected abstract void render(int x, int y, BlockSprite sprite);
+	protected abstract void render(int x, int y, BlockTexture sprite);
 }

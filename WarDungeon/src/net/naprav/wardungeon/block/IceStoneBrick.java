@@ -1,16 +1,16 @@
 package net.naprav.wardungeon.block;
 
-import net.naprav.wardungeon.graphics.BlockSprite;
+import net.naprav.wardungeon.graphics.BlockTexture;
 
 public class IceStoneBrick extends Block {
 
-	public IceStoneBrick(BlockSprite sprite, boolean isCollidable, boolean doesKill) {
+	public IceStoneBrick(BlockTexture sprite, boolean isCollidable, boolean doesKill) {
 		super(sprite, isCollidable, doesKill);
 	}
 
-	public static IceStoneBrick block = new IceStoneBrick(BlockSprite.icestonebrick, false, false);
-	
-	protected void render(int x, int y, BlockSprite sprite) {
+	public static IceStoneBrick block = new IceStoneBrick(BlockTexture.icestonebrick, false, false);
+
+	protected void render(int x, int y, BlockTexture sprite) {
 
 	}
 }

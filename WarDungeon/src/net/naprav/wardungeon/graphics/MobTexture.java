@@ -1,10 +1,10 @@
 package net.naprav.wardungeon.graphics;
 
-public class MobSprite {
+public class MobTexture {
 
 	private int x, y;
 	public final int SIZE;
-	private SpriteSheet sheet;
+	private TextureSheet sheet;
 
 	public int[] pixels;
 
@@ -16,7 +16,7 @@ public class MobSprite {
 	 * @param y
 	 * @param size
 	 */
-	public MobSprite(SpriteSheet sheet, int x, int y, int size) {
+	public MobTexture(TextureSheet sheet, int x, int y, int size) {
 		SIZE = size;
 		this.x = x * SIZE;
 		this.y = y * SIZE;
