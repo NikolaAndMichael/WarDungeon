@@ -23,7 +23,6 @@ import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.PlayerClass;
 import net.naprav.wardungeon.player.WizardClass;
 import net.naprav.wardungeon.sound.Music;
-import net.naprav.wardungeon.sound.Sound;
 
 public class WarDungeon extends Canvas implements Runnable {
 
@@ -220,7 +219,6 @@ public class WarDungeon extends Canvas implements Runnable {
 			} else if (state == 'M') {
 				display.renderMenu(this);
 				listen.listenInMenu();
-				System.out.println(state);
 			} else if (state == 'O') {
 				display.renderOptions(this);
 				listen.listenInOptions();

@@ -1,8 +1,6 @@
 package net.naprav.wardungeon.graphics;
 
 import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -112,21 +110,21 @@ public class Display {
 		WButton quit = new WButton("/textures/gui/button/standard/quit.png", 150, 75);
 		WButton credits = new WButton("/textures/gui/button/standard/credit.png", 150, 75);
 		WButton settings = new WButton("/textures/gui/button/standard/setting.png", 150, 75);
-		
+
 		WScreen background = new WScreen("/textures/gui/screen/background_title.png", 460, 280);
 
 		int width = enter.WIDTH, height = enter.HEIGHT;
-		
+
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
 
 		// Drawing the title screen.
 		gfx.drawImage(background.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		
+
 		// Drawing enter and quit.
 		gfx.drawImage(enter.image, 65, 300, width, height, null);
 		gfx.drawImage(quit.image, canvas.getWidth() - (width + 65), 300, width, height, null);
-	
+
 		// Drawing the options and credits.
 		gfx.drawImage(settings.image, 230, 450, width, height, null);
 		gfx.drawImage(credits.image, canvas.getWidth() - (width + 230), 450, width, height, null);
@@ -140,20 +138,19 @@ public class Display {
 	 */
 	public final void renderCredits(Canvas canvas) {
 		WButton back = new WButton("/textures/gui/button/standard/return.png", 150, 75);
-		
-		WScreen background = new WScreen("/textures/gui/screen/background.png", 460, 280);
+		WScreen credits = new WScreen("/textures/gui/screen/background.png", 460, 280);
 
 		int width = back.WIDTH, height = back.HEIGHT;
-		
+
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
 
-		// Drawing the title screen.
-		gfx.drawImage(background.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		
+		// Drawing the background.
+		gfx.drawImage(credits.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+
 		// Drawing return.
 		gfx.drawImage(back.image, canvas.getWidth() / 2 - (width / 2), 450, width, height, null);
-	
+
 		gfx.dispose();
 		buffer.show();
 	}
@@ -164,21 +161,21 @@ public class Display {
 	public final void renderOptions(Canvas canvas) {
 		WButton apply = new WButton("/textures/gui/button/standard/ok.png", 150, 75); // Scaled up by two!
 		WButton back = new WButton("/textures/gui/button/standard/return.png", 150, 75);
-		
+
 		WScreen background = new WScreen("/textures/gui/screen/background.png", 460, 280);
 
 		int width = apply.WIDTH, height = apply.HEIGHT;
-		
+
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
 
-		// Drawing the title screen.
+		// Drawing the background.
 		gfx.drawImage(background.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		
+
 		// Drawing apply and return.
 		gfx.drawImage(apply.image, 65, 450, width, height, null);
 		gfx.drawImage(back.image, canvas.getWidth() - (width + 65), 450, width, height, null);
-	
+
 		gfx.dispose();
 		buffer.show();
 	}
@@ -189,28 +186,24 @@ public class Display {
 	 * @param canvas
 	 */
 	public final void renderClassSelect(Canvas canvas) {
-		WButton enter = new WButton("/textures/gui/button/standard/enter.png", 150, 75); // Scaled up by two!
-		WButton quit = new WButton("/textures/gui/button/standard/quit.png", 150, 75);
-		WButton credits = new WButton("/textures/gui/button/standard/credit.png", 150, 75);
-		WButton settings = new WButton("/textures/gui/button/standard/setting.png", 150, 75);
-		
-		WScreen background = new WScreen("/textures/gui/screen/background_title.png", 460, 280);
+		WButton ok = new WButton("/textures/gui/button/standard/ok.png", 150, 75); // Scaled up by two!
+		WButton back = new WButton("/textures/gui/button/standard/return.png", 150, 75);
 
-		int width = enter.WIDTH, height = enter.HEIGHT;
-		
+		WScreen classes = new WScreen("/textures/gui/screen/background_class.png", 460, 280);
+
+		int width = ok.WIDTH, height = ok.HEIGHT;
+
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
 
-		// Drawing the title screen.
-		gfx.drawImage(background.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		
-		// Drawing enter and quit.
-		gfx.drawImage(enter.image, 65, 300, width, height, null);
-		gfx.drawImage(quit.image, canvas.getWidth() - (width + 65), 300, width, height, null);
-	
-		// Drawing the options and credits.
-		gfx.drawImage(settings.image, 230, 450, width, height, null);
-		gfx.drawImage(credits.image, canvas.getWidth() - (width + 230), 450, width, height, null);
+		// Drawing the background.
+		gfx.drawImage(classes.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+
+		// Drawing the selection buttons.
+
+		// Drawing enter and return.
+		gfx.drawImage(back.image, 65, 450, width, height, null);
+		gfx.drawImage(ok.image, canvas.getWidth() - (width + 65), 450, width, height, null);
 
 		gfx.dispose();
 		buffer.show();
@@ -226,21 +219,21 @@ public class Display {
 		WButton quit = new WButton("/textures/gui/button/standard/quit.png", 150, 75);
 		WButton credits = new WButton("/textures/gui/button/standard/credit.png", 150, 75);
 		WButton settings = new WButton("/textures/gui/button/standard/setting.png", 150, 75);
-		
+
 		WScreen background = new WScreen("/textures/gui/screen/background_title.png", 460, 280);
 
 		int width = enter.WIDTH, height = enter.HEIGHT;
-		
+
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
 
 		// Drawing the title screen.
 		gfx.drawImage(background.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		
+
 		// Drawing enter and quit.
 		gfx.drawImage(enter.image, 65, 300, width, height, null);
 		gfx.drawImage(quit.image, canvas.getWidth() - (width + 65), 300, width, height, null);
-	
+
 		// Drawing the options and credits.
 		gfx.drawImage(settings.image, 230, 450, width, height, null);
 		gfx.drawImage(credits.image, canvas.getWidth() - (width + 230), 450, width, height, null);

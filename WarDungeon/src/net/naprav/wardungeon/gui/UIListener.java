@@ -8,11 +8,11 @@ public class UIListener {
 
 	private Mouser mouse;
 	public byte state = 1;
-	
+
 	public UIListener(Mouser mouser) {
 		mouse = mouser;
 	}
-	
+
 	/**
 	 * The method for listening for mouse clicks in the main menu.
 	 */
@@ -45,7 +45,71 @@ public class UIListener {
 			WarDungeon.setState('Q');
 		}
 	}
-	
+
+	public final void listenInClassSelection() {
+		int xClick = mouse.xClick;
+		int yClick = mouse.yClick;
+
+		System.out.println(xClick + ", " + yClick);
+
+		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
+			// Enters game with knight.
+			// player_select = 1;
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('L');
+			return;
+		}
+		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
+			// Enters game with wizard.
+			// player_select = 2;
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('L');
+			return;
+		}
+		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
+			// Enters game with archer.
+			// player_select = 3;
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('L');
+			return;
+		}
+	}
+
+	public final void listenInLevelSelection() {
+		int xClick = mouse.xClick;
+		int yClick = mouse.yClick;
+
+		System.out.println(xClick + ", " + yClick);
+
+		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
+			// Enters game with knight.
+			// player_select = 1;
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('G');
+			return;
+		}
+		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
+			// Enters game with wizard.
+			// player_select = 2;
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('G');
+			return;
+		}
+		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
+			// Enters game with archer.
+			// player_select = 3;
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('G');
+			return;
+		}
+	}
+
 	/**
 	 * The method for listening to mouse clicks in the credits.
 	 */
@@ -54,73 +118,15 @@ public class UIListener {
 		int yClick = mouse.yClick;
 
 		System.out.println(xClick + ", " + yClick);
-		
-		if ((xClick > 717 && xClick < 907) && (yClick > 464 && yClick < 542)) {
+
+		if ((xClick > 391 && xClick < 539) && (yClick > 450 && yClick < 523)) {
 			// Returns to menu.
 			Sound.pushButtonSound();
+			mouse.resetCoords();
 			WarDungeon.setState('M');
 			return;
 		}
 	}
-	
-	public final void listenInClassSelection() {
-		int xClick = mouse.xClick;
-		int yClick = mouse.yClick;
-
-		System.out.println(xClick + ", " + yClick);
-		
-		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
-			// Enters game with knight.
-			//player_select = 1;
-			Sound.pushButtonSound();
-			WarDungeon.setState('L');
-			return;
-		}
-		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
-			// Enters game with wizard.
-			//player_select = 2;
-			Sound.pushButtonSound();
-			WarDungeon.setState('L');
-			return;
-		}
-		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
-			// Enters game with archer.
-			//player_select = 3;
-			Sound.pushButtonSound();
-			WarDungeon.setState('L');
-			return;
-		}
-	}
-	
-	public final void listenInLevelSelection() {
-		int xClick = mouse.xClick;
-		int yClick = mouse.yClick;
-
-		System.out.println(xClick + ", " + yClick);
-		
-		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
-			// Enters game with knight.
-			//player_select = 1;
-			Sound.pushButtonSound();
-			WarDungeon.setState('G');
-			return;
-		}
-		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
-			// Enters game with wizard.
-			//player_select = 2;
-			Sound.pushButtonSound();
-			WarDungeon.setState('G');
-			return;
-		}
-		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
-			// Enters game with archer.
-			//player_select = 3;
-			Sound.pushButtonSound();
-			WarDungeon.setState('G');
-			return;
-		}
-	}
-
 	
 	/**
 	 * The method for listening for mouse clicks in options.
@@ -130,21 +136,23 @@ public class UIListener {
 		int yClick = mouse.yClick;
 
 		System.out.println(xClick + ", " + yClick);
-		
+
 		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
 			// Applies settings and returns to menu.
 			Sound.pushButtonSound();
 			applySettings();
-			//WarDungeon.setState('M');
+			mouse.resetCoords();
+			WarDungeon.setState('M');
 			return;
 		} else if ((xClick > 715 && xClick < 905) && (yClick > 470 && yClick < 548)) {
 			// Returns to menu.
 			Sound.pushButtonSound();
-			//WarDungeon.setState('M');
+			mouse.resetCoords();
+			WarDungeon.setState('M');
 			return;
 		}
 	}
-	
+
 	/**
 	 * The method for applying user settings to game!
 	 */
