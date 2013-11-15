@@ -29,6 +29,6 @@ public class Music {
 	}
 	
 	public static void stopTitleMusic() {
-		if (clip.isActive()) clip.stop();
+		clip.stop();
 	}
 }

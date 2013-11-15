@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import net.naprav.wardungeon.block.Block;
+import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.gui.WScreen;
 import net.naprav.wardungeon.gui.button.WButton;
 import net.naprav.wardungeon.player.PlayerClass;
@@ -47,7 +48,13 @@ public class Display {
 
 				if (xPos < 0 || yPos < 0 || xPos >= WIDTH || yPos >= HEIGHT) continue;
 				int index = (x & 31) + (y & 31) * 32;
-				pixels[xPos + (yPos * WIDTH)] = block.sprite.pixels[index];
+				
+				if (x < 32 && y < 32) {
+					pixels[xPos + (yPos * WIDTH)] = StoneBlock.block.sprite.pixels[index];
+				} else {
+					pixels[xPos + (yPos * WIDTH)] = block.sprite.pixels[index];
+				}
+				
 			}
 		}
 	}
@@ -69,7 +76,7 @@ public class Display {
 			int xPos = x + xMove;
 			for (int y = 0; y < 48; y++) {
 				int yPos = y + yMove;
-				if (xPos < 0 || yPos < 0 || xPos >= WIDTH || yPos >= HEIGHT) continue;
+				
 				int colour = player.sprite.pixels[x + y * 64];
 				if (colour != 0x000000) pixels[xPos + yPos * WIDTH] = colour;
 			}
@@ -77,7 +84,7 @@ public class Display {
 	}
 
 	/**
-	 * Method for setting the pixels in this class to the one in WarDungeon.java.
+	 * Method for option the pixels in this class to the one in WarDungeon.java.
 	 * 
 	 * @param screen
 	 */
@@ -106,14 +113,14 @@ public class Display {
 	 * @param canvas
 	 */
 	public final void renderMenu(Canvas canvas) {
-		WButton enter = new WButton("/textures/gui/button/standard/enter.png", 150, 75); // Scaled up by two!
+		WButton begin = new WButton("/textures/gui/button/standard/begin.png", 150, 75); // Scaled up by two!
 		WButton quit = new WButton("/textures/gui/button/standard/quit.png", 150, 75);
 		WButton credits = new WButton("/textures/gui/button/standard/credit.png", 150, 75);
-		WButton settings = new WButton("/textures/gui/button/standard/setting.png", 150, 75);
+		WButton options = new WButton("/textures/gui/button/standard/option.png", 150, 75);
 
 		WScreen background = new WScreen("/textures/gui/screen/background_title.png", 460, 280);
 
-		int width = enter.WIDTH, height = enter.HEIGHT;
+		int width = begin.WIDTH, height = begin.HEIGHT;
 
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
@@ -121,12 +128,12 @@ public class Display {
 		// Drawing the title screen.
 		gfx.drawImage(background.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 
-		// Drawing enter and quit.
-		gfx.drawImage(enter.image, 65, 300, width, height, null);
+		// Drawing begin and quit.
+		gfx.drawImage(begin.image, 65, 300, width, height, null);
 		gfx.drawImage(quit.image, canvas.getWidth() - (width + 65), 300, width, height, null);
 
 		// Drawing the options and credits.
-		gfx.drawImage(settings.image, 230, 450, width, height, null);
+		gfx.drawImage(options.image, 230, 450, width, height, null);
 		gfx.drawImage(credits.image, canvas.getWidth() - (width + 230), 450, width, height, null);
 
 		gfx.dispose();
@@ -159,7 +166,7 @@ public class Display {
 	 * Method for rendering the options.
 	 */
 	public final void renderOptions(Canvas canvas) {
-		WButton apply = new WButton("/textures/gui/button/standard/ok.png", 150, 75); // Scaled up by two!
+		WButton apply = new WButton("/textures/gui/button/standard/okay.png", 150, 75); // Scaled up by two!
 		WButton back = new WButton("/textures/gui/button/standard/return.png", 150, 75);
 
 		WScreen background = new WScreen("/textures/gui/screen/background.png", 460, 280);
@@ -186,12 +193,12 @@ public class Display {
 	 * @param canvas
 	 */
 	public final void renderClassSelect(Canvas canvas) {
-		WButton ok = new WButton("/textures/gui/button/standard/ok.png", 150, 75); // Scaled up by two!
+		WButton okay = new WButton("/textures/gui/button/standard/okay.png", 150, 75); // Scaled up by two!
 		WButton back = new WButton("/textures/gui/button/standard/return.png", 150, 75);
 
 		WScreen classes = new WScreen("/textures/gui/screen/background_class.png", 460, 280);
 
-		int width = ok.WIDTH, height = ok.HEIGHT;
+		int width = okay.WIDTH, height = okay.HEIGHT;
 
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
@@ -201,9 +208,9 @@ public class Display {
 
 		// Drawing the selection buttons.
 
-		// Drawing enter and return.
+		// Drawing begin and return.
 		gfx.drawImage(back.image, 65, 450, width, height, null);
-		gfx.drawImage(ok.image, canvas.getWidth() - (width + 65), 450, width, height, null);
+		gfx.drawImage(okay.image, canvas.getWidth() - (width + 65), 450, width, height, null);
 
 		gfx.dispose();
 		buffer.show();
@@ -215,14 +222,14 @@ public class Display {
 	 * @param canvas
 	 */
 	public final void renderLevelSelect(Canvas canvas) {
-		WButton enter = new WButton("/textures/gui/button/standard/enter.png", 150, 75); // Scaled up by two!
+		WButton begin = new WButton("/textures/gui/button/standard/begin.png", 150, 75); // Scaled up by two!
 		WButton quit = new WButton("/textures/gui/button/standard/quit.png", 150, 75);
 		WButton credits = new WButton("/textures/gui/button/standard/credit.png", 150, 75);
-		WButton settings = new WButton("/textures/gui/button/standard/setting.png", 150, 75);
+		WButton options = new WButton("/textures/gui/button/standard/option.png", 150, 75);
 
 		WScreen background = new WScreen("/textures/gui/screen/background_title.png", 460, 280);
 
-		int width = enter.WIDTH, height = enter.HEIGHT;
+		int width = begin.WIDTH, height = begin.HEIGHT;
 
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
@@ -230,12 +237,12 @@ public class Display {
 		// Drawing the title screen.
 		gfx.drawImage(background.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 
-		// Drawing enter and quit.
-		gfx.drawImage(enter.image, 65, 300, width, height, null);
+		// Drawing begin and quit.
+		gfx.drawImage(begin.image, 65, 300, width, height, null);
 		gfx.drawImage(quit.image, canvas.getWidth() - (width + 65), 300, width, height, null);
 
 		// Drawing the options and credits.
-		gfx.drawImage(settings.image, 230, 450, width, height, null);
+		gfx.drawImage(options.image, 230, 450, width, height, null);
 		gfx.drawImage(credits.image, canvas.getWidth() - (width + 230), 450, width, height, null);
 
 		gfx.dispose();

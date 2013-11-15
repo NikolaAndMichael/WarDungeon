@@ -85,7 +85,7 @@ public class UIListener {
 		System.out.println(xClick + ", " + yClick);
 
 		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
-			// Enters game with knight.
+			// Enters game with classic level.
 			// player_select = 1;
 			Sound.pushButtonSound();
 			mouse.resetCoords();
@@ -93,7 +93,7 @@ public class UIListener {
 			return;
 		}
 		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
-			// Enters game with wizard.
+			// Enters game with second level.
 			// player_select = 2;
 			Sound.pushButtonSound();
 			mouse.resetCoords();
@@ -101,7 +101,7 @@ public class UIListener {
 			return;
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
-			// Enters game with archer.
+			// Enters game with third level.
 			// player_select = 3;
 			Sound.pushButtonSound();
 			mouse.resetCoords();
@@ -116,8 +116,6 @@ public class UIListener {
 	public final void listenInCredits() {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
-
-		System.out.println(xClick + ", " + yClick);
 
 		if ((xClick > 391 && xClick < 539) && (yClick > 450 && yClick < 523)) {
 			// Returns to menu.
