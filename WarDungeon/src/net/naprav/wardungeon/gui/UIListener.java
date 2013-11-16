@@ -50,27 +50,46 @@ public class UIListener {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		System.out.println(xClick + ", " + yClick);
+		//System.out.println(xClick + ", " + yClick);
 
+		char player_select = 'K';
+		
 		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
 			// Enters game with knight.
-			// player_select = 1;
+			player_select = 'K';
+			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			WarDungeon.setState('L');
+			System.out.println("You're playing as a knight!");
 			return;
 		}
 		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
 			// Enters game with wizard.
-			// player_select = 2;
+			player_select = 'W';
+			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			WarDungeon.setState('L');
+			System.out.println("You're playing as a wizard!");
 			return;
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
 			// Enters game with archer.
-			// player_select = 3;
+			player_select = 'A';
+			WarDungeon.setPlayer(player_select);
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			System.out.println("You're playing as an archer!");
+			return;
+		}
+		if ((xClick > 66 && xClick < 215) && (yClick > 450 && yClick < 524)) {
+			// Returns to the main menu.
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('M');
+			return;
+		}
+		if ((xClick > 716 && xClick < 865) && (yClick > 451 && yClick < 523)) {
+			// Continues into the level selection screen.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
 			WarDungeon.setState('L');
@@ -86,23 +105,49 @@ public class UIListener {
 
 		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
 			// Enters game with classic level.
-			// player_select = 1;
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			WarDungeon.setState('G');
+			//WarDungeon.setState('G');
 			return;
 		}
 		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
 			// Enters game with second level.
-			// player_select = 2;
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			WarDungeon.setState('G');
+			//WarDungeon.setState('G');
 			return;
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
 			// Enters game with third level.
-			// player_select = 3;
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			//WarDungeon.setState('G');
+			return;
+		}
+		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
+			// Enters game with fourth level.
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			//WarDungeon.setState('G');
+			return;
+		}
+		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
+			// Enters game with fifth level.
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			//WarDungeon.setState('G');
+			return;
+		}
+		
+		if ((xClick > 66 && xClick < 215) && (yClick > 450 && yClick < 522)) {
+			// Enters returns to the previous menu.
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('S');
+			return;
+		}
+		if ((xClick > 717 && xClick < 863) && (yClick > 450 && yClick < 524)) {
+			// Enters game with selected level.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
 			WarDungeon.setState('G');
@@ -118,6 +163,28 @@ public class UIListener {
 		int yClick = mouse.yClick;
 
 		if ((xClick > 391 && xClick < 539) && (yClick > 450 && yClick < 523)) {
+			// Returns to menu.
+			Sound.pushButtonSound();
+			mouse.resetCoords();
+			WarDungeon.setState('M');
+			return;
+		}
+	}
+	
+	public final void listenInGameMenu() {
+		int xClick = mouse.xClick;
+		int yClick = mouse.yClick;
+
+		System.out.println(xClick + ", " + yClick);
+
+		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
+			// Applies settings and returns to menu.
+			Sound.pushButtonSound();
+			applySettings();
+			mouse.resetCoords();
+			WarDungeon.setState('M');
+			return;
+		} else if ((xClick > 715 && xClick < 905) && (yClick > 470 && yClick < 548)) {
 			// Returns to menu.
 			Sound.pushButtonSound();
 			mouse.resetCoords();

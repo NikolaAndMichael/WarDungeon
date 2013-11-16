@@ -3,7 +3,6 @@ package net.naprav.wardungeon;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -16,6 +15,7 @@ import net.naprav.wardungeon.block.StoneBrickBlock;
 import net.naprav.wardungeon.graphics.ClassTexture;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.gui.UIListener;
+import net.naprav.wardungeon.gui.WarDungeonGUI;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.player.ArcherClass;
@@ -39,11 +39,9 @@ public class WarDungeon extends Canvas implements Runnable {
 	private Thread thread;
 	public static volatile boolean isRunning = false;
 	public static volatile boolean inGame = false;
-	
-	public int showable = 0;
 
 	public static char state = 'N';
-	private byte player_select = 0;
+	public static char player_select = 'K';
 
 	JFrame frame;
 
@@ -148,10 +146,6 @@ public class WarDungeon extends Canvas implements Runnable {
 			wizard.setDirection('E');
 			archer.setDirection('E');
 		}
-		
-		if (key.show) {
-			showable += 1;
-		} 
 	}
 
 	public int frames = 0, updates = 0;
@@ -173,20 +167,24 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 
-		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		gfx.setFont(WarDungeonGUI.warDungeonFont());
 		gfx.setColor(new Color(125, 125, 125));
 
-		if (showable % 2 == 0) {
+		if (key.show) {
 			key.showInfo(gfx, frames, updates);
-			System.out.println(showable);
 		}
-		
+
 		gfx.dispose();
 		buffer.show();
 	}
 
 	public static void setState(char setState) {
 		state = setState;
+	}
+
+	public static void setPlayer(char selection) {
+		player_select = selection;
+		System.out.println(player_select + " = " + selection + "?");
 	}
 
 	private final void addPlayerClasses() {
@@ -196,9 +194,9 @@ public class WarDungeon extends Canvas implements Runnable {
 	}
 
 	private final PlayerClass getPlayer() {
-		if (player_select == 1) return knight;
-		if (player_select == 2) return wizard;
-		if (player_select == 3) return archer;
+		if (player_select == 'K') return knight;
+		if (player_select == 'W') return wizard;
+		if (player_select == 'A') return archer;
 		return knight;
 	}
 
@@ -212,13 +210,14 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove for actual game itself.
-		//state = 50;
+		// state = 50;
 
 		if (state != 50) {
-			// Music.playTitleMusic();
+			Music.playTitleMusic();
 		}
 
 		while (isRunning == true) {
+
 			if (state == 'N') {
 				display.renderNaprav(this);
 				if ((System.currentTimeMillis() - lastSecond) > 2000) {
@@ -244,11 +243,11 @@ public class WarDungeon extends Canvas implements Runnable {
 			} else if (state == 'Q') {
 				System.exit(0);
 			} else {
-				// Music.stopTitleMusic();
 				break;
 			}
 		}
 
+		Music.stopTitleMusic();
 		inGame = true;
 
 		while (inGame == true) {
@@ -264,6 +263,10 @@ public class WarDungeon extends Canvas implements Runnable {
 
 			frames++;
 			render();
+
+			if (key.escape) {
+				break;
+			}
 
 			if ((System.currentTimeMillis() - lastSecond) > 1000) {
 				lastSecond += 1000;

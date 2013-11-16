@@ -31,6 +31,6 @@ public class WarDungeonGUI {
 			System.out.println("Could not load font!");
 		}
 		
-		return dungeon.deriveFont(Font.PLAIN, 35);
+		return dungeon.deriveFont(Font.PLAIN, 18);
 	}
 }
