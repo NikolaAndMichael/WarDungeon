@@ -1,11 +1,13 @@
 package net.naprav.wardungeon.level;
 
-import net.naprav.wardungeon.graphics.Display;
+import java.util.Random;
 
 public class RandomLevel extends LevelTemplate {
 
+	private static final Random random = new Random();
+
 	/**
-	 * Highly experimental! Don't screw up!
+	 * Highly experimental class!
 	 * 
 	 * @param width
 	 * @param height
@@ -15,8 +17,13 @@ public class RandomLevel extends LevelTemplate {
 	}
 
 	/**
-	 * The overridden method from the superclass.
+	 * The overridden method from the superclass to generate a random level using the tiles index.
 	 */
-	public void render(int xOffset, int yOffset, Display display) {
+	public void generateLevel() {
+		for (int x = 0; x < height; x++) {
+			for (int y = 0; y < width; y++) {
+				blocks[x + (y * width)] = random.nextInt(4);
+			}
+		}
 	}
 }

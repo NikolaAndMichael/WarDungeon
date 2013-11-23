@@ -1,6 +1,7 @@
 package net.naprav.wardungeon.block;
 
 import net.naprav.wardungeon.graphics.BlockTexture;
+import net.naprav.wardungeon.graphics.Display;
 
 public class LavaBlock extends Block {
 
@@ -22,9 +23,7 @@ public class LavaBlock extends Block {
 	public static LavaBlock block_5 = new LavaBlock(BlockTexture.lava_5, false, true);
 	public static LavaBlock block_6 = new LavaBlock(BlockTexture.lava_6, false, true);
 
-	/**
-	 * Method for rendering the LavaBlock.
-	 */
-	protected void render(int x, int y, BlockTexture sprite) {
+	public void render(int x, int y, Display display) {
+		display.renderBlock(block, x * 32, y * 32);
 	}
 }

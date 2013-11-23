@@ -7,9 +7,8 @@ import javax.imageio.ImageIO;
 
 public class Background {
 
-	private final int WIDTH, HEIGHT;
-	public int[] pixels;
-
+	public BufferedImage image;
+	
 	/**
 	 * Main constructor for background image of Login.
 	 * 
@@ -18,10 +17,6 @@ public class Background {
 	 * @param pathway
 	 */
 	public Background(int width, int height, String pathway) {
-		WIDTH = width;
-		HEIGHT = height;
-		pixels = new int[WIDTH * HEIGHT];
-
 		loadMenuScreen(pathway);
 	}
 
@@ -32,14 +27,7 @@ public class Background {
 	 */
 	private void loadMenuScreen(String pathway) {
 		try {
-			BufferedImage image = ImageIO.read(Background.class.getResource(pathway));
-			int width = image.getWidth();
-			int height = image.getHeight();
-			if (WIDTH == width && HEIGHT == height) {
-				image.getRGB(0, 0, width, height, pixels, 0, width);
-			} else {
-				System.out.println("Menu Screen is not the same size as declared! >:(");
-			}
+			image = ImageIO.read(Background.class.getResource(pathway));
 		} catch (IOException exc) {
 			exc.printStackTrace();
 		}

@@ -1,7 +1,7 @@
 package net.naprav.wardungeon.block;
 
 import net.naprav.wardungeon.graphics.BlockTexture;
-
+import net.naprav.wardungeon.graphics.Display;
 
 public class StoneBlock extends Block {
 
@@ -22,5 +22,9 @@ public class StoneBlock extends Block {
 	 * Method for rendering the StoneBlock.
 	 */
 	public void render(int x, int y, BlockTexture sprite) {
+	}
+
+	public void render(int x, int y, Display display) {
+		display.renderBlock(block, x * 32, y * 32);
 	}
 }

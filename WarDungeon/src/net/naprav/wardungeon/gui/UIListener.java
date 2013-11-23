@@ -107,35 +107,35 @@ public class UIListener {
 			// Enters game with classic level.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			//WarDungeon.setState('G');
+			WarDungeon.setLevel('C');
 			return;
 		}
 		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
 			// Enters game with second level.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			//WarDungeon.setState('G');
+			WarDungeon.setLevel('2');
 			return;
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
 			// Enters game with third level.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			//WarDungeon.setState('G');
+			WarDungeon.setLevel('3');
 			return;
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
 			// Enters game with fourth level.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			//WarDungeon.setState('G');
+			WarDungeon.setLevel('4');
 			return;
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
 			// Enters game with fifth level.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			//WarDungeon.setState('G');
+			WarDungeon.setLevel('5');
 			return;
 		}
 		

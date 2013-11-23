@@ -1,5 +1,6 @@
 package net.naprav.wardungeon;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,11 +12,14 @@ import java.awt.image.DataBufferInt;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import net.naprav.wardungeon.block.StoneBrickBlock;
 import net.naprav.wardungeon.graphics.ClassTexture;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.gui.UIListener;
+import net.naprav.wardungeon.gui.UIRender;
 import net.naprav.wardungeon.gui.WarDungeonGUI;
+import net.naprav.wardungeon.level.ClassicLevel;
+import net.naprav.wardungeon.level.LevelTemplate;
+import net.naprav.wardungeon.level.RandomLevel;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.player.ArcherClass;
@@ -28,6 +32,8 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 6601282971656374659L;
 
+	private static final String version = "Version: 0.1 Alpha";
+	
 	public static final int WIDTH = 460;
 	public static final int HEIGHT = 280;
 	private static final int SCALE = 2;
@@ -42,6 +48,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	public static char state = 'N';
 	public static char player_select = 'K';
+	public static char level_select = 'C';
 
 	JFrame frame;
 
@@ -55,6 +62,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	WizardClass wizard;
 	ArcherClass archer;
 
+	LevelTemplate level;
+	
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
@@ -65,6 +74,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		key = new Keyboard(200);
 		mouse = new Mouser();
 		listen = new UIListener(mouse);
+		level = new RandomLevel(256, 256);
 
 		addPlayerClasses();
 
@@ -78,7 +88,8 @@ public class WarDungeon extends Canvas implements Runnable {
 		addKeyListener(key);
 		addMouseListener(mouse);
 
-		frame.add(this);
+		frame.setLayout(new BorderLayout());
+		frame.add(this, BorderLayout.CENTER);
 		frame.pack();
 
 		frame.setIconImage(new ImageIcon("res/wardungeon_logo.png").getImage());
@@ -120,31 +131,27 @@ public class WarDungeon extends Canvas implements Runnable {
 		key.checkForKeys();
 
 		if (key.up) {
-			yMove++;
-			knight.setDirection('N');
-			wizard.setDirection('N');
-			archer.setDirection('N');
+			yMove--;
+			getPlayer().setDirection('N');
 		}
 
 		if (key.down) {
-			yMove--;
-			knight.setDirection('S');
-			wizard.setDirection('S');
-			archer.setDirection('S');
+			yMove++;
+			getPlayer().setDirection('S');
 		}
 
 		if (key.left) {
-			xMove++;
-			knight.setDirection('W');
-			wizard.setDirection('W');
-			archer.setDirection('W');
+			xMove--;
+			getPlayer().setDirection('W');
 		}
 
 		if (key.right) {
-			xMove--;
-			knight.setDirection('E');
-			wizard.setDirection('E');
-			archer.setDirection('E');
+			xMove++;
+			getPlayer().setDirection('E');
+		}
+		
+		if (key.escape) {
+			UIRender.renderInGameMenu(this);
 		}
 	}
 
@@ -161,14 +168,16 @@ public class WarDungeon extends Canvas implements Runnable {
 		final int centerX = (WIDTH / 2) - (48 / 2);
 
 		display.clear();
-		display.renderBlock(StoneBrickBlock.block, xMove, yMove);
+		level.render(xMove, yMove, display);
 		display.renderPlayer(getPlayer(), centerX, centerY);
+
 		display.alignPixels(pixels);
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 
 		gfx.setFont(WarDungeonGUI.warDungeonFont());
-		gfx.setColor(new Color(125, 125, 125));
+		gfx.setColor(new Color(230, 230, 230));
+		gfx.drawString(version, 3, 15);
 
 		if (key.show) {
 			key.showInfo(gfx, frames, updates);
@@ -182,15 +191,15 @@ public class WarDungeon extends Canvas implements Runnable {
 		state = setState;
 	}
 
-	public static void setPlayer(char selection) {
-		player_select = selection;
-		System.out.println(player_select + " = " + selection + "?");
-	}
-
 	private final void addPlayerClasses() {
 		knight = new KnightClass(ClassTexture.knight_south, 2, 5, 5);
 		wizard = new WizardClass(ClassTexture.wizard_south, 2, 6, 4);
 		archer = new ArcherClass(ClassTexture.archer_south, 4, 5, 3);
+	}
+	
+	public static void setPlayer(char selection) {
+		player_select = selection;
+		System.out.println("Playing as a " + player_select);
 	}
 
 	private final PlayerClass getPlayer() {
@@ -200,6 +209,15 @@ public class WarDungeon extends Canvas implements Runnable {
 		return knight;
 	}
 
+	public static void setLevel(char selection) {
+		level_select = selection;
+	}
+	
+	private final LevelTemplate getLevel() {
+		if (level_select == 'C') return ClassicLevel.level;
+		return ClassicLevel.level;
+	}
+	
 	/**
 	 * The main "run()" method; needed for any class that implements the Runnable.java interface.
 	 */
@@ -209,46 +227,46 @@ public class WarDungeon extends Canvas implements Runnable {
 		final float desig = 1_000_000_000F / 50F;
 		float single = 0;
 
-		// Remove for actual game itself.
-		// state = 50;
+		// Remove to play actual game.
+		state = 50;
 
 		if (state != 50) {
 			Music.playTitleMusic();
 		}
 
 		while (isRunning == true) {
-
 			if (state == 'N') {
-				display.renderNaprav(this);
+				UIRender.renderNaprav(this);
 				if ((System.currentTimeMillis() - lastSecond) > 2000) {
 					// Wait 2 seconds and then go to the menu.
 					lastSecond += 1000;
 					state = 'M';
 				}
 			} else if (state == 'M') {
-				display.renderMenu(this);
+				UIRender.renderMenu(this);
 				listen.listenInMenu();
 			} else if (state == 'O') {
-				display.renderOptions(this);
+				UIRender.renderOptions(this);
 				listen.listenInOptions();
 			} else if (state == 'C') {
-				display.renderCredits(this);
+				UIRender.renderCredits(this);
 				listen.listenInCredits();
 			} else if (state == 'S') {
-				display.renderClassSelect(this);
+				UIRender.renderClassSelect(this);
 				listen.listenInClassSelection();
 			} else if (state == 'L') {
-				display.renderLevelSelect(this);
+				UIRender.renderLevelSelect(this);
 				listen.listenInLevelSelection();
 			} else if (state == 'Q') {
 				System.exit(0);
 			} else {
+				inGame = true;
 				break;
 			}
 		}
 
+		Music.playTitleMusic();
 		Music.stopTitleMusic();
-		inGame = true;
 
 		while (inGame == true) {
 			long currentTime = System.nanoTime();
@@ -263,10 +281,6 @@ public class WarDungeon extends Canvas implements Runnable {
 
 			frames++;
 			render();
-
-			if (key.escape) {
-				break;
-			}
 
 			if ((System.currentTimeMillis() - lastSecond) > 1000) {
 				lastSecond += 1000;
@@ -284,7 +298,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// new Login();
+		//new Login();
 		WarDungeon dungeon = new WarDungeon();
 		dungeon.begin();
 	}

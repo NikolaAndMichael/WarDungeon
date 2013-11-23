@@ -10,10 +10,10 @@ public class Music {
 
 	private static Clip clip;
 	private static File file;
-	
+
 	public static void playTitleMusic() {
 		file = new File("res/noise/music/menu.wav");
-		
+
 		try {
 			AudioInputStream stream = AudioSystem.getAudioInputStream(file);
 			clip = AudioSystem.getClip();
@@ -21,14 +21,14 @@ public class Music {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-		
+
 		int loops = 10000000;
-		
+
 		clip.setFramePosition(0);
 		clip.loop(loops);
 	}
-	
+
 	public static void stopTitleMusic() {
-		clip.stop();
+		clip.close();
 	}
 }

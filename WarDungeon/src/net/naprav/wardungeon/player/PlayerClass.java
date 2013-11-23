@@ -1,7 +1,6 @@
 package net.naprav.wardungeon.player;
 
 import net.naprav.wardungeon.graphics.ClassTexture;
-import net.naprav.wardungeon.graphics.Display;
 
 public abstract class PlayerClass {
 
@@ -30,4 +29,6 @@ public abstract class PlayerClass {
 	protected abstract void takesDamage(int damage);
 
 	protected abstract void tick();
+
+	public abstract void setDirection(char dir);
 }

@@ -26,19 +26,30 @@ public class BlockTexture {
 		loadBlock();
 	}
 
+	public BlockTexture(int color, int size) {
+		SIZE = size;
+		pixels = new int[SIZE * SIZE];
+
+		for (int a = 0; a < pixels.length; a++) {
+			pixels[a] = color;
+		}
+	}
+
 	public static BlockTexture stone = new BlockTexture(TextureSheet.block, 0, 0, 32);
 	public static BlockTexture stonebrick = new BlockTexture(TextureSheet.block, 1, 0, 32);
 	public static BlockTexture mossystonebrick = new BlockTexture(TextureSheet.block, 2, 0, 32);
 	public static BlockTexture cobblestone = new BlockTexture(TextureSheet.block, 3, 0, 32);
 	public static BlockTexture icestonebrick = new BlockTexture(TextureSheet.block, 4, 0, 32);
-	
+
+	public static BlockTexture empty = new BlockTexture(0x000000, 32);
+
 	public static BlockTexture lava_1 = new BlockTexture(TextureSheet.lava, 0, 0, 32);
 	public static BlockTexture lava_2 = new BlockTexture(TextureSheet.lava, 1, 0, 32);
 	public static BlockTexture lava_3 = new BlockTexture(TextureSheet.lava, 2, 0, 32);
 	public static BlockTexture lava_4 = new BlockTexture(TextureSheet.lava, 0, 1, 32);
 	public static BlockTexture lava_5 = new BlockTexture(TextureSheet.lava, 1, 1, 32);
 	public static BlockTexture lava_6 = new BlockTexture(TextureSheet.lava, 2, 1, 32);
-	
+
 	/**
 	 * Protected method loads the block into the pixels[] array as pixel data.
 	 */

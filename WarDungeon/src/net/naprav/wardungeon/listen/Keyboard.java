@@ -27,9 +27,9 @@ public class Keyboard implements KeyListener {
 	}
 
 	public void showInfo(Graphics gfx, int fps, int ups) {
-		gfx.drawString("Version: 0.1 Indev", 3, 15);
-		gfx.drawString("Frames per Second: " + fps, 3, 30);
-		gfx.drawString("Updates per Second: " + ups, 3, 45);
+		gfx.drawString("Created by Gumptastic", 3, 30);
+		gfx.drawString("FPS: " + fps, 3, 45);
+		gfx.drawString("UPS: " + ups, 3, 60);
 	}
 
 	public void keyPressed(KeyEvent key) {

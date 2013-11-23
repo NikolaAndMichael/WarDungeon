@@ -1,6 +1,7 @@
 package net.naprav.wardungeon.block;
 
 import net.naprav.wardungeon.graphics.BlockTexture;
+import net.naprav.wardungeon.graphics.Display;
 
 public abstract class Block {
 
@@ -56,5 +57,5 @@ public abstract class Block {
 	 * @param y
 	 * @param sprite
 	 */
-	protected abstract void render(int x, int y, BlockTexture sprite);
+	public abstract void render(int x, int y, Display display);
 }

@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,12 +27,6 @@ public class Login extends JPanel {
 	private static final int SCALE = 2;
 	private final Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
-	private BufferedImage screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	public int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
-
-	private BufferedImage image = new BufferedImage(586, 324, BufferedImage.TYPE_INT_RGB);
-	public int[] shotPixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-
 	JFrame frame;
 	Background background;
 	ScreenShot shot;
@@ -54,7 +46,7 @@ public class Login extends JPanel {
 	 */
 	public Login() {
 		background = new Background(WIDTH, HEIGHT, "/login/login_screen.png");
-		shot = new ScreenShot(586, 324, "/login/splash.png");
+		shot = new ScreenShot(654, 392, "/login/splash.png");
 		directory = new Directory();
 
 		createWindow();
@@ -117,28 +109,13 @@ public class Login extends JPanel {
 	}
 	
 	/**
-	 * Updates the login of any components.
-	 */
-	private void updateLogin() {
-		for (int a = 0; a < pixels.length; a++) {
-			pixels[a] = background.pixels[a];
-		}
-
-		for (int a = 0; a < shotPixels.length; a++) {
-			shotPixels[a] = shot.splashPixels[a];
-		}
-	}
-
-	/**
 	 * Paints the JPanel.
 	 */
 	public void paintComponent(Graphics gfx) {
 		super.paintComponent(gfx);
 
-		updateLogin();
-		
-		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.drawImage(image, 295, 25, 586, 324, null);
+		gfx.drawImage(background.image, 0, 0, getWidth(), getHeight(), null);
+		gfx.drawImage(shot.image, 264, 0, 654, 372, null);
 
 		gfx.setColor(new Color(105, 105, 105));
 		gfx.setFont(new Font("Tahoma", Font.PLAIN, 12));
