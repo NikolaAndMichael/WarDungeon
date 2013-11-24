@@ -1,7 +1,6 @@
-package net.naprav.wardungeon.gui;
+package net.naprav.wardungeon.listen;
 
 import net.naprav.wardungeon.WarDungeon;
-import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.sound.Sound;
 
 public class UIListener {

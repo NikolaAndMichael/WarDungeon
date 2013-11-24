@@ -7,6 +7,6 @@ public class ClassicLevel extends Level {
 	}
 
 	public void generateLevel() {
-
+		
 	}
 }

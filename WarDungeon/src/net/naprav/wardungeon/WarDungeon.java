@@ -14,12 +14,12 @@ import javax.swing.JFrame;
 
 import net.naprav.wardungeon.graphics.ClassTexture;
 import net.naprav.wardungeon.graphics.Display;
-import net.naprav.wardungeon.gui.UIListener;
 import net.naprav.wardungeon.gui.UIRender;
 import net.naprav.wardungeon.gui.WarDungeonGUI;
 import net.naprav.wardungeon.level.Level;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
+import net.naprav.wardungeon.listen.UIListener;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.PlayerClass;
@@ -30,7 +30,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 6601282971656374659L;
 
-	private static final String version = "Version: 0.1 Alpha";
+	public static final String version = "Version: 0.1 Alpha";
 	
 	public static final int WIDTH = 460;
 	public static final int HEIGHT = 280;
@@ -171,13 +171,15 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
 
 		gfx.setFont(WarDungeonGUI.warDungeonFont());
-		gfx.setColor(new Color(230, 230, 230));
-		gfx.drawString(version, 3, 15);
-
+		gfx.setColor(new Color(220, 220, 220));
+		gfx.drawString(WarDungeon.version, 3, 15);
+		
 		if (key.show) {
 			key.showInfo(gfx, frames, updates);
+		} else if (key.escape) {
+			UIRender.renderInGameMenu(this);
 		}
-
+		
 		gfx.dispose();
 		buffer.show();
 	}

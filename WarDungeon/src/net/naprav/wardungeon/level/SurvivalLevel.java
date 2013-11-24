@@ -2,7 +2,7 @@ package net.naprav.wardungeon.level;
 
 import java.util.Random;
 
-public class RandomLevel extends Level {
+public class SurvivalLevel extends Level {
 
 	private static final Random random = new Random();
 
@@ -12,7 +12,7 @@ public class RandomLevel extends Level {
 	 * @param width
 	 * @param height
 	 */
-	public RandomLevel(int width, int height) {
+	public SurvivalLevel(int width, int height) {
 		super(width, height);
 	}
 

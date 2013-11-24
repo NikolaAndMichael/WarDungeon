@@ -37,7 +37,7 @@ public class Level {
 	}
 
 	public static Level classic = new ClassicLevel("/level/classic/floor1.png");
-	public static Level survival = new RandomLevel(256, 256);
+	public static Level survival = new SurvivalLevel(256, 256);
 	
 	/**
 	 * Loads the level from a file.

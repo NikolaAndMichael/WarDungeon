@@ -4,8 +4,6 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import net.naprav.wardungeon.gui.button.WButton;
-
 public class UIRender {
 
 	/**
@@ -159,22 +157,22 @@ public class UIRender {
 		WButton back = new WButton("/textures/gui/button/standard/return.png", 150, 75); // Scaled up by two!
 		WButton option = new WButton("/textures/gui/button/standard/option.png", 150, 75); // Scaled up by two!
 		WButton quit = new WButton("/textures/gui/button/standard/quit.png", 150, 75);
-		
+
 		int width = back.WIDTH, height = back.HEIGHT;
-		
+
 		WScreen menu = new WScreen("/textures/gui/screen/background_ingame.png", 460, 280);
-		 
+
 		BufferStrategy buffer = canvas.getBufferStrategy();
 		Graphics gfx = buffer.getDrawGraphics();
-		
+
 		// Drawing the ingame menu.
 		gfx.drawImage(menu.image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-		
+
 		// Drawing the buttons to return, change settings, and quit the game.
 		gfx.drawImage(back.image, 250, 100, width, height, null);
 		gfx.drawImage(option.image, 250, 200, width, height, null);
 		gfx.drawImage(quit.image, 250, 300, width, height, null);
-		
+
 		gfx.dispose();
 		buffer.show();
 	}

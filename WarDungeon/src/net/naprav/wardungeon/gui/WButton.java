@@ -1,11 +1,9 @@
-package net.naprav.wardungeon.gui.button;
+package net.naprav.wardungeon.gui;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-import net.naprav.wardungeon.gui.WarDungeonGUI;
 
 public class WButton extends WarDungeonGUI {
 
