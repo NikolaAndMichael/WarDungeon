@@ -223,7 +223,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove to play actual game.
-		state = 50;
+		//state = 50;
 
 		if (state != 50) {
 			Music.playTitleMusic();
@@ -256,12 +256,10 @@ public class WarDungeon extends Canvas implements Runnable {
 				System.exit(0);
 			} else {
 				inGame = true;
+				Music.stopTitleMusic();
 				break;
 			}
 		}
-
-		Music.playTitleMusic();
-		Music.stopTitleMusic();
 
 		while (inGame == true) {
 			long currentTime = System.nanoTime();
