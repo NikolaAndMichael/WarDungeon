@@ -16,6 +16,7 @@ import net.naprav.wardungeon.graphics.ClassTexture;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.gui.UIRender;
 import net.naprav.wardungeon.gui.WarDungeonGUI;
+import net.naprav.wardungeon.level.ClassicLevel;
 import net.naprav.wardungeon.level.Level;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
@@ -59,6 +60,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	KnightClass knight;
 	WizardClass wizard;
 	ArcherClass archer;
+	
+	Level classic;
 
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
@@ -77,6 +80,8 @@ public class WarDungeon extends Canvas implements Runnable {
 		wizard.setDirection('S');
 		archer.setDirection('S');
 
+		classic = new ClassicLevel("/level/classic/floor1.png", 64);
+		
 		setPreferredSize(size);
 		setMaximumSize(size);
 		setMinimumSize(size);
@@ -163,7 +168,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		final int centerX = (WIDTH / 2) - (48 / 2);
 
 		display.clear();
-		getLevel().render(xMove, yMove, display);
+		classic.render(xMove, yMove, display);
 		display.renderPlayer(getPlayer(), centerX, centerY);
 
 		display.alignPixels(pixels);
@@ -225,7 +230,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove to play actual game.
-		//state = 50;
+		state = 50;
 
 		if (state != 50) {
 			Music.playTitleMusic();
@@ -258,7 +263,8 @@ public class WarDungeon extends Canvas implements Runnable {
 				System.exit(0);
 			} else {
 				inGame = true;
-				Music.stopTitleMusic();
+				// Remember to comment out the code below when state is auto-equal to 50.
+				//Music.stopTitleMusic();
 				break;
 			}
 		}

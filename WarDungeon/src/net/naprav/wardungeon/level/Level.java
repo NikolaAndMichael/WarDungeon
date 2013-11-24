@@ -18,7 +18,11 @@ public class Level {
 	 * 
 	 * @param pathway
 	 */
-	public Level(String pathway) {
+	public Level(String pathway, int size) {
+		width = size;
+		height = size;
+		blocks = new int[width * height];
+		
 		loadLevel(pathway);
 		generateLevel();
 	}
@@ -33,12 +37,13 @@ public class Level {
 		this.width = width;
 		this.height = height;
 		blocks = new int[width * height];
+		
 		generateLevel();
 	}
 
-	public static Level classic = new ClassicLevel("/level/classic/floor1.png");
+	public static Level classic = new ClassicLevel("/level/classic/floor1.png", 64);
 	public static Level survival = new SurvivalLevel(256, 256);
-	
+
 	/**
 	 * Loads the level from a file.
 	 * 
@@ -79,7 +84,7 @@ public class Level {
 		display.setBlockOffset(xOffset, yOffset);
 
 		int block_size = 32;
-		
+
 		int x0 = xOffset / block_size;
 		int x1 = (xOffset + display.WIDTH + block_size) / block_size;
 		int y0 = yOffset / block_size;
@@ -87,6 +92,8 @@ public class Level {
 
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
+				if (blocks[x + (y * width)] == -16777216) System.out.println("Ice!");
+				if (blocks[x + (y * width)] == -6361601) System.out.println("StoneBrick!");
 				getBlock(x, y).render(x, y, display);
 			}
 		}
@@ -94,12 +101,12 @@ public class Level {
 
 	public Block getBlock(int xPos, int yPos) {
 		if (xPos < 0 || xPos >= width || yPos < 0 || yPos >= height) return EmptyBlock.block;
-		
-		if (blocks[xPos + (yPos * width)] == 0) return StoneBrickBlock.block;
-		if (blocks[xPos + (yPos * width)] == 1) return StoneBlock.block;
-		if (blocks[xPos + (yPos * width)] == 2) return LavaBlock.block;
-		if (blocks[xPos + (yPos * width)] == 3) return IceStoneBrickBlock.block;
-		
+
+		if (blocks[xPos + (yPos * width)] == -6361601) return StoneBrickBlock.block;
+		//if (blocks[xPos + (yPos * width)] == 0x9EEDFF) return StoneBlock.block;
+		//if (blocks[xPos + (yPos * width)] == 2) return LavaBlock.block;
+		if (blocks[xPos + (yPos * width)] == -16777216) return IceStoneBrickBlock.block;
+
 		return EmptyBlock.block;
 	}
 }

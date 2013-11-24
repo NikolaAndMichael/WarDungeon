@@ -37,12 +37,7 @@ public class KnightClass extends PlayerClass {
 	 * The method for allowing the class to take damage.
 	 */
 	public void takesDamage(int damage) {
-
 	}
 
-	/**
-	 * Method for updating the class.
-	 */
-	public void tick() {
-	}
+	
 }

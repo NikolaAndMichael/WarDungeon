@@ -14,10 +14,12 @@ public class WizardClass extends PlayerClass {
 	 * @param attack
 	 * @param defense
 	 */
-	public WizardClass(ClassTexture sprite, int speed, int attack, int defense) {
-		super(sprite, speed, attack, defense);
+	public WizardClass(ClassTexture sprite, int speed, int attack, int health) {
+		super(sprite, speed, attack, health);
 	}
 
+	public static WizardClass wizard = new WizardClass(ClassTexture.wizard_south, 6, 13, 50);
+	
 	public void setDirection(char direct) {
 		direction = direct;
 		if (direction == 'S') {
@@ -33,16 +35,6 @@ public class WizardClass extends PlayerClass {
 		}
 	}
 	
-	/**
-	 * The method for allowing the class to take damage.
-	 */
 	public void takesDamage(int damage) {
-
-	}
-
-	/**
-	 * Method for updating the class.
-	 */
-	public void tick() {
 	}
 }

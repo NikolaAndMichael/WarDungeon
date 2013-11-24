@@ -2,14 +2,13 @@ package net.naprav.wardungeon.player;
 
 import net.naprav.wardungeon.graphics.ClassTexture;
 
-public abstract class PlayerClass {
+public class PlayerClass {
 
-	protected final int SPEED;
-	protected final int ATTACK;
-	protected final int DEFENSE;
+	protected int SPEED;
+	protected int ATTACK;
+	protected int HEALTH;
 
 	public ClassTexture sprite;
-	protected int[] pixels;
 
 	/**
 	 * Creates a class in the game depending on the stats.
@@ -19,16 +18,36 @@ public abstract class PlayerClass {
 	 * @param attack
 	 * @param defense
 	 */
-	public PlayerClass(ClassTexture sprite, int speed, int attack, int defense) {
+	public PlayerClass(ClassTexture sprite, int speed, int attack, int health) {
 		this.sprite = sprite;
 		SPEED = speed;
 		ATTACK = attack;
-		DEFENSE = defense;
+		HEALTH = health;
 	}
 
-	protected abstract void takesDamage(int damage);
-
-	protected abstract void tick();
-
-	public abstract void setDirection(char dir);
+	public void setDirection(char dir) {
+	}
+	
+	public void setAttack(int attack) {
+		ATTACK = attack;
+	}
+	
+	public int getAttack() {
+		return ATTACK;
+	}
+	
+	public void takesDamage(int damage) {
+	}
+	
+	public int getHealh() {
+		return HEALTH;
+	}
+	
+	public void setSpeed(int speed) {
+		SPEED = speed;
+	}
+	
+	public int getSpeed() {
+		return SPEED;
+	}
 }

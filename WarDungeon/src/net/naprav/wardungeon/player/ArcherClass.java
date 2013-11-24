@@ -4,13 +4,13 @@ import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class ArcherClass extends PlayerClass {
 
-	public char direction;
-
-	public ArcherClass(ClassTexture sprite, int speed, int attack, int defense) {
-		super(sprite, speed, attack, defense);
+	public ArcherClass(ClassTexture sprite, int speed, int attack, int health) {
+		super(sprite, speed, attack, health);
 	}
 
-	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, 4, 5, 3);
+	public char direction;
+
+	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, 8, 15, 50);
 
 	public void setDirection(char direct) {
 		direction = direct;
