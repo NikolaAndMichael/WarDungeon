@@ -8,7 +8,7 @@ import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.block.StoneBrickBlock;
 import net.naprav.wardungeon.graphics.Display;
 
-public class LevelTemplate {
+public class Level {
 
 	protected int width, height;
 	protected int[] blocks;
@@ -18,7 +18,7 @@ public class LevelTemplate {
 	 * 
 	 * @param pathway
 	 */
-	public LevelTemplate(String pathway) {
+	public Level(String pathway) {
 		loadLevel(pathway);
 		generateLevel();
 	}
@@ -29,13 +29,16 @@ public class LevelTemplate {
 	 * @param width
 	 * @param height
 	 */
-	public LevelTemplate(int width, int height) {
+	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
 		blocks = new int[width * height];
 		generateLevel();
 	}
 
+	public static Level classic = new ClassicLevel("/level/classic/floor1.png");
+	public static Level survival = new RandomLevel(256, 256);
+	
 	/**
 	 * Loads the level from a file.
 	 * 

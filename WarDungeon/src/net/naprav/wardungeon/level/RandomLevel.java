@@ -2,7 +2,7 @@ package net.naprav.wardungeon.level;
 
 import java.util.Random;
 
-public class RandomLevel extends LevelTemplate {
+public class RandomLevel extends Level {
 
 	private static final Random random = new Random();
 

@@ -17,9 +17,7 @@ import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.gui.UIListener;
 import net.naprav.wardungeon.gui.UIRender;
 import net.naprav.wardungeon.gui.WarDungeonGUI;
-import net.naprav.wardungeon.level.ClassicLevel;
-import net.naprav.wardungeon.level.LevelTemplate;
-import net.naprav.wardungeon.level.RandomLevel;
+import net.naprav.wardungeon.level.Level;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.player.ArcherClass;
@@ -48,7 +46,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	public static char state = 'N';
 	public static char player_select = 'K';
-	public static char level_select = 'C';
+	public static char level_select = 'S';
 
 	JFrame frame;
 
@@ -62,8 +60,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	WizardClass wizard;
 	ArcherClass archer;
 
-	LevelTemplate level;
-	
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
 	 */
@@ -74,7 +70,6 @@ public class WarDungeon extends Canvas implements Runnable {
 		key = new Keyboard(200);
 		mouse = new Mouser();
 		listen = new UIListener(mouse);
-		level = new RandomLevel(256, 256);
 
 		addPlayerClasses();
 
@@ -168,7 +163,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		final int centerX = (WIDTH / 2) - (48 / 2);
 
 		display.clear();
-		level.render(xMove, yMove, display);
+		getLevel().render(xMove, yMove, display);
 		display.renderPlayer(getPlayer(), centerX, centerY);
 
 		display.alignPixels(pixels);
@@ -213,9 +208,9 @@ public class WarDungeon extends Canvas implements Runnable {
 		level_select = selection;
 	}
 	
-	private final LevelTemplate getLevel() {
-		if (level_select == 'C') return ClassicLevel.level;
-		return ClassicLevel.level;
+	private final Level getLevel() {
+		if (level_select == 'C') return Level.classic;
+		return Level.survival;
 	}
 	
 	/**
