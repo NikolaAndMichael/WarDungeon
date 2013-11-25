@@ -18,7 +18,7 @@ public class WizardClass extends PlayerClass {
 		super(sprite, speed, attack, health);
 	}
 
-	public static WizardClass wizard = new WizardClass(ClassTexture.wizard_south, 6, 13, 50);
+	public static WizardClass wizard = new WizardClass(ClassTexture.wizard_south, 2, 7, 50);
 	
 	public void setDirection(char direct) {
 		direction = direct;
@@ -36,5 +36,11 @@ public class WizardClass extends PlayerClass {
 	}
 	
 	public void takesDamage(int damage) {
+		HEALTH -= damage;
+		System.out.println(HEALTH);
+	}
+	
+	public int getSpeed() {
+		return SPEED;
 	}
 }

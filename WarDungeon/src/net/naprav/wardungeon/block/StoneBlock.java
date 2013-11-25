@@ -18,12 +18,6 @@ public class StoneBlock extends Block {
 
 	public static StoneBlock block = new StoneBlock(BlockTexture.stone, false, false);
 
-	/**
-	 * Method for rendering the StoneBlock.
-	 */
-	public void render(int x, int y, BlockTexture sprite) {
-	}
-
 	public void render(int x, int y, Display display) {
 		display.renderBlock(block, x * 32, y * 32);
 	}

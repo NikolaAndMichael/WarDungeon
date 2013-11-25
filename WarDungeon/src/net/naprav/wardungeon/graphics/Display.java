@@ -7,11 +7,12 @@ import net.naprav.wardungeon.player.PlayerClass;
 
 public class Display {
 
+	/* Basic integers for the game. The pixels[] array is equal to WIDTH * HEIGHT, which should normally be 460 * 280. */
 	public final int WIDTH, HEIGHT;
 	public int[] pixels;
 
+	/* Integers for the offset at which the level must render. */
 	public int xOffset, yOffset;
-	public int xMove, yMove;
 
 	/**
 	 * Sets the screen's width and height to match the pixels[] array in WarDungeon.java
@@ -47,6 +48,12 @@ public class Display {
 		}
 	}
 
+	/**
+	 * Method for setting the offset of the level render.
+	 * 
+	 * @param xOff
+	 * @param yOff
+	 */
 	public void setBlockOffset(int xOff, int yOff) {
 		xOffset = xOff;
 		yOffset = yOff;
@@ -72,7 +79,7 @@ public class Display {
 	}
 
 	/**
-	 * Method for option the pixels in this class to the one in WarDungeon.java.
+	 * Method for setting the pixels in this class to the one in WarDungeon.java.
 	 * 
 	 * @param screen
 	 */
@@ -85,7 +92,7 @@ public class Display {
 	}
 
 	/**
-	 * Clear's the screen to update it constantly.
+	 * Clears the screen to update it constantly.
 	 */
 	public void clear() {
 		for (int a = 0; a < pixels.length; a++) {

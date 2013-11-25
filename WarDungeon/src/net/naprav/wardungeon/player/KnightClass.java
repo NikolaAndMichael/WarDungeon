@@ -14,10 +14,12 @@ public class KnightClass extends PlayerClass {
 	 * @param attack
 	 * @param defense
 	 */
-	public KnightClass(ClassTexture sprite, int speed, int attack, int defense) {
-		super(sprite, speed, attack, defense);
+	public KnightClass(ClassTexture sprite, int speed, int attack, int health) {
+		super(sprite, speed, attack, health);
 	}
 
+	public static KnightClass knight = new KnightClass(ClassTexture.knight_south, 2, 9, 50);
+	
 	public void setDirection(char direct) {
 		direction = direct;
 		if (direction == 'S') {
@@ -37,7 +39,14 @@ public class KnightClass extends PlayerClass {
 	 * The method for allowing the class to take damage.
 	 */
 	public void takesDamage(int damage) {
+		HEALTH -= damage;
+		System.out.println(HEALTH);
 	}
 
-	
+	/**
+	 * Returns the speed of the knight.
+	 */
+	public int getSpeed() {
+		return SPEED;
+	}
 }

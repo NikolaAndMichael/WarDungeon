@@ -37,7 +37,7 @@ public class BlockTexture {
 
 	public static BlockTexture stone = new BlockTexture(TextureSheet.block, 0, 0, 32);
 	public static BlockTexture stonebrick = new BlockTexture(TextureSheet.block, 1, 0, 32);
-	public static BlockTexture mossystonebrick = new BlockTexture(TextureSheet.block, 2, 0, 32);
+	public static BlockTexture mossbrick = new BlockTexture(TextureSheet.block, 2, 0, 32);
 	public static BlockTexture cobblestone = new BlockTexture(TextureSheet.block, 3, 0, 32);
 	public static BlockTexture icestonebrick = new BlockTexture(TextureSheet.block, 4, 0, 32);
 

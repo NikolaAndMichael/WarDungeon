@@ -1,0 +1,31 @@
+These are the color codes for rendering the blocks to the screen:
+
+Abyss: 0x000000
+
+Stone: 0x7F7F7F
+StoneBrick: 0x4C4C4C
+Lava: 0xFF6543
+CobbleStone: 0xA0A0A0
+MossBrick: 0x317232
+IceStoneBrick: 0xCEF0FF
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+WALLS:
+Walls are incredibly ludicrous! Beware!
+
+[Flat Edges]
+____: 
+   |:
+----:
+|   :
+
+(Corner Turns Outer)
+  _|:
+  -|:
+  |-:
+  |_:
+  
+(Corner Turns Inner)
+
+	

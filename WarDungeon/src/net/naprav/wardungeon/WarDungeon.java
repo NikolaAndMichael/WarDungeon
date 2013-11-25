@@ -31,40 +31,48 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 6601282971656374659L;
 
+	/* The version of the game, will be updates with annotation later! */
 	public static final String version = "Version: 0.1 Alpha";
-	
+
+	/* Basic integers and Dimensions for the JFrame and Canvas */
 	public static final int WIDTH = 460;
 	public static final int HEIGHT = 280;
 	private static final int SCALE = 2;
 	private final Dimension size = new Dimension((WIDTH * SCALE), (HEIGHT * SCALE));
 
+	/* BufferedImage below is the one thing that is drawn to the screen. The pixels[] array holds the pixel data of said image. */
 	private BufferedImage screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	public int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
 
+	/* A Thread for running the game and two Booleans for being either in-game or in-menu. */
 	private Thread thread;
 	public static volatile boolean isRunning = false;
 	public static volatile boolean inGame = false;
 
+	/* Characters for determining what state the player is in, and what level is selected. (MAY CHANGE TO INT LATER!) */
 	public static char state = 'N';
 	public static char player_select = 'K';
 	public static char level_select = 'S';
 
+	/* The only non-local reference in this class. Used for creating the window. */
 	JFrame frame;
 
+	/* Imports having to do with the logic behind the game and then rendering. */
 	Display display;
 	UIListener listen;
 	Keyboard key;
 	Mouser mouse;
 	Music music;
 
+	/* The three main classes. */
 	KnightClass knight;
 	WizardClass wizard;
 	ArcherClass archer;
-	
+
 	Level classic;
 
 	/**
-	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it.
+	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it. It also sets the level to a default selection.
 	 */
 	public WarDungeon() {
 		frame = new JFrame("WarDungeon");
@@ -81,7 +89,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		archer.setDirection('S');
 
 		classic = new ClassicLevel("/level/classic/floor1.png", 64);
-		
+
 		setPreferredSize(size);
 		setMaximumSize(size);
 		setMinimumSize(size);
@@ -105,8 +113,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	public synchronized void begin() {
 		thread = new Thread(this, "WarDungeon");
-		this.createBufferStrategy(3);
-		this.requestFocus();
+		createBufferStrategy(3);
+		requestFocus();
 
 		thread.start();
 		isRunning = true;
@@ -122,6 +130,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		thread.join();
 	}
 
+	/* Integers that reflect the Keyboard movements. Should not be removed. */
 	int xMove = 0, yMove = 0;
 
 	/**
@@ -130,31 +139,30 @@ public class WarDungeon extends Canvas implements Runnable {
 	private synchronized void tick() {
 		key.checkForKeys();
 
+		int speed = getPlayer().getSpeed();
+		
 		if (key.up) {
-			yMove--;
+			yMove -= speed;
 			getPlayer().setDirection('N');
 		}
 
 		if (key.down) {
-			yMove++;
+			yMove += speed;
 			getPlayer().setDirection('S');
 		}
 
 		if (key.left) {
-			xMove--;
+			xMove -= speed;
 			getPlayer().setDirection('W');
 		}
 
 		if (key.right) {
-			xMove++;
+			xMove += speed;
 			getPlayer().setDirection('E');
-		}
-		
-		if (key.escape) {
-			UIRender.renderInGameMenu(this);
 		}
 	}
 
+	/* Integers responsible for the FPS and UPS. */
 	public int frames = 0, updates = 0;
 
 	/**
@@ -178,32 +186,49 @@ public class WarDungeon extends Canvas implements Runnable {
 		gfx.setFont(WarDungeonGUI.warDungeonFont());
 		gfx.setColor(new Color(220, 220, 220));
 		gfx.drawString(WarDungeon.version, 3, 15);
-		
+
 		if (key.show) {
 			key.showInfo(gfx, frames, updates);
 		} else if (key.escape) {
 			UIRender.renderInGameMenu(this);
 		}
-		
+
 		gfx.dispose();
 		buffer.show();
 	}
 
+	/**
+	 * Method responsible for setting the state of the game. (i.e. in options, in credits, etc.)
+	 * 
+	 * @param setState
+	 */
 	public static void setState(char setState) {
 		state = setState;
 	}
 
+	/**
+	 * Method responsible for adding the classes to the game.
+	 */
 	private final void addPlayerClasses() {
-		knight = new KnightClass(ClassTexture.knight_south, 2, 5, 5);
-		wizard = new WizardClass(ClassTexture.wizard_south, 2, 6, 4);
-		archer = new ArcherClass(ClassTexture.archer_south, 4, 5, 3);
-	}
-	
-	public static void setPlayer(char selection) {
-		player_select = selection;
-		System.out.println("Playing as a " + player_select);
+		knight = KnightClass.knight;
+		wizard = WizardClass.wizard;
+		archer = ArcherClass.archer;
 	}
 
+	/**
+	 * Sets the desired player for the game.
+	 * 
+	 * @param selection
+	 */
+	public static void setPlayer(char selection) {
+		player_select = selection;
+	}
+
+	/**
+	 * Method for returning the player that the user has selected while in the class select.
+	 * 
+	 * @return
+	 */
 	private final PlayerClass getPlayer() {
 		if (player_select == 'K') return knight;
 		if (player_select == 'W') return wizard;
@@ -211,15 +236,25 @@ public class WarDungeon extends Canvas implements Runnable {
 		return knight;
 	}
 
+	/**
+	 * Method responsible for setting the desired level of the user.
+	 * 
+	 * @param selection
+	 */
 	public static void setLevel(char selection) {
 		level_select = selection;
 	}
-	
+
+	/**
+	 * Method used for getting the level that the user picked.
+	 * 
+	 * @return
+	 */
 	private final Level getLevel() {
 		if (level_select == 'C') return Level.classic;
 		return Level.survival;
 	}
-	
+
 	/**
 	 * The main "run()" method; needed for any class that implements the Runnable.java interface.
 	 */
@@ -299,7 +334,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//new Login();
+		// new Login();
 		WarDungeon dungeon = new WarDungeon();
 		dungeon.begin();
 	}

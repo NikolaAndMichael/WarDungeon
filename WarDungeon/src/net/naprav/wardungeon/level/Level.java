@@ -1,15 +1,18 @@
 package net.naprav.wardungeon.level;
 
 import net.naprav.wardungeon.block.Block;
+import net.naprav.wardungeon.block.CobbleStoneBlock;
 import net.naprav.wardungeon.block.EmptyBlock;
-import net.naprav.wardungeon.block.IceStoneBrickBlock;
+import net.naprav.wardungeon.block.IceBrickBlock;
 import net.naprav.wardungeon.block.LavaBlock;
+import net.naprav.wardungeon.block.MossBrickBlock;
 import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.block.StoneBrickBlock;
 import net.naprav.wardungeon.graphics.Display;
 
 public class Level {
 
+	/* Two integers for the width and height of the level and a blocks[] array to store all the block data. */
 	protected int width, height;
 	protected int[] blocks;
 
@@ -41,7 +44,10 @@ public class Level {
 		generateLevel();
 	}
 
+	/* Two static levels to be able to run in the game. */
 	public static Level classic = new ClassicLevel("/level/classic/floor1.png", 64);
+	//public static Level winter = new WinterLevel("/level/winter/floor1.png", 256);
+	
 	public static Level survival = new SurvivalLevel(256, 256);
 
 	/**
@@ -90,23 +96,37 @@ public class Level {
 		int y0 = yOffset / block_size;
 		int y1 = (yOffset + display.HEIGHT + block_size) / block_size;
 
+		// Integers for the center block of the screen.
+		//int centerBlockX = x1 / 2;
+		//int centerBlockY = y1 / 2;
+		
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
-				if (blocks[x + (y * width)] == -16777216) System.out.println("Ice!");
-				if (blocks[x + (y * width)] == -6361601) System.out.println("StoneBrick!");
 				getBlock(x, y).render(x, y, display);
+
+				//if (getBlock(centerBlockX, centerBlockY) == StoneBlock.block) {
+					//System.out.println("We got a stoner here!");
+				//}
 			}
 		}
 	}
 
+	/**
+	 * Method for returning the block at a certain coordinate.
+	 * @param xPos
+	 * @param yPos
+	 * @return
+	 */
 	public Block getBlock(int xPos, int yPos) {
 		if (xPos < 0 || xPos >= width || yPos < 0 || yPos >= height) return EmptyBlock.block;
 
-		if (blocks[xPos + (yPos * width)] == -6361601) return StoneBrickBlock.block;
-		//if (blocks[xPos + (yPos * width)] == 0x9EEDFF) return StoneBlock.block;
-		//if (blocks[xPos + (yPos * width)] == 2) return LavaBlock.block;
-		if (blocks[xPos + (yPos * width)] == -16777216) return IceStoneBrickBlock.block;
-
+		if (blocks[xPos + (yPos * width)] == 0x7F7F7F) return StoneBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0x4C4C4C) return StoneBrickBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFF6543) return LavaBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xA0A0A0) return CobbleStoneBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0x317232) return MossBrickBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xCEF0FF) return IceBrickBlock.block;
+		
 		return EmptyBlock.block;
 	}
 }

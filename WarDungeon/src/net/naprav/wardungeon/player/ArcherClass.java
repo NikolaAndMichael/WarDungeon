@@ -10,7 +10,7 @@ public class ArcherClass extends PlayerClass {
 
 	public char direction;
 
-	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, 8, 15, 50);
+	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, 3, 8, 50);
 
 	public void setDirection(char direct) {
 		direction = direct;
@@ -31,12 +31,11 @@ public class ArcherClass extends PlayerClass {
 	 * The method for allowing the class to take damage.
 	 */
 	public void takesDamage(int damage) {
-
+		HEALTH -= damage;
+		System.out.println(HEALTH);
 	}
-
-	/**
-	 * Method for updating the class.
-	 */
-	public void tick() {
+	
+	public int getSpeed() {
+		return SPEED;
 	}
 }
