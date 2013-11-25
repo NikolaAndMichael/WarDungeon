@@ -12,11 +12,9 @@ import java.awt.image.DataBufferInt;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import net.naprav.wardungeon.graphics.ClassTexture;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.gui.UIRender;
 import net.naprav.wardungeon.gui.WarDungeonGUI;
-import net.naprav.wardungeon.level.ClassicLevel;
 import net.naprav.wardungeon.level.Level;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
@@ -83,12 +81,11 @@ public class WarDungeon extends Canvas implements Runnable {
 		listen = new UIListener(mouse);
 
 		addPlayerClasses();
+		setLevel('C');
 
 		knight.setDirection('S');
 		wizard.setDirection('S');
 		archer.setDirection('S');
-
-		classic = new ClassicLevel("/level/classic/floor1.png", 64);
 
 		setPreferredSize(size);
 		setMaximumSize(size);
@@ -139,8 +136,9 @@ public class WarDungeon extends Canvas implements Runnable {
 	private synchronized void tick() {
 		key.checkForKeys();
 
-		int speed = getPlayer().getSpeed();
-		
+		// int speed = getPlayer().getSpeed();
+		int speed = 8;
+
 		if (key.up) {
 			yMove -= speed;
 			getPlayer().setDirection('N');
@@ -176,7 +174,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		final int centerX = (WIDTH / 2) - (48 / 2);
 
 		display.clear();
-		classic.render(xMove, yMove, display);
+		getLevel().render(xMove, yMove, display);
 		display.renderPlayer(getPlayer(), centerX, centerY);
 
 		display.alignPixels(pixels);

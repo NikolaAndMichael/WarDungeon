@@ -21,11 +21,11 @@ public class Level {
 	 * 
 	 * @param pathway
 	 */
-	public Level(String pathway, int size) {
-		width = size;
-		height = size;
+	public Level(String pathway, int width, int height) {
+		this.width = width;
+		this.height = height;
 		blocks = new int[width * height];
-		
+
 		loadLevel(pathway);
 		generateLevel();
 	}
@@ -40,14 +40,14 @@ public class Level {
 		this.width = width;
 		this.height = height;
 		blocks = new int[width * height];
-		
+
 		generateLevel();
 	}
 
 	/* Two static levels to be able to run in the game. */
-	public static Level classic = new ClassicLevel("/level/classic/floor1.png", 64);
-	//public static Level winter = new WinterLevel("/level/winter/floor1.png", 256);
-	
+	public static Level classic = new ClassicLevel("/level/classic/floor1.png", 160, 160);
+	// public static Level winter = new WinterLevel("/level/winter/floor1.png", 256);
+
 	public static Level survival = new SurvivalLevel(256, 256);
 
 	/**
@@ -97,22 +97,23 @@ public class Level {
 		int y1 = (yOffset + display.HEIGHT + block_size) / block_size;
 
 		// Integers for the center block of the screen.
-		//int centerBlockX = x1 / 2;
-		//int centerBlockY = y1 / 2;
-		
+		// int centerBlockX = x1 / 2;
+		// int centerBlockY = y1 / 2;
+
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
 				getBlock(x, y).render(x, y, display);
 
-				//if (getBlock(centerBlockX, centerBlockY) == StoneBlock.block) {
-					//System.out.println("We got a stoner here!");
-				//}
+				// if (getBlock(centerBlockX, centerBlockY) == StoneBlock.block) {
+				// System.out.println("We got a stoner here!");
+				// }
 			}
 		}
 	}
 
 	/**
 	 * Method for returning the block at a certain coordinate.
+	 * 
 	 * @param xPos
 	 * @param yPos
 	 * @return
@@ -120,13 +121,13 @@ public class Level {
 	public Block getBlock(int xPos, int yPos) {
 		if (xPos < 0 || xPos >= width || yPos < 0 || yPos >= height) return EmptyBlock.block;
 
-		if (blocks[xPos + (yPos * width)] == 0x7F7F7F) return StoneBlock.block;
-		if (blocks[xPos + (yPos * width)] == 0x4C4C4C) return StoneBrickBlock.block;
-		if (blocks[xPos + (yPos * width)] == 0xFF6543) return LavaBlock.block;
-		if (blocks[xPos + (yPos * width)] == 0xA0A0A0) return CobbleStoneBlock.block;
-		if (blocks[xPos + (yPos * width)] == 0x317232) return MossBrickBlock.block;
-		if (blocks[xPos + (yPos * width)] == 0xCEF0FF) return IceBrickBlock.block;
-		
+		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x7F7F7F) return StoneBlock.block;
+		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x4C4C4C) return StoneBrickBlock.block;
+		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xFF6543) return LavaBlock.block;
+		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xA0A0A0) return CobbleStoneBlock.block;
+		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x317232) return MossBrickBlock.block;
+		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xCEF0FF) return IceBrickBlock.block;
+
 		return EmptyBlock.block;
 	}
 }
