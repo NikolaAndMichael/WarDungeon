@@ -168,8 +168,6 @@ public class UIListener {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		System.out.println(xClick + ", " + yClick);
-
 		if ((xClick > 23 && xClick < 211) && (yClick > 470 && yClick < 548)) {
 			// Applies settings and returns to menu.
 			Sound.pushButtonSound();

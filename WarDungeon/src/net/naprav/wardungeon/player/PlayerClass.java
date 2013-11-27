@@ -18,6 +18,8 @@ public class PlayerClass {
 	public static int SOUTH = 3;
 	public static int WEST = 4;
 
+	protected int animation;
+	
 	/* Static integers used for selecting classes. */
 	public static int KNIGHT = 1, WIZARD = 2, ARCHER = 3;
 

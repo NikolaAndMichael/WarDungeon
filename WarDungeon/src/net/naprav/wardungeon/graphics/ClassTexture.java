@@ -31,15 +31,51 @@ public class ClassTexture {
 	public static ClassTexture knight_east = new ClassTexture(TextureSheet.knight, 2, 0, 64);
 	public static ClassTexture knight_west = new ClassTexture(TextureSheet.knight, 3, 0, 64);
 	
+	public static ClassTexture knight_south_walk1 = new ClassTexture(TextureSheet.knight, 0, 1, 64);
+	public static ClassTexture knight_north_walk1 = new ClassTexture(TextureSheet.knight, 1, 1, 64);
+	public static ClassTexture knight_east_walk1 = new ClassTexture(TextureSheet.knight, 2, 1, 64);
+	public static ClassTexture knight_west_walk1 = new ClassTexture(TextureSheet.knight, 3, 1, 64);
+	
+	public static ClassTexture knight_south_walk2 = new ClassTexture(TextureSheet.knight, 0, 2, 64);
+	public static ClassTexture knight_north_walk2 = new ClassTexture(TextureSheet.knight, 1, 2, 64);
+	public static ClassTexture knight_east_walk2 = new ClassTexture(TextureSheet.knight, 2, 2, 64);
+	public static ClassTexture knight_west_walk2 = new ClassTexture(TextureSheet.knight, 3, 2, 64);
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	
 	public static ClassTexture wizard_south = new ClassTexture(TextureSheet.wizard, 0, 0, 64);
 	public static ClassTexture wizard_north = new ClassTexture(TextureSheet.wizard, 1, 0, 64);
 	public static ClassTexture wizard_east = new ClassTexture(TextureSheet.wizard, 2, 0, 64);
 	public static ClassTexture wizard_west = new ClassTexture(TextureSheet.wizard, 3, 0, 64);
 	
+	public static ClassTexture wizard_south_walk1 = new ClassTexture(TextureSheet.wizard, 0, 1, 64);
+	public static ClassTexture wizard_north_walk1 = new ClassTexture(TextureSheet.wizard, 1, 1, 64);
+	public static ClassTexture wizard_east_walk1 = new ClassTexture(TextureSheet.wizard, 2, 1, 64);
+	public static ClassTexture wizard_west_walk1 = new ClassTexture(TextureSheet.wizard, 3, 1, 64);
+	
+	public static ClassTexture wizard_south_walk2 = new ClassTexture(TextureSheet.wizard, 0, 2, 64);
+	public static ClassTexture wizard_north_walk2 = new ClassTexture(TextureSheet.wizard, 1, 2, 64);
+	public static ClassTexture wizard_east_walk2 = new ClassTexture(TextureSheet.wizard, 2, 2, 64);
+	public static ClassTexture wizard_west_walk2 = new ClassTexture(TextureSheet.wizard, 3, 2, 64);
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	
 	public static ClassTexture archer_south = new ClassTexture(TextureSheet.archer, 0, 0, 64);
 	public static ClassTexture archer_north = new ClassTexture(TextureSheet.archer, 1, 0, 64);
 	public static ClassTexture archer_east = new ClassTexture(TextureSheet.archer, 2, 0, 64);
 	public static ClassTexture archer_west = new ClassTexture(TextureSheet.archer, 3, 0, 64);
+	
+	public static ClassTexture archer_south_walk1 = new ClassTexture(TextureSheet.archer, 0, 1, 64);
+	public static ClassTexture archer_north_walk1 = new ClassTexture(TextureSheet.archer, 1, 1, 64);
+	public static ClassTexture archer_east_walk1 = new ClassTexture(TextureSheet.archer, 2, 1, 64);
+	public static ClassTexture archer_west_walk1 = new ClassTexture(TextureSheet.archer, 3, 1, 64);
+	
+	public static ClassTexture archer_south_walk2 = new ClassTexture(TextureSheet.archer, 0, 2, 64);
+	public static ClassTexture archer_north_walk2 = new ClassTexture(TextureSheet.archer, 1, 2, 64);
+	public static ClassTexture archer_east_walk2 = new ClassTexture(TextureSheet.archer, 2, 2, 64);
+	public static ClassTexture archer_west_walk2 = new ClassTexture(TextureSheet.archer, 3, 2, 64);
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 	/**
 	 * Method for loading the player to the pixels[] array.

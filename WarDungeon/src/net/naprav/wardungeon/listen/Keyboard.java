@@ -10,6 +10,7 @@ public class Keyboard implements KeyListener {
 	public boolean up, down, left, right;
 
 	public boolean show;
+	public boolean shot;
 	public boolean escape;
 
 	public Keyboard(int arraySize) {
@@ -23,6 +24,7 @@ public class Keyboard implements KeyListener {
 		right = keys[KeyEvent.VK_D];
 
 		show = keys[KeyEvent.VK_F1];
+		shot = keys[KeyEvent.VK_F2];
 		escape = keys[KeyEvent.VK_ESCAPE];
 	}
 

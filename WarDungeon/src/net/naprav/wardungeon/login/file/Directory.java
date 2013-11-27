@@ -1,6 +1,9 @@
 package net.naprav.wardungeon.login.file;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Directory {
 
@@ -47,5 +50,15 @@ public class Directory {
 		} else {
 			System.out.println("Player's up to date!");
 		}
+	}
+
+	public static String getTime() {
+		Date current = new Date();
+		Locale locale = new Locale("en", "US");
+
+		DateFormat formatTime = DateFormat.getTimeInstance(DateFormat.DEFAULT, locale);
+		String date = formatTime.format(current);
+
+		return date;
 	}
 }

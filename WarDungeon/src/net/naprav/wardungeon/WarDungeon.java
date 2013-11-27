@@ -5,10 +5,14 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -21,6 +25,7 @@ import net.naprav.wardungeon.level.SurvivalLevel;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.listen.UIListener;
+import net.naprav.wardungeon.login.file.Directory;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.PlayerClass;
@@ -30,9 +35,10 @@ import net.naprav.wardungeon.sound.Music;
 public class WarDungeon extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 6601282971656374659L;
-
-	/* The version of the game, will be updates with annotation later! */
+	
+	/* The version of the game, will be updates with annotation later! It also has the location to the game path! */
 	public static final String version = "Version: 0.1 Alpha";
+	private static final String GAME_PATH = System.getProperty("user.home") + "\\AppData\\Roaming\\[WarDungeon]";
 
 	/* Basic integers and Dimensions for the JFrame and Canvas */
 	public static final int WIDTH = 460;
@@ -129,7 +135,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		thread.join();
 	}
 
-	/* Integers that reflect the Keyboard movements. Should not be removed. */
+	/* Integers that reflect the Keyboard's movements. Should not be removed. */
 	int xMove = 0, yMove = 0;
 
 	/**
@@ -137,7 +143,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	 */
 	private synchronized void tick() {
 		key.checkForKeys();
-
 		int speed = getPlayer().getSpeed();
 
 		if (key.up) {
@@ -196,6 +201,13 @@ public class WarDungeon extends Canvas implements Runnable {
 		buffer.show();
 	}
 
+	private final void screenShot(String filename) throws Exception {
+		Robot robot = new Robot();
+		Rectangle window = new Rectangle(frame.getX(), frame.getY(), WIDTH * SCALE, HEIGHT * SCALE);
+		BufferedImage image = robot.createScreenCapture(window);
+		ImageIO.write(image, "png", new File(GAME_PATH + filename));
+	}
+	
 	/**
 	 * Method responsible for setting the state of the game. (i.e. in options, in credits, etc.)
 	 * 
@@ -229,8 +241,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @return
 	 */
 	private final PlayerClass getPlayer() {
-		System.out.println(player_select + ", " + PlayerClass.KNIGHT);
-		
 		if (player_select == 1) return knight;
 		if (player_select == 2)return wizard;
 		if (player_select == 3) return archer;
@@ -267,7 +277,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove to play actual game.
-		//state = 50;
+		state = 50;
 
 		if (state != 50) {
 			//Music.playTitleMusic();

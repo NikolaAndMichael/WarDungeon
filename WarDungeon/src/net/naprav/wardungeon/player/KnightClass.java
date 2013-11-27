@@ -19,16 +19,47 @@ public class KnightClass extends PlayerClass {
 	public static KnightClass knight = new KnightClass(ClassTexture.knight_south, 2, 9, 50);
 	
 	public void setDirection(int direct) {
+		animation++;
 		direction = direct;
 		
+		System.out.println(animation);
+		
 		if (direction == SOUTH) {
-			this.sprite = ClassTexture.knight_south;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.knight_south_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.knight_south_walk2;
+				if (animation >= 30) animation = 0;
+			} else {
+				sprite = ClassTexture.knight_south;
+			}
 		} else if (direction == NORTH) {
-			this.sprite = ClassTexture.knight_north;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.knight_north_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.knight_north_walk2;
+				if (animation > 30) animation = 0;
+			} else {
+				sprite = ClassTexture.knight_north;
+			}
 		} else if (direction == WEST) {
-			this.sprite = ClassTexture.knight_west;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.knight_west_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.knight_west_walk2;
+				if (animation > 30) animation = 0;
+			} else {
+				sprite = ClassTexture.knight_west;
+			}
 		} else if (direction == EAST) {
-			this.sprite = ClassTexture.knight_east;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.knight_east_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.knight_east_walk2;
+				if (animation > 30) animation = 0;
+			} else {
+				sprite = ClassTexture.knight_east;
+			}
 		} else {
 			System.out.println("Put in a legit direction!");
 		}
@@ -39,7 +70,6 @@ public class KnightClass extends PlayerClass {
 	 */
 	public void takesDamage(int damage) {
 		HEALTH -= damage;
-		System.out.println(HEALTH);
 	}
 
 	/**

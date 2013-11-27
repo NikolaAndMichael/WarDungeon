@@ -11,26 +11,57 @@ public class ArcherClass extends PlayerClass {
 	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, 3, 8, 50);
 
 	public void setDirection(int direct) {
+		animation++;
 		direction = direct;
 		
+		System.out.println(animation);
+		
 		if (direction == SOUTH) {
-			this.sprite = ClassTexture.archer_south;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.archer_south_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.archer_south_walk2;
+				if (animation >= 30) animation = 0;
+			} else {
+				sprite = ClassTexture.archer_south;
+			}
 		} else if (direction == NORTH) {
-			this.sprite = ClassTexture.archer_north;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.archer_north_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.archer_north_walk2;
+				if (animation > 30) animation = 0;
+			} else {
+				sprite = ClassTexture.archer_north;
+			}
 		} else if (direction == WEST) {
-			this.sprite = ClassTexture.archer_west;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.archer_west_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.archer_west_walk2;
+				if (animation > 30) animation = 0;
+			} else {
+				sprite = ClassTexture.archer_west;
+			}
 		} else if (direction == EAST) {
-			this.sprite = ClassTexture.archer_east;
+			if (animation < 15 && animation > 5) {
+				sprite = ClassTexture.archer_east_walk1;
+			} else if (animation > 20){
+				sprite = ClassTexture.archer_east_walk2;
+				if (animation > 30) animation = 0;
+			} else {
+				sprite = ClassTexture.archer_east;
+			}
 		} else {
 			System.out.println("Put in a legit direction!");
 		}
 	}
+	
 	/**
 	 * The method for allowing the class to take damage.
 	 */
 	public void takesDamage(int damage) {
 		HEALTH -= damage;
-		System.out.println(HEALTH);
 	}
 	
 	public int getSpeed() {
