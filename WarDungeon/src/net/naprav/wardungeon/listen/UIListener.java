@@ -8,7 +8,6 @@ import net.naprav.wardungeon.sound.Sound;
 public class UIListener {
 
 	private Mouser mouse;
-	public byte state = 1;
 
 	public UIListener(Mouser mouser) {
 		mouse = mouser;
@@ -51,8 +50,6 @@ public class UIListener {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		// System.out.println(xClick + ", " + yClick);
-
 		int player_select = 0;
 
 		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
@@ -61,7 +58,6 @@ public class UIListener {
 			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			System.out.println("You're playing as a knight!");
 			return;
 		}
 		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
@@ -70,7 +66,6 @@ public class UIListener {
 			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			System.out.println("You're playing as a wizard!");
 			return;
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
@@ -79,7 +74,6 @@ public class UIListener {
 			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			System.out.println("You're playing as an archer!" + " Right here: " + player_select);
 			return;
 		}
 		if ((xClick > 66 && xClick < 215) && (yClick > 450 && yClick < 524)) {
@@ -101,8 +95,6 @@ public class UIListener {
 	public final void listenInLevelSelection() {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
-
-		System.out.println(xClick + ", " + yClick);
 
 		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
 			// Enters game with classic level.
