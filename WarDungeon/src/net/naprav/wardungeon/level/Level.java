@@ -1,8 +1,8 @@
 package net.naprav.wardungeon.level;
 
+import net.naprav.wardungeon.block.AbyssBlock;
 import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.block.CobbleStoneBlock;
-import net.naprav.wardungeon.block.EmptyBlock;
 import net.naprav.wardungeon.block.IceBrickBlock;
 import net.naprav.wardungeon.block.LavaBlock;
 import net.naprav.wardungeon.block.MossBrickBlock;
@@ -14,20 +14,35 @@ public class Level {
 
 	/* Two integers for the width and height of the level and a blocks[] array to store all the block data. */
 	protected int width, height;
+	protected int xSpawn, ySpawn;
+
 	protected int[] blocks;
 
+	public static int FLOOR_1 = 1;
+	public static int FLOOR_2 = 2;
+	public static int FLOOR_3 = 3;
+	public static int FLOOR_4 = 4;
+	public static int FLOOR_5 = 5;
+	public static int FLOOR_6 = 6;
+	public static int FLOOR_7 = 7;
+	
+	public static int FLOOR_BOSS = 8;
+	
 	/**
 	 * The default constructor for all levels. It's important because it's needed to access the level's location.
 	 * 
 	 * @param pathway
 	 */
-	public Level(String pathway, int width, int height) {
+	public Level(String pathway, int width, int height, int xSpawn, int ySpawn) {
 		this.width = width;
 		this.height = height;
+
+		this.xSpawn = (int) (xSpawn * 29.5);
+		this.ySpawn = (int) (ySpawn * 31.15);
+
 		blocks = new int[width * height];
 
 		loadLevel(pathway);
-		generateLevel();
 	}
 
 	/**
@@ -43,12 +58,6 @@ public class Level {
 
 		generateLevel();
 	}
-
-	/* Two static levels to be able to run in the game. */
-	public static Level classic = new ClassicLevel("/level/classic/floor1.png", 160, 160);
-	// public static Level winter = new WinterLevel("/level/winter/floor1.png", 256);
-
-	public static Level survival = new SurvivalLevel(256, 256);
 
 	/**
 	 * Loads the level from a file.
@@ -87,6 +96,9 @@ public class Level {
 	 * @param display
 	 */
 	public void render(int xOffset, int yOffset, Display display) {
+		xOffset += xSpawn;
+		yOffset += ySpawn;
+
 		display.setBlockOffset(xOffset, yOffset);
 
 		int block_size = 32;
@@ -119,8 +131,9 @@ public class Level {
 	 * @return
 	 */
 	public Block getBlock(int xPos, int yPos) {
-		if (xPos < 0 || xPos >= width || yPos < 0 || yPos >= height) return EmptyBlock.block;
+		if (xPos < 0 || xPos >= width || yPos < 0 || yPos >= height) return AbyssBlock.block;
 
+		/* Checks for standard blocks. */
 		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x7F7F7F) return StoneBlock.block;
 		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x4C4C4C) return StoneBrickBlock.block;
 		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xFF6543) return LavaBlock.block;
@@ -128,6 +141,8 @@ public class Level {
 		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x317232) return MossBrickBlock.block;
 		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xCEF0FF) return IceBrickBlock.block;
 
-		return EmptyBlock.block;
+		/* */
+
+		return AbyssBlock.block;
 	}
 }

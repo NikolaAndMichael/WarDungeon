@@ -16,6 +16,8 @@ public class SurvivalLevel extends Level {
 		super(width, height);
 	}
 
+	public static Level level = new SurvivalLevel(512, 512);
+	
 	/**
 	 * The overridden method from the superclass to generate a random level using the tiles index.
 	 */

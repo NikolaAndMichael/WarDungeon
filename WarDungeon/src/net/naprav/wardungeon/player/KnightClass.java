@@ -4,8 +4,6 @@ import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class KnightClass extends PlayerClass {
 
-	public char direction;
-
 	/**
 	 * Creates a constructor for the KnightClass and uses it in the superclass.
 	 * 
@@ -20,15 +18,16 @@ public class KnightClass extends PlayerClass {
 
 	public static KnightClass knight = new KnightClass(ClassTexture.knight_south, 2, 9, 50);
 	
-	public void setDirection(char direct) {
+	public void setDirection(int direct) {
 		direction = direct;
-		if (direction == 'S') {
+		
+		if (direction == SOUTH) {
 			this.sprite = ClassTexture.knight_south;
-		} else if (direction == 'N') {
+		} else if (direction == NORTH) {
 			this.sprite = ClassTexture.knight_north;
-		} else if (direction == 'W') {
+		} else if (direction == WEST) {
 			this.sprite = ClassTexture.knight_west;
-		} else if (direction == 'E') {
+		} else if (direction == EAST) {
 			this.sprite = ClassTexture.knight_east;
 		} else {
 			System.out.println("Put in a legit direction!");

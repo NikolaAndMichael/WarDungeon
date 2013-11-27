@@ -50,6 +50,27 @@ public class BlockTexture {
 	public static BlockTexture lava_5 = new BlockTexture(TextureSheet.lava, 1, 1, 32);
 	public static BlockTexture lava_6 = new BlockTexture(TextureSheet.lava, 2, 1, 32);
 
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	
+
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	
+	public static BlockTexture bottom_flat = new BlockTexture(TextureSheet.wall, 0, 0, 32);
+	public static BlockTexture right_flat = new BlockTexture(TextureSheet.wall, 1, 0, 32);
+	public static BlockTexture top_flat = new BlockTexture(TextureSheet.wall, 2, 0, 32);
+	public static BlockTexture left_flat = new BlockTexture(TextureSheet.wall, 3, 0, 32);
+	
+	public static BlockTexture bottom_right_corner = new BlockTexture(TextureSheet.wall, 4, 0, 32);
+	public static BlockTexture top_left_corner = new BlockTexture(TextureSheet.wall, 5, 0, 32);
+	public static BlockTexture bottom_left_corner = new BlockTexture(TextureSheet.wall, 6, 0, 32);
+	public static BlockTexture top_right_corner = new BlockTexture(TextureSheet.wall, 7, 0, 32);
+	
+	public static BlockTexture bottom_left_inner = new BlockTexture(TextureSheet.wall, 0, 1, 32);
+	public static BlockTexture top_left_inner = new BlockTexture(TextureSheet.wall, 1, 1, 32);
+	public static BlockTexture bottom_right_inner = new BlockTexture(TextureSheet.wall, 2, 1, 32);
+	public static BlockTexture top_right_inner = new BlockTexture(TextureSheet.wall, 3, 1, 32);
+	
 	/**
 	 * Protected method loads the block into the pixels[] array as pixel data.
 	 */

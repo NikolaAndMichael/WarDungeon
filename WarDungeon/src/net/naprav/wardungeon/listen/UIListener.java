@@ -1,6 +1,8 @@
 package net.naprav.wardungeon.listen;
 
 import net.naprav.wardungeon.WarDungeon;
+import net.naprav.wardungeon.level.ClassicLevel;
+import net.naprav.wardungeon.player.PlayerClass;
 import net.naprav.wardungeon.sound.Sound;
 
 public class UIListener {
@@ -49,13 +51,13 @@ public class UIListener {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
 
-		//System.out.println(xClick + ", " + yClick);
+		// System.out.println(xClick + ", " + yClick);
 
-		char player_select = 'K';
-		
+		int player_select = 0;
+
 		if ((xClick > 402 && xClick < 536) && (yClick > 48 && yClick < 311)) {
 			// Enters game with knight.
-			player_select = 'K';
+			player_select = PlayerClass.KNIGHT;
 			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
@@ -64,7 +66,7 @@ public class UIListener {
 		}
 		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
 			// Enters game with wizard.
-			player_select = 'W';
+			player_select = PlayerClass.WIZARD;
 			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
@@ -73,11 +75,11 @@ public class UIListener {
 		}
 		if ((xClick > 545 && xClick < 674) && (yClick > 52 && yClick < 307)) {
 			// Enters game with archer.
-			player_select = 'A';
+			player_select = PlayerClass.ARCHER;
 			WarDungeon.setPlayer(player_select);
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			System.out.println("You're playing as an archer!");
+			System.out.println("You're playing as an archer!" + " Right here: " + player_select);
 			return;
 		}
 		if ((xClick > 66 && xClick < 215) && (yClick > 450 && yClick < 524)) {
@@ -106,7 +108,7 @@ public class UIListener {
 			// Enters game with classic level.
 			Sound.pushButtonSound();
 			mouse.resetCoords();
-			WarDungeon.setLevel('C');
+			WarDungeon.setLevel(ClassicLevel.FLOOR_1);
 			return;
 		}
 		if ((xClick > 252 && xClick < 381) && (yClick > 41 && yClick < 303)) {
@@ -137,7 +139,7 @@ public class UIListener {
 			WarDungeon.setLevel('5');
 			return;
 		}
-		
+
 		if ((xClick > 66 && xClick < 215) && (yClick > 450 && yClick < 522)) {
 			// Enters returns to the previous menu.
 			Sound.pushButtonSound();
@@ -169,7 +171,7 @@ public class UIListener {
 			return;
 		}
 	}
-	
+
 	public final void listenInGameMenu() {
 		int xClick = mouse.xClick;
 		int yClick = mouse.yClick;
@@ -191,7 +193,7 @@ public class UIListener {
 			return;
 		}
 	}
-	
+
 	/**
 	 * The method for listening for mouse clicks in options.
 	 */

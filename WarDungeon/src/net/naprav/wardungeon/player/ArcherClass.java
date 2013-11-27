@@ -8,25 +8,23 @@ public class ArcherClass extends PlayerClass {
 		super(sprite, speed, attack, health);
 	}
 
-	public char direction;
-
 	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, 3, 8, 50);
 
-	public void setDirection(char direct) {
+	public void setDirection(int direct) {
 		direction = direct;
-		if (direction == 'S') {
+		
+		if (direction == SOUTH) {
 			this.sprite = ClassTexture.archer_south;
-		} else if (direction == 'N') {
+		} else if (direction == NORTH) {
 			this.sprite = ClassTexture.archer_north;
-		} else if (direction == 'W') {
+		} else if (direction == WEST) {
 			this.sprite = ClassTexture.archer_west;
-		} else if (direction == 'E') {
+		} else if (direction == EAST) {
 			this.sprite = ClassTexture.archer_east;
 		} else {
 			System.out.println("Put in a legit direction!");
 		}
 	}
-
 	/**
 	 * The method for allowing the class to take damage.
 	 */

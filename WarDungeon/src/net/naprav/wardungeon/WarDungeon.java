@@ -15,7 +15,9 @@ import javax.swing.JFrame;
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.gui.UIRender;
 import net.naprav.wardungeon.gui.WarDungeonGUI;
+import net.naprav.wardungeon.level.ClassicLevel;
 import net.naprav.wardungeon.level.Level;
+import net.naprav.wardungeon.level.SurvivalLevel;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.listen.UIListener;
@@ -49,8 +51,8 @@ public class WarDungeon extends Canvas implements Runnable {
 
 	/* Characters for determining what state the player is in, and what level is selected. (MAY CHANGE TO INT LATER!) */
 	public static char state = 'N';
-	public static char player_select = 'K';
-	public static char level_select = 'S';
+	public static int player_select = 0;
+	public static int level_select = 0;
 
 	/* The only non-local reference in this class. Used for creating the window. */
 	JFrame frame;
@@ -67,8 +69,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	WizardClass wizard;
 	ArcherClass archer;
 
-	Level classic;
-
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it. It also sets the level to a default selection.
 	 */
@@ -81,11 +81,13 @@ public class WarDungeon extends Canvas implements Runnable {
 		listen = new UIListener(mouse);
 
 		addPlayerClasses();
-		setLevel('C');
+		setLevel(ClassicLevel.FLOOR_1);
 
-		knight.setDirection('S');
-		wizard.setDirection('S');
-		archer.setDirection('S');
+		if (getLevel() == ClassicLevel.floor_1) {
+			knight.setDirection(PlayerClass.NORTH);
+			wizard.setDirection(PlayerClass.NORTH);
+			archer.setDirection(PlayerClass.NORTH);
+		}
 
 		setPreferredSize(size);
 		setMaximumSize(size);
@@ -136,27 +138,26 @@ public class WarDungeon extends Canvas implements Runnable {
 	private synchronized void tick() {
 		key.checkForKeys();
 
-		// int speed = getPlayer().getSpeed();
-		int speed = 8;
+		int speed = getPlayer().getSpeed();
 
 		if (key.up) {
 			yMove -= speed;
-			getPlayer().setDirection('N');
+			getPlayer().setDirection(PlayerClass.NORTH);
 		}
 
 		if (key.down) {
 			yMove += speed;
-			getPlayer().setDirection('S');
+			getPlayer().setDirection(PlayerClass.SOUTH);
 		}
 
 		if (key.left) {
 			xMove -= speed;
-			getPlayer().setDirection('W');
+			getPlayer().setDirection(PlayerClass.WEST);
 		}
 
 		if (key.right) {
 			xMove += speed;
-			getPlayer().setDirection('E');
+			getPlayer().setDirection(PlayerClass.EAST);
 		}
 	}
 
@@ -218,7 +219,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * 
 	 * @param selection
 	 */
-	public static void setPlayer(char selection) {
+	public static void setPlayer(int selection) {
 		player_select = selection;
 	}
 
@@ -228,9 +229,12 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @return
 	 */
 	private final PlayerClass getPlayer() {
-		if (player_select == 'K') return knight;
-		if (player_select == 'W') return wizard;
-		if (player_select == 'A') return archer;
+		System.out.println(player_select + ", " + PlayerClass.KNIGHT);
+		
+		if (player_select == 1) return knight;
+		if (player_select == 2)return wizard;
+		if (player_select == 3) return archer;
+		
 		return knight;
 	}
 
@@ -239,7 +243,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * 
 	 * @param selection
 	 */
-	public static void setLevel(char selection) {
+	public static void setLevel(int selection) {
 		level_select = selection;
 	}
 
@@ -249,8 +253,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @return
 	 */
 	private final Level getLevel() {
-		if (level_select == 'C') return Level.classic;
-		return Level.survival;
+		if (level_select == ClassicLevel.FLOOR_1) return ClassicLevel.floor_1;
+		return SurvivalLevel.level;
 	}
 
 	/**
@@ -263,10 +267,10 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove to play actual game.
-		state = 50;
+		//state = 50;
 
 		if (state != 50) {
-			Music.playTitleMusic();
+			//Music.playTitleMusic();
 		}
 
 		while (isRunning == true) {

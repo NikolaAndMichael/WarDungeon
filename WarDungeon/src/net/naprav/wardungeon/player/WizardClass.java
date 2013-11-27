@@ -4,8 +4,6 @@ import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class WizardClass extends PlayerClass {
 
-	public char direction;
-	
 	/**
 	 * Creates a constructor for the WizardClass and uses it in the superclass.
 	 * 
@@ -20,15 +18,16 @@ public class WizardClass extends PlayerClass {
 
 	public static WizardClass wizard = new WizardClass(ClassTexture.wizard_south, 2, 7, 50);
 	
-	public void setDirection(char direct) {
+	public void setDirection(int direct) {
 		direction = direct;
-		if (direction == 'S') {
+		
+		if (direction == SOUTH) {
 			this.sprite = ClassTexture.wizard_south;
-		} else if (direction == 'N') {
+		} else if (direction == NORTH) {
 			this.sprite = ClassTexture.wizard_north;
-		} else if (direction == 'W') {
+		} else if (direction == WEST) {
 			this.sprite = ClassTexture.wizard_west;
-		} else if (direction == 'E') {
+		} else if (direction == EAST) {
 			this.sprite = ClassTexture.wizard_east;
 		} else {
 			System.out.println("Put in a legit direction!");
