@@ -7,6 +7,8 @@ import net.naprav.wardungeon.WarDungeon;
 
 public class LoginGame {
 
+	public static String username;
+	
 	/**
 	 * Method for attempting login into the game.
 	 * 
@@ -14,7 +16,9 @@ public class LoginGame {
 	 * @param passcode
 	 * @param frame
 	 */
-	public void attemptLogin(String username, String passcode, JFrame frame) {
+	public void attemptLogin(String user, String passcode, JFrame frame) {
+		username = user;
+		
 		if (username.equals("") || passcode.equals("")) {
 			JOptionPane.showMessageDialog(null, "Put in your credentials!", "Hey you!", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -32,5 +36,13 @@ public class LoginGame {
 			dungeon.begin();
 			dungeon.requestFocus();
 		}
+	}
+	
+	public static String getUsername() {
+		if (username == null) {
+			username = "Legit Name. :P";
+		} 
+			
+		return username;
 	}
 }

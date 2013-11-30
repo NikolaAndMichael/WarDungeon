@@ -24,4 +24,12 @@ public class WScreen extends WarDungeonGUI {
 			exc.printStackTrace();
 		}
 	}
+	
+	public int getWidth() {
+		return WIDTH;
+	}
+	
+	public int getHeight() {
+		return HEIGHT;
+	}
 }

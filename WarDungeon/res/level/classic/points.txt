@@ -1,0 +1,4 @@
+floor1-floor2: (77, 84 / 78, 84);
+floor4-floor3: (79, 6 / 80, 6);
+floor4-floor5: (48, 38);
+floor7-floor_boss: (80, 122);

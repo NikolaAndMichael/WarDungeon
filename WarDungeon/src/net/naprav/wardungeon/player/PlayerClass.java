@@ -1,5 +1,10 @@
 package net.naprav.wardungeon.player;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class PlayerClass {
@@ -18,13 +23,17 @@ public class PlayerClass {
 	public static int SOUTH = 3;
 	public static int WEST = 4;
 
+	/* A protected integer for marking the animations. */
 	protected int animation;
-	
+
 	/* Static integers used for selecting classes. */
 	public static int KNIGHT = 1, WIZARD = 2, ARCHER = 3;
 
 	/* The sprite that we draw pixels from. */
-	public ClassTexture sprite;
+	public ClassTexture texture;
+
+	/* The icon used for getting the said player icon. */
+	public BufferedImage icon;
 
 	/**
 	 * Creates a class in the game depending on the stats.
@@ -34,11 +43,16 @@ public class PlayerClass {
 	 * @param attack
 	 * @param defense
 	 */
-	public PlayerClass(ClassTexture sprite, int speed, int attack, int health) {
-		this.sprite = sprite;
-		SPEED = speed;
-		ATTACK = attack;
-		HEALTH = health;
+	public PlayerClass(ClassTexture texture, String icon_location, int speed, int attack, int health) {
+		try {
+			this.icon = ImageIO.read(PlayerClass.class.getResource(icon_location));
+			this.texture = texture;
+			SPEED = speed;
+			ATTACK = attack;
+			HEALTH = health;
+		} catch (IOException exc) {
+			exc.printStackTrace();
+		}
 	}
 
 	/**
@@ -73,7 +87,7 @@ public class PlayerClass {
 	 * @param damage
 	 */
 	public void takesDamage(int damage) {
-		HEALTH += damage;
+		HEALTH -= damage;
 	}
 
 	/**
@@ -81,7 +95,7 @@ public class PlayerClass {
 	 * 
 	 * @return
 	 */
-	public int getHealh() {
+	public int getHealth() {
 		return HEALTH;
 	}
 
@@ -101,5 +115,9 @@ public class PlayerClass {
 	 */
 	public int getSpeed() {
 		return SPEED;
+	}
+
+	public BufferedImage getIcon() {
+		return icon;
 	}
 }

@@ -1,56 +1,56 @@
 package net.naprav.wardungeon.player;
 
+import java.awt.image.BufferedImage;
+
 import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class ArcherClass extends PlayerClass {
 
-	public ArcherClass(ClassTexture sprite, int speed, int attack, int health) {
-		super(sprite, speed, attack, health);
+	public ArcherClass(ClassTexture texture, String icon_location, int speed, int attack, int health) {
+		super(texture, icon_location, speed, attack, health);
 	}
 
-	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, 3, 8, 50);
+	public static ArcherClass archer = new ArcherClass(ClassTexture.archer_south, "/textures/gui/in-game/icon/archer_icon.png", 3, 8, 20);
 
 	public void setDirection(int direct) {
 		animation++;
 		direction = direct;
 		
-		System.out.println(animation);
-		
 		if (direction == SOUTH) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.archer_south_walk1;
+				texture = ClassTexture.archer_south_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.archer_south_walk2;
+				texture = ClassTexture.archer_south_walk2;
 				if (animation >= 30) animation = 0;
 			} else {
-				sprite = ClassTexture.archer_south;
+				texture = ClassTexture.archer_south;
 			}
 		} else if (direction == NORTH) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.archer_north_walk1;
+				texture = ClassTexture.archer_north_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.archer_north_walk2;
+				texture = ClassTexture.archer_north_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.archer_north;
+				texture = ClassTexture.archer_north;
 			}
 		} else if (direction == WEST) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.archer_west_walk1;
+				texture = ClassTexture.archer_west_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.archer_west_walk2;
+				texture = ClassTexture.archer_west_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.archer_west;
+				texture = ClassTexture.archer_west;
 			}
 		} else if (direction == EAST) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.archer_east_walk1;
+				texture = ClassTexture.archer_east_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.archer_east_walk2;
+				texture = ClassTexture.archer_east_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.archer_east;
+				texture = ClassTexture.archer_east;
 			}
 		} else {
 			System.out.println("Put in a legit direction!");
@@ -66,5 +66,9 @@ public class ArcherClass extends PlayerClass {
 	
 	public int getSpeed() {
 		return SPEED;
+	}
+	
+	public BufferedImage getIcon() {
+		return icon;
 	}
 }

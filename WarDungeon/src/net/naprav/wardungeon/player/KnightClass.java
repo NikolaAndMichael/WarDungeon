@@ -1,5 +1,7 @@
 package net.naprav.wardungeon.player;
 
+import java.awt.image.BufferedImage;
+
 import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class KnightClass extends PlayerClass {
@@ -7,58 +9,56 @@ public class KnightClass extends PlayerClass {
 	/**
 	 * Creates a constructor for the KnightClass and uses it in the superclass.
 	 * 
-	 * @param sprite
+	 * @param texture
 	 * @param speed
 	 * @param attack
 	 * @param defense
 	 */
-	public KnightClass(ClassTexture sprite, int speed, int attack, int health) {
-		super(sprite, speed, attack, health);
+	public KnightClass(ClassTexture texture, String icon_location, int speed, int attack, int health) {
+		super(texture, icon_location, speed, attack, health);
 	}
 
-	public static KnightClass knight = new KnightClass(ClassTexture.knight_south, 2, 9, 50);
+	public static KnightClass knight = new KnightClass(ClassTexture.knight_south, "/textures/gui/in-game/icon/knight_icon.png", 2, 9, 20);
 	
 	public void setDirection(int direct) {
 		animation++;
 		direction = direct;
 		
-		System.out.println(animation);
-		
 		if (direction == SOUTH) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.knight_south_walk1;
+				texture = ClassTexture.knight_south_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.knight_south_walk2;
+				texture = ClassTexture.knight_south_walk2;
 				if (animation >= 30) animation = 0;
 			} else {
-				sprite = ClassTexture.knight_south;
+				texture = ClassTexture.knight_south;
 			}
 		} else if (direction == NORTH) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.knight_north_walk1;
+				texture = ClassTexture.knight_north_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.knight_north_walk2;
+				texture = ClassTexture.knight_north_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.knight_north;
+				texture = ClassTexture.knight_north;
 			}
 		} else if (direction == WEST) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.knight_west_walk1;
+				texture = ClassTexture.knight_west_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.knight_west_walk2;
+				texture = ClassTexture.knight_west_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.knight_west;
+				texture = ClassTexture.knight_west;
 			}
 		} else if (direction == EAST) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.knight_east_walk1;
+				texture = ClassTexture.knight_east_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.knight_east_walk2;
+				texture = ClassTexture.knight_east_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.knight_east;
+				texture = ClassTexture.knight_east;
 			}
 		} else {
 			System.out.println("Put in a legit direction!");
@@ -77,5 +77,9 @@ public class KnightClass extends PlayerClass {
 	 */
 	public int getSpeed() {
 		return SPEED;
+	}
+	
+	public BufferedImage getIcon() {
+		return icon;
 	}
 }

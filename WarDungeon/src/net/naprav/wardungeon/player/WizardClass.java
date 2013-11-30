@@ -1,5 +1,7 @@
 package net.naprav.wardungeon.player;
 
+import java.awt.image.BufferedImage;
+
 import net.naprav.wardungeon.graphics.ClassTexture;
 
 public class WizardClass extends PlayerClass {
@@ -7,58 +9,56 @@ public class WizardClass extends PlayerClass {
 	/**
 	 * Creates a constructor for the WizardClass and uses it in the superclass.
 	 * 
-	 * @param sprite
+	 * @param texture
 	 * @param speed
 	 * @param attack
 	 * @param defense
 	 */
-	public WizardClass(ClassTexture sprite, int speed, int attack, int health) {
-		super(sprite, speed, attack, health);
+	public WizardClass(ClassTexture texture, String icon_location, int speed, int attack, int health) {
+		super(texture, icon_location, speed, attack, health);
 	}
 
-	public static WizardClass wizard = new WizardClass(ClassTexture.wizard_south, 2, 7, 50);
+	public static WizardClass wizard = new WizardClass(ClassTexture.wizard_south, "/textures/gui/in-game/icon/wizard_icon.png", 2, 7, 20);
 	
 	public void setDirection(int direct) {
 		animation++;
 		direction = direct;
 		
-		System.out.println(animation);
-		
 		if (direction == SOUTH) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.wizard_south_walk1;
+				texture = ClassTexture.wizard_south_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.wizard_south_walk2;
+				texture = ClassTexture.wizard_south_walk2;
 				if (animation >= 30) animation = 0;
 			} else {
-				sprite = ClassTexture.wizard_south;
+				texture = ClassTexture.wizard_south;
 			}
 		} else if (direction == NORTH) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.wizard_north_walk1;
+				texture = ClassTexture.wizard_north_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.wizard_north_walk2;
+				texture = ClassTexture.wizard_north_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.wizard_north;
+				texture = ClassTexture.wizard_north;
 			}
 		} else if (direction == WEST) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.wizard_west_walk1;
+				texture = ClassTexture.wizard_west_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.wizard_west_walk2;
+				texture = ClassTexture.wizard_west_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.wizard_west;
+				texture = ClassTexture.wizard_west;
 			}
 		} else if (direction == EAST) {
 			if (animation < 15 && animation > 5) {
-				sprite = ClassTexture.wizard_east_walk1;
+				texture = ClassTexture.wizard_east_walk1;
 			} else if (animation > 20){
-				sprite = ClassTexture.wizard_east_walk2;
+				texture = ClassTexture.wizard_east_walk2;
 				if (animation > 30) animation = 0;
 			} else {
-				sprite = ClassTexture.wizard_east;
+				texture = ClassTexture.wizard_east;
 			}
 		} else {
 			System.out.println("Put in a legit direction!");
@@ -71,5 +71,9 @@ public class WizardClass extends PlayerClass {
 	
 	public int getSpeed() {
 		return SPEED;
+	}
+	
+	public BufferedImage getIcon() {
+		return icon;
 	}
 }

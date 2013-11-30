@@ -25,7 +25,6 @@ import net.naprav.wardungeon.level.SurvivalLevel;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.listen.UIListener;
-import net.naprav.wardungeon.login.file.Directory;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.PlayerClass;
@@ -71,9 +70,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	Music music;
 
 	/* The three main classes. */
-	KnightClass knight;
-	WizardClass wizard;
-	ArcherClass archer;
 
 	/**
 	 * The main constructor. It's responsible for creating the JFrame and adding this canvas to it. It also sets the level to a default selection.
@@ -86,13 +82,11 @@ public class WarDungeon extends Canvas implements Runnable {
 		mouse = new Mouser();
 		listen = new UIListener(mouse);
 
-		addPlayerClasses();
+		setPlayer(PlayerClass.KNIGHT);
 		setLevel(ClassicLevel.FLOOR_1);
 
 		if (getLevel() == ClassicLevel.floor_1) {
-			knight.setDirection(PlayerClass.NORTH);
-			wizard.setDirection(PlayerClass.NORTH);
-			archer.setDirection(PlayerClass.NORTH);
+			getPlayer().setDirection(PlayerClass.NORTH);
 		}
 
 		setPreferredSize(size);
@@ -186,6 +180,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		display.alignPixels(pixels);
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
+		gfx.drawImage(UIRender.playerBar(getPlayer().getIcon()), 0, getHeight() - 100, 200, 100, null);
 
 		gfx.setFont(WarDungeonGUI.warDungeonFont());
 		gfx.setColor(new Color(220, 220, 220));
@@ -194,14 +189,14 @@ public class WarDungeon extends Canvas implements Runnable {
 		if (key.show) {
 			key.showInfo(gfx, frames, updates);
 		} else if (key.escape) {
-			UIRender.renderInGameMenu(this);
+			UIRender.renderEscapeMenu(this);
 		}
 
 		gfx.dispose();
 		buffer.show();
 	}
 
-	private final void screenShot(String filename) throws Exception {
+	public final void screenShot(String filename) throws Exception {
 		Robot robot = new Robot();
 		Rectangle window = new Rectangle(frame.getX(), frame.getY(), WIDTH * SCALE, HEIGHT * SCALE);
 		BufferedImage image = robot.createScreenCapture(window);
@@ -218,15 +213,6 @@ public class WarDungeon extends Canvas implements Runnable {
 	}
 
 	/**
-	 * Method responsible for adding the classes to the game.
-	 */
-	private final void addPlayerClasses() {
-		knight = KnightClass.knight;
-		wizard = WizardClass.wizard;
-		archer = ArcherClass.archer;
-	}
-
-	/**
 	 * Sets the desired player for the game.
 	 * 
 	 * @param selection
@@ -240,12 +226,12 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * 
 	 * @return
 	 */
-	private final PlayerClass getPlayer() {
-		if (player_select == 1) return knight;
-		if (player_select == 2)return wizard;
-		if (player_select == 3) return archer;
+	public static PlayerClass getPlayer() {
+		if (player_select == 1) return KnightClass.knight;
+		if (player_select == 2) return WizardClass.wizard;
+		if (player_select == 3) return ArcherClass.archer;
 		
-		return knight;
+		return KnightClass.knight;
 	}
 
 	/**
@@ -346,7 +332,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// new Login();
+		//new Login();
 		WarDungeon dungeon = new WarDungeon();
 		dungeon.begin();
 	}

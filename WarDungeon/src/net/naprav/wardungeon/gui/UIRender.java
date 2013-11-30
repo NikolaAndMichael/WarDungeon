@@ -1,8 +1,16 @@
 package net.naprav.wardungeon.gui;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import net.naprav.wardungeon.WarDungeon;
+import net.naprav.wardungeon.login.LoginGame;
 
 public class UIRender {
 
@@ -153,7 +161,7 @@ public class UIRender {
 		buffer.show();
 	}
 
-	public static void renderInGameMenu(Canvas canvas) {
+	public static void renderEscapeMenu(Canvas canvas) {
 		WButton back = new WButton("/textures/gui/button/standard/return.png", 150, 75); // Scaled up by two!
 		WButton option = new WButton("/textures/gui/button/standard/option.png", 150, 75); // Scaled up by two!
 		WButton quit = new WButton("/textures/gui/button/standard/quit.png", 150, 75);
@@ -175,5 +183,76 @@ public class UIRender {
 
 		gfx.dispose();
 		buffer.show();
+	}
+
+	private static int[] x = new int[10];
+	
+	private static final void setX() {
+		int spot = 63;
+		int continuum = 11;
+		
+		for (int a = 0; a < x.length; a++) {
+			x[a] = spot + continuum;
+			continuum += 11;
+		}
+	}
+	
+	public static BufferedImage playerBar(BufferedImage icon) {
+		WScreen bar = new WScreen("/textures/gui/in-game/player_bar.png", 200, 100);
+		Graphics gfx = bar.image.getGraphics();
+
+		if (x[1] == 0) {
+			setX();
+		}
+
+		gfx.setFont(WarDungeonGUI.warDungeonFont());
+		gfx.setColor(Color.WHITE);
+		gfx.drawString(LoginGame.getUsername(), 70, 20);
+
+		gfx.drawImage(icon, 11, 10, 48, 48, null);
+
+		int health = WarDungeon.getPlayer().getHealth();
+		// Maximum spot in array is 9?
+		int spot = 0;
+		
+		if (health != WarDungeon.getPlayer().getHealth()) {
+			// Even number
+			if (health % 2 == 0) {
+				gfx.drawImage(health(), x[0], 33, 10, 22, null);
+			} else if (health % 2 != 0) {
+				gfx.drawImage(halfHealth(), x[0], 33, 10, 22, null);
+			}
+		} else {
+			while (spot <= 9) {
+				gfx.drawImage(health(), x[spot], 33, 10, 22, null);
+				spot++;
+			}
+		}
+
+		return bar.image;
+	}
+
+	private static BufferedImage health() {
+		BufferedImage health = null;
+
+		try {
+			health = ImageIO.read(UIRender.class.getResource("/textures/gui/in-game/health_full.png"));
+		} catch (IOException exc) {
+			exc.printStackTrace();
+		}
+
+		return health;
+	}
+
+	private static BufferedImage halfHealth() {
+		BufferedImage health = null;
+
+		try {
+			health = ImageIO.read(UIRender.class.getResource("/textures/gui/in-game/health_half.png"));
+		} catch (IOException exc) {
+			exc.printStackTrace();
+		}
+
+		return health;
 	}
 }

@@ -72,7 +72,7 @@ public class Display {
 			for (int y = 0; y < 48; y++) {
 				int yPos = y + yMove;
 
-				int colour = player.sprite.pixels[x + y * 64];
+				int colour = player.texture.pixels[x + y * 64];
 				if (colour != 0x000000) pixels[xPos + yPos * WIDTH] = colour;
 			}
 		}
