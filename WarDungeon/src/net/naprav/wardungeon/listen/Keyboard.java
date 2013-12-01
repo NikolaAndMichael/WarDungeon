@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener {
 
 	private boolean[] keys;
-	public boolean up, down, left, right;
+	public boolean up, down, left, right, power;
 
 	public boolean show;
 	public boolean shot;
@@ -22,6 +22,8 @@ public class Keyboard implements KeyListener {
 		down = keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
+		
+		power = keys[KeyEvent.VK_SPACE];
 
 		show = keys[KeyEvent.VK_F1];
 		shot = keys[KeyEvent.VK_F2];

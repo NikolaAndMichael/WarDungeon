@@ -33,4 +33,19 @@ public class WarDungeonGUI {
 		
 		return dungeon.deriveFont(Font.PLAIN, 16);
 	}
+	
+	public static Font warDungeonFontLarge() {
+		GraphicsEnvironment enviro = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		File fontLocation = new File("res/textures/gui/wardungeon_font.ttf");
+		
+		try {
+			dungeon= Font.createFont(Font.TRUETYPE_FONT, fontLocation);
+			enviro.registerFont(dungeon);
+		} catch (FontFormatException | IOException exc) {
+			exc.printStackTrace();
+			System.out.println("Could not load font!");
+		}
+		
+		return dungeon.deriveFont(Font.PLAIN, 26);
+	}
 }

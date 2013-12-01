@@ -34,7 +34,7 @@ import net.naprav.wardungeon.sound.Music;
 public class WarDungeon extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 6601282971656374659L;
-	
+
 	/* The version of the game, will be updates with annotation later! It also has the location to the game path! */
 	public static final String version = "Version: 0.1 Alpha";
 	private static final String GAME_PATH = System.getProperty("user.home") + "\\AppData\\Roaming\\[WarDungeon]";
@@ -49,10 +49,11 @@ public class WarDungeon extends Canvas implements Runnable {
 	private BufferedImage screen = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	public int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
 
-	/* A Thread for running the game and two Booleans for being either in-game or in-menu. */
+	/* A Thread for running the game and two Booleans for being either in-game or in-menu. Also, there is a boolean for if the health of the player has changed. */
 	private Thread thread;
 	public static volatile boolean isRunning = false;
 	public static volatile boolean inGame = false;
+	public static volatile boolean hasChanged = false;
 
 	/* Characters for determining what state the player is in, and what level is selected. (MAY CHANGE TO INT LATER!) */
 	public static char state = 'N';
@@ -130,13 +131,14 @@ public class WarDungeon extends Canvas implements Runnable {
 	}
 
 	/* Integers that reflect the Keyboard's movements. Should not be removed. */
-	int xMove = 0, yMove = 0;
+	private int xMove = 0, yMove = 0;
 
 	/**
 	 * This method is responsible for updating the logic behind the game, i.e. Mobs, time, AI, etc.
 	 */
-	private synchronized void tick() {
+	private synchronized void tick(int health) {
 		key.checkForKeys();
+
 		int speed = getPlayer().getSpeed();
 
 		if (key.up) {
@@ -158,6 +160,12 @@ public class WarDungeon extends Canvas implements Runnable {
 			xMove += speed;
 			getPlayer().setDirection(PlayerClass.EAST);
 		}
+
+		if (key.power) {
+			getPlayer().takesDamage(3);
+		}
+
+		if (getPlayer().getHealth() != health) hasChanged = true;
 	}
 
 	/* Integers responsible for the FPS and UPS. */
@@ -176,15 +184,13 @@ public class WarDungeon extends Canvas implements Runnable {
 		display.clear();
 		getLevel().render(xMove, yMove, display);
 		display.renderPlayer(getPlayer(), centerX, centerY);
-
 		display.alignPixels(pixels);
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
-		gfx.drawImage(UIRender.playerBar(getPlayer().getIcon()), 0, getHeight() - 100, 200, 100, null);
 
 		gfx.setFont(WarDungeonGUI.warDungeonFont());
 		gfx.setColor(new Color(220, 220, 220));
-		gfx.drawString(WarDungeon.version, 3, 15);
+		gfx.drawString(version, 3, 15);
 
 		if (key.show) {
 			key.showInfo(gfx, frames, updates);
@@ -202,7 +208,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		BufferedImage image = robot.createScreenCapture(window);
 		ImageIO.write(image, "png", new File(GAME_PATH + filename));
 	}
-	
+
 	/**
 	 * Method responsible for setting the state of the game. (i.e. in options, in credits, etc.)
 	 * 
@@ -230,7 +236,7 @@ public class WarDungeon extends Canvas implements Runnable {
 		if (player_select == 1) return KnightClass.knight;
 		if (player_select == 2) return WizardClass.wizard;
 		if (player_select == 3) return ArcherClass.archer;
-		
+
 		return KnightClass.knight;
 	}
 
@@ -263,10 +269,10 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove to play actual game.
-		state = 50;
+		// state = 50;
 
 		if (state != 50) {
-			//Music.playTitleMusic();
+			Music.playTitleMusic();
 		}
 
 		while (isRunning == true) {
@@ -297,7 +303,7 @@ public class WarDungeon extends Canvas implements Runnable {
 			} else {
 				inGame = true;
 				// Remember to comment out the code below when state is auto-equal to 50.
-				//Music.stopTitleMusic();
+				Music.stopTitleMusic();
 				break;
 			}
 		}
@@ -308,7 +314,7 @@ public class WarDungeon extends Canvas implements Runnable {
 
 			pastTime = currentTime;
 			while (single >= 1) {
-				tick();
+				tick(getPlayer().getHealth());
 				updates++;
 				single--;
 			}
@@ -332,7 +338,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//new Login();
+		// new Login();
 		WarDungeon dungeon = new WarDungeon();
 		dungeon.begin();
 	}
