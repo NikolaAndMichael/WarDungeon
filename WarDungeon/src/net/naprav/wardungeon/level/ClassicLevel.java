@@ -12,6 +12,7 @@ public class ClassicLevel extends Level {
 	}
 
 	public static Level floor_1 = new ClassicLevel("/level/classic/floor1.png", 160, 160, 79, 159);
+	public static Level floor_2 = new ClassicLevel("/level/classic/floor2.png", 160, 160, 70, 70);
 	
 	public void loadLevel(String pathway) {
 		try {

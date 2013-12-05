@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.login.file.Server;
 
 public class UIRender {
@@ -72,7 +73,7 @@ public class UIRender {
 
 		gfx.setColor(Color.WHITE);
 		gfx.setFont(WarDungeonGUI.warDungeonFontLarge());
-		
+
 		gfx.drawString(Server.credits, 50, 50 + 50);
 		gfx.drawString(Server.credits_2, 50, 85 + 50);
 		gfx.drawString(Server.credits_3, 50, 120 + 50);
@@ -81,7 +82,7 @@ public class UIRender {
 		gfx.drawString(Server.credits_6, 50, 225 + 50);
 		gfx.drawString(Server.credits_7, 50, 260 + 50);
 		gfx.drawString(Server.credits_8, 50, 295 + 50);
-		
+
 		gfx.dispose();
 		buffer.show();
 	}
@@ -196,6 +197,19 @@ public class UIRender {
 	 * 
 	 * @param canvas
 	 */
-	public static void renderPlayerBar(Canvas canvas) {
+	public static void renderPlayerBar(int[] screen, Display display) {
+		WScreen bar = new WScreen("/textures/gui/in-game/player_bar.png", 100, 50);
+
+		int width = bar.getWidth(), height = bar.getHeight();
+		// int yPos = display.HEIGHT - height;
+
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				int index = x + (y * display.WIDTH), barIndex = x + (y * width);
+				if (barIndex < 5000) {
+					screen[index] = bar.pixels[barIndex];
+				}
+			}
+		}
 	}
 }

@@ -23,10 +23,8 @@ public class PlayerClass {
 	public static int SOUTH = 3;
 	public static int WEST = 4;
 
-	/* A protected integer for marking the animations. */
+	/* A protected integer for marking the animations and static integers for selecting classes. */
 	protected int animation;
-
-	/* Static integers used for selecting classes. */
 	public static int KNIGHT = 1, WIZARD = 2, ARCHER = 3;
 
 	/* The sprite that we draw pixels from. */
@@ -109,7 +107,7 @@ public class PlayerClass {
 	}
 
 	/**
-	 * The method fo returning the speed of said player.
+	 * The method for returning the speed of said player.
 	 * 
 	 * @return
 	 */

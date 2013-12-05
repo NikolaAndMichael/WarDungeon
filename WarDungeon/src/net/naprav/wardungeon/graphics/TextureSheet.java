@@ -35,6 +35,8 @@ public class TextureSheet {
 	public static TextureSheet wizard = new TextureSheet("/textures/mob/player/wizard_sheet.png", 384);
 	public static TextureSheet archer = new TextureSheet("/textures/mob/player/archer_sheet.png", 384);
 	
+	public static TextureSheet ogre = new TextureSheet("/textures/mob/ogre_sheet.png", 384);
+	
 	/**
 	 * This protected method helps to load the TextureSheet's data into the pixels[] array.
 	 * 

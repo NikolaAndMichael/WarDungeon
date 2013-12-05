@@ -25,6 +25,7 @@ import net.naprav.wardungeon.level.SurvivalLevel;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.listen.UIListener;
+import net.naprav.wardungeon.mob.Ogre;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.PlayerClass;
@@ -183,7 +184,9 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		display.clear();
 		getLevel().render(xMove, yMove, display);
-		display.renderPlayer(getPlayer(), centerX, centerY);
+		//display.renderPlayer(getPlayer(), centerX, centerY);
+		//display.renderMob(Mob mob, getLevel().getMobSpawnX(), getLevel().getMobSpawnY());
+		display.renderMob(Ogre.mob, centerX, centerY);
 		display.alignPixels(pixels);
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
@@ -269,10 +272,10 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove to play actual game.
-		// state = 50;
+		 state = 50;
 
 		if (state != 50) {
-			Music.playTitleMusic();
+			//Music.playTitleMusic();
 		}
 
 		while (isRunning == true) {
@@ -303,7 +306,9 @@ public class WarDungeon extends Canvas implements Runnable {
 			} else {
 				inGame = true;
 				// Remember to comment out the code below when state is auto-equal to 50.
-				Music.stopTitleMusic();
+				if (state != 50) {
+					Music.stopTitleMusic();
+				}
 				break;
 			}
 		}

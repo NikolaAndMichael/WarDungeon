@@ -3,6 +3,7 @@ package net.naprav.wardungeon.graphics;
 import java.awt.image.BufferedImage;
 
 import net.naprav.wardungeon.block.Block;
+import net.naprav.wardungeon.mob.Mob;
 import net.naprav.wardungeon.player.PlayerClass;
 
 public class Display {
@@ -72,18 +73,36 @@ public class Display {
 			for (int y = 0; y < 48; y++) {
 				int yPos = y + yMove;
 
-				int colour = player.texture.pixels[x + y * 64];
+				int colour = player.texture.pixels[x + (y * 64)];
 				if (colour != 0x000000) pixels[xPos + yPos * WIDTH] = colour;
 			}
 		}
 	}
+	
+	public void renderMob(Mob mob, int xMove, int yMove) {
+		for (int x = 0; x < 48; x++) {
+			int xPos = x + xMove;
+			for (int y = 0; y < 48; y++) {
+				int yPos = y + yMove;
+				
+				int color = mob.texture.pixels[x + (y * 64)];
+				if (color != 0x000000) pixels[xPos + (yPos * WIDTH)] = color;
+			}
+		}
+	}
 
+	public void renderBoss() {
+		
+	}
+	
 	/**
 	 * Method for setting the pixels in this class to the one in WarDungeon.java.
 	 * 
 	 * @param screen
 	 */
 	public void alignPixels(int[] screen) {
+		// UIRender.renderPlayerBar(pixels, this);
+
 		for (int a = 0; a < screen.length; a++) {
 			if (screen.length == pixels.length) {
 				screen[a] = pixels[a];

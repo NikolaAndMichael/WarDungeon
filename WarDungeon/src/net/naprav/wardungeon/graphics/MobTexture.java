@@ -26,6 +26,21 @@ public class MobTexture {
 		loadPlayer();
 	}
 
+	public static MobTexture ogre_south = new MobTexture(TextureSheet.ogre, 0, 0, 64);
+	public static MobTexture ogre_north = new MobTexture(TextureSheet.ogre, 1, 0, 64);
+	public static MobTexture ogre_east = new MobTexture(TextureSheet.ogre, 2, 0, 64);
+	public static MobTexture ogre_west = new MobTexture(TextureSheet.ogre, 3, 0, 64);
+	
+	public static MobTexture ogre_south_walk1 = new MobTexture(TextureSheet.ogre, 0, 1, 64);
+	public static MobTexture ogre_north_walk1 = new MobTexture(TextureSheet.ogre, 1, 1, 64);
+	public static MobTexture ogre_east_walk1 = new MobTexture(TextureSheet.ogre, 2, 1, 64);
+	public static MobTexture ogre_west_walk1 = new MobTexture(TextureSheet.ogre, 3, 1, 64);
+	
+	public static MobTexture ogre_south_walk2 = new MobTexture(TextureSheet.ogre, 0, 2, 64);
+	public static MobTexture ogre_north_walk2 = new MobTexture(TextureSheet.ogre, 1, 2, 64);
+	public static MobTexture ogre_east_walk2 = new MobTexture(TextureSheet.ogre, 2, 2, 64);
+	public static MobTexture ogre_west_walk2 = new MobTexture(TextureSheet.ogre, 3, 2, 64);
+	
 	/**
 	 * Method for loading the mob to the pixels[] array.
 	 */
