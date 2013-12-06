@@ -1,0 +1,40 @@
+These are the color codes for rendering the blocks to the screen:
+
+Abyss: 0x000000
+
+Mob Spawns: 0xFFFFFF
+Spawnpoint/Stairs: 0xA0E100
+Wall that requires key: 0x9800d6
+walls: 0xff00ff
+
+Health Vial: 0xAC0000
+Sugar Bag: 0xC2927E
+Key: 0xD9A539
+Powerup: 0xFFFF00
+
+Stone: 0x7F7F7F
+StoneBrick: 0x4C4C4C
+Lava: 0xFF6543
+CobbleStone: 0xA0A0A0
+MossBrick: 0x317232
+IceStoneBrick: 0xCEF0FF
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+WALLS:Walls are incredibly ludicrous! Beware!
+[Flat Edges]
+____: 0xFF00FF    
+   |: 0xFA00FA
+----: 0xF500F5
+|   : 0xF000F0
+
+(Corner Turns Outer)  
+_|: 0xEB00EB
+-|: 0xE600E6  
+|-: 0xE000E0 
+|_: 0xDB00DB 
+
+(Corner Turns Inner)
+0xD600AB
+0xD100A7
+0xCC00A3
+0xC7009F

@@ -5,9 +5,11 @@ import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.block.CobbleStoneBlock;
 import net.naprav.wardungeon.block.IceBrickBlock;
 import net.naprav.wardungeon.block.LavaBlock;
+import net.naprav.wardungeon.block.MobSpawnBlock;
 import net.naprav.wardungeon.block.MossBrickBlock;
 import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.block.StoneBrickBlock;
+import net.naprav.wardungeon.block.wall.Wall;
 import net.naprav.wardungeon.graphics.Display;
 
 public class Level {
@@ -25,9 +27,9 @@ public class Level {
 	public static int FLOOR_5 = 5;
 	public static int FLOOR_6 = 6;
 	public static int FLOOR_7 = 7;
-	
+
 	public static int FLOOR_BOSS = 8;
-	
+
 	/**
 	 * The default constructor for all levels. It's important because it's needed to access the level's location.
 	 * 
@@ -96,29 +98,28 @@ public class Level {
 	 * @param display
 	 */
 	public void render(int xOffset, int yOffset, Display display) {
+		int block_size = 32;
+
 		xOffset += xSpawn;
 		yOffset += ySpawn;
-
 		display.setBlockOffset(xOffset, yOffset);
-
-		int block_size = 32;
 
 		int x0 = xOffset / block_size;
 		int x1 = (xOffset + display.WIDTH + block_size) / block_size;
 		int y0 = yOffset / block_size;
 		int y1 = (yOffset + display.HEIGHT + block_size) / block_size;
-
+		
 		// Integers for the center block of the screen.
-		// int centerBlockX = x1 / 2;
-		// int centerBlockY = y1 / 2;
+		int centerBlockX = x1 / 2;
+		int centerBlockY = y1 / 2;
 
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
 				getBlock(x, y).render(x, y, display);
 
-				// if (getBlock(centerBlockX, centerBlockY) == StoneBlock.block) {
-				// System.out.println("We got a stoner here!");
-				// }
+				if (getBlock(centerBlockX, centerBlockY) == StoneBlock.block) {
+					System.out.println("We got a stoner here!");
+				}
 			}
 		}
 	}
@@ -134,14 +135,31 @@ public class Level {
 		if (xPos < 0 || xPos >= width || yPos < 0 || yPos >= height) return AbyssBlock.block;
 
 		/* Checks for standard blocks. */
-		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x7F7F7F) return StoneBlock.block;
-		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x4C4C4C) return StoneBrickBlock.block;
-		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xFF6543) return LavaBlock.block;
-		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xA0A0A0) return CobbleStoneBlock.block;
-		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0x317232) return MossBrickBlock.block;
-		if ((blocks[xPos + (yPos * width)] & 0xFFFFFF) == 0xCEF0FF) return IceBrickBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFF7F7F7F) return StoneBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFF4C4C4C) return StoneBrickBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFFFF6543) return LavaBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFFA0A0A0) return CobbleStoneBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFF317232) return MossBrickBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFFCEF0FF) return IceBrickBlock.block;
+		
+		/* Special blocks. */
+		if (blocks[xPos + (yPos * width)] == 0xFFFFFFFF) return MobSpawnBlock.block;
 
-		/* */
+		/* Checks for walls. */
+		if (blocks[xPos + (yPos * width)] == 0xFFFF00FF) return Wall.bottomFlat;
+		if (blocks[xPos + (yPos * width)] == 0xFFFA00FA) return Wall.rightFlat;
+		if (blocks[xPos + (yPos * width)] == 0xFFF500F5) return Wall.topFlat;
+		if (blocks[xPos + (yPos * width)] == 0xFFF000F0) return Wall.leftFlat;
+		
+		if (blocks[xPos + (yPos * width)] == 0xFFEB00EB) return Wall.bottomRightOutCorner;
+		if (blocks[xPos + (yPos * width)] == 0xFFE600E6) return Wall.topRightOutCorner;
+		if (blocks[xPos + (yPos * width)] == 0xFFE000E0) return Wall.topLeftOutCorner;
+		if (blocks[xPos + (yPos * width)] == 0xFFDB00DB) return Wall.bottomLeftOutCorner;
+		
+		if (blocks[xPos + (yPos * width)] == 0xFFD600AB) return Wall.bottomLeftInCorner;
+		if (blocks[xPos + (yPos * width)] == 0xFFD100A7) return Wall.topLeftInCorner;
+		if (blocks[xPos + (yPos * width)] == 0xFFCC00A3) return Wall.bottomRightInCorner;
+		if (blocks[xPos + (yPos * width)] == 0xFFC7009F) return Wall.topRightInCorner;
 
 		return AbyssBlock.block;
 	}

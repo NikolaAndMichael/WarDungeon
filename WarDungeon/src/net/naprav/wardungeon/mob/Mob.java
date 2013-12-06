@@ -1,7 +1,5 @@
 package net.naprav.wardungeon.mob;
 
-import java.awt.image.BufferedImage;
-
 import net.naprav.wardungeon.graphics.MobTexture;
 
 public class Mob {
@@ -17,14 +15,13 @@ public class Mob {
 	public static int SOUTH = 3;
 	public static int WEST = 4;
 
-	
 	/* A protected integer for marking the animations and the direction of the mob. */
 	protected int direction;
 	protected int animation;
 
 	/* Static integers used for selecting certain mobs. */
 	public static int OGRE = 1;
-	
+
 	/* The actual mobtexture and the pixels that go along with it. */
 	public MobTexture texture;
 
@@ -97,7 +94,7 @@ public class Mob {
 	}
 
 	/**
-	 * The method fo returning the speed of said player.
+	 * The method for returning the speed of said player.
 	 * 
 	 * @return
 	 */
@@ -105,4 +102,3 @@ public class Mob {
 		return SPEED;
 	}
 }
-	

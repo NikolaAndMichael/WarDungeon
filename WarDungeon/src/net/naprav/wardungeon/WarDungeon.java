@@ -25,7 +25,6 @@ import net.naprav.wardungeon.level.SurvivalLevel;
 import net.naprav.wardungeon.listen.Keyboard;
 import net.naprav.wardungeon.listen.Mouser;
 import net.naprav.wardungeon.listen.UIListener;
-import net.naprav.wardungeon.mob.Ogre;
 import net.naprav.wardungeon.player.ArcherClass;
 import net.naprav.wardungeon.player.KnightClass;
 import net.naprav.wardungeon.player.PlayerClass;
@@ -184,9 +183,8 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		display.clear();
 		getLevel().render(xMove, yMove, display);
-		//display.renderPlayer(getPlayer(), centerX, centerY);
 		//display.renderMob(Mob mob, getLevel().getMobSpawnX(), getLevel().getMobSpawnY());
-		display.renderMob(Ogre.mob, centerX, centerY);
+		display.renderPlayer(getPlayer(), centerX, centerY);
 		display.alignPixels(pixels);
 
 		gfx.drawImage(screen, 0, 0, getWidth(), getHeight(), null);
@@ -258,7 +256,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @return
 	 */
 	private final Level getLevel() {
-		if (level_select == ClassicLevel.FLOOR_1) return ClassicLevel.floor_1;
+		if (level_select == ClassicLevel.FLOOR_1) return ClassicLevel.floor_2;
 		return SurvivalLevel.level;
 	}
 
