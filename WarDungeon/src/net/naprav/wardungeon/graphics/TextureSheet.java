@@ -31,6 +31,8 @@ public class TextureSheet {
 	public static TextureSheet wall = new TextureSheet("/textures/block/wall_sheet.png", 256);
 	public static TextureSheet lava = new TextureSheet("/textures/block/lava_flow.png", 96);
 	
+	public static TextureSheet item = new TextureSheet("/textures/block/item_sheet.png", 160);
+	
 	public static TextureSheet knight = new TextureSheet("/textures/mob/player/knight_sheet.png", 384);
 	public static TextureSheet wizard = new TextureSheet("/textures/mob/player/wizard_sheet.png", 384);
 	public static TextureSheet archer = new TextureSheet("/textures/mob/player/archer_sheet.png", 384);

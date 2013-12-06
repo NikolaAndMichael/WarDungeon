@@ -54,6 +54,15 @@ public class BlockTexture {
 	
 	public static BlockTexture mob_spawn = new BlockTexture(TextureSheet.block, 6, 0, 32);
 	
+	public static BlockTexture health = new BlockTexture(TextureSheet.item, 0, 0, 32);
+	public static BlockTexture health_2 = new BlockTexture(TextureSheet.item, 0, 1, 32);
+	//public static BlockTexture health_3 = new BlockTexture(TextureSheet.item, 0, 2, 32);
+	//public static BlockTexture health_4 = new BlockTexture(TextureSheet.item, 0, 3, 32);
+	//public static BlockTexture health_5 = new BlockTexture(TextureSheet.item, 0, 4, 32);
+	
+	public static BlockTexture powerup = new BlockTexture(TextureSheet.item, 3, 0, 32);
+	public static BlockTexture powerup_2 = new BlockTexture(TextureSheet.item, 3, 1, 32);
+	
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	
 	public static BlockTexture bottom_flat = new BlockTexture(TextureSheet.wall, 0, 0, 32);

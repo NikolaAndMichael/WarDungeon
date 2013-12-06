@@ -9,6 +9,8 @@ import net.naprav.wardungeon.block.MobSpawnBlock;
 import net.naprav.wardungeon.block.MossBrickBlock;
 import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.block.StoneBrickBlock;
+import net.naprav.wardungeon.block.item.HealthPodBlock;
+import net.naprav.wardungeon.block.item.PowerUpBlock;
 import net.naprav.wardungeon.block.wall.Wall;
 import net.naprav.wardungeon.graphics.Display;
 
@@ -108,7 +110,7 @@ public class Level {
 		int x1 = (xOffset + display.WIDTH + block_size) / block_size;
 		int y0 = yOffset / block_size;
 		int y1 = (yOffset + display.HEIGHT + block_size) / block_size;
-		
+
 		// Integers for the center block of the screen.
 		int centerBlockX = x1 / 2;
 		int centerBlockY = y1 / 2;
@@ -141,21 +143,23 @@ public class Level {
 		if (blocks[xPos + (yPos * width)] == 0xFFA0A0A0) return CobbleStoneBlock.block;
 		if (blocks[xPos + (yPos * width)] == 0xFF317232) return MossBrickBlock.block;
 		if (blocks[xPos + (yPos * width)] == 0xFFCEF0FF) return IceBrickBlock.block;
-		
+
 		/* Special blocks. */
 		if (blocks[xPos + (yPos * width)] == 0xFFFFFFFF) return MobSpawnBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFFAC0000) return HealthPodBlock.block;
+		if (blocks[xPos + (yPos & width)] == 0xFFFFFF00) return PowerUpBlock.block;
 
 		/* Checks for walls. */
 		if (blocks[xPos + (yPos * width)] == 0xFFFF00FF) return Wall.bottomFlat;
 		if (blocks[xPos + (yPos * width)] == 0xFFFA00FA) return Wall.rightFlat;
 		if (blocks[xPos + (yPos * width)] == 0xFFF500F5) return Wall.topFlat;
 		if (blocks[xPos + (yPos * width)] == 0xFFF000F0) return Wall.leftFlat;
-		
+
 		if (blocks[xPos + (yPos * width)] == 0xFFEB00EB) return Wall.bottomRightOutCorner;
 		if (blocks[xPos + (yPos * width)] == 0xFFE600E6) return Wall.topRightOutCorner;
 		if (blocks[xPos + (yPos * width)] == 0xFFE000E0) return Wall.topLeftOutCorner;
 		if (blocks[xPos + (yPos * width)] == 0xFFDB00DB) return Wall.bottomLeftOutCorner;
-		
+
 		if (blocks[xPos + (yPos * width)] == 0xFFD600AB) return Wall.bottomLeftInCorner;
 		if (blocks[xPos + (yPos * width)] == 0xFFD100A7) return Wall.topLeftInCorner;
 		if (blocks[xPos + (yPos * width)] == 0xFFCC00A3) return Wall.bottomRightInCorner;
