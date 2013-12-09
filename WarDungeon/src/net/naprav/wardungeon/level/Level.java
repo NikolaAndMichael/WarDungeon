@@ -124,7 +124,9 @@ public class Level {
 			for (int x = x0; x < x1; x++) {
 				getBlock(x, y).render(x, y, display);
 				
-				System.out.println(getBlock(centerX, centerY));
+				if (getBlock(centerX, centerY) == HealthPodBlock.block) {
+					setBlock(centerX, centerY, 0xFF4C4C4C);
+				}
 			}
 		}
 	}
@@ -169,5 +171,9 @@ public class Level {
 		if (blocks[xPos + (yPos * width)] == 0xFFC7009F) return Wall.topRightInCorner;
 
 		return AbyssBlock.block;
+	}
+	
+	public void setBlock(int xPos, int yPos, int block_color) {
+		blocks[xPos + (yPos * width)] = block_color;
 	}
 }

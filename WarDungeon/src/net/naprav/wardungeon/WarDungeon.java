@@ -180,10 +180,10 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		final int centerY = (HEIGHT / 2) - (48 / 2);
 		final int centerX = (WIDTH / 2) - (48 / 2);
-		//int x = getLevel().getXSpawn() + xMove, y = getLevel().getYSpawn() + yMove;
+		int x = getLevel().getXSpawn() + xMove, y = getLevel().getYSpawn() + yMove;
 		
 		display.clear();
-		getLevel().render(xMove, yMove, display);
+		getLevel().render(x, y, display);
 		//display.renderMob(Mob mob, getLevel().getMobSpawnX(), getLevel().getMobSpawnY());
 		display.renderPlayer(getPlayer(), centerX, centerY);
 		display.alignPixels(pixels);
