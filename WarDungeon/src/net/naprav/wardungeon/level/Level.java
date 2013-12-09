@@ -41,8 +41,8 @@ public class Level {
 		this.width = width;
 		this.height = height;
 
-		this.xSpawn = (int) (xSpawn * 29.5);
-		this.ySpawn = (int) (ySpawn * 31.15);
+		this.xSpawn = (int) (xSpawn * 32);
+		this.ySpawn = (int) (ySpawn * 32);
 
 		blocks = new int[width * height];
 
@@ -92,6 +92,14 @@ public class Level {
 	protected void tick() {
 	}
 
+	public int getXSpawn() {
+		return xSpawn;
+	}
+
+	public int getYSpawn() {
+		return ySpawn;
+	}
+
 	/**
 	 * Responsible for rendering the level to Display.java, the class in charge of all rendering.
 	 * 
@@ -100,28 +108,23 @@ public class Level {
 	 * @param display
 	 */
 	public void render(int xOffset, int yOffset, Display display) {
-		int block_size = 32;
-
-		xOffset += xSpawn;
-		yOffset += ySpawn;
 		display.setBlockOffset(xOffset, yOffset);
+		final int block_size = 32;
 
 		int x0 = xOffset / block_size;
 		int x1 = (xOffset + display.WIDTH + block_size) / block_size;
 		int y0 = yOffset / block_size;
 		int y1 = (yOffset + display.HEIGHT + block_size) / block_size;
 
-		// Integers for the center block of the screen.
-		int centerBlockX = x1 / 2;
-		int centerBlockY = y1 / 2;
+		//int centerX = x1, centerY = y1;
+		int centerX = (int) (xOffset / 32 + 7.5);
+		int centerY = (int) (yOffset / 32 + 5.5);
 
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
 				getBlock(x, y).render(x, y, display);
-
-				if (getBlock(centerBlockX, centerBlockY) == StoneBlock.block) {
-					System.out.println("We got a stoner here!");
-				}
+				
+				System.out.println(getBlock(centerX, centerY));
 			}
 		}
 	}

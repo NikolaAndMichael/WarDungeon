@@ -180,7 +180,8 @@ public class WarDungeon extends Canvas implements Runnable {
 
 		final int centerY = (HEIGHT / 2) - (48 / 2);
 		final int centerX = (WIDTH / 2) - (48 / 2);
-
+		//int x = getLevel().getXSpawn() + xMove, y = getLevel().getYSpawn() + yMove;
+		
 		display.clear();
 		getLevel().render(xMove, yMove, display);
 		//display.renderMob(Mob mob, getLevel().getMobSpawnX(), getLevel().getMobSpawnY());
@@ -256,8 +257,8 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @return
 	 */
 	private final Level getLevel() {
-		if (level_select == ClassicLevel.FLOOR_1) return ClassicLevel.floor_2;
-		return SurvivalLevel.level;
+		if (level_select == ClassicLevel.FLOOR_1) return ClassicLevel.floor_1;
+		else return SurvivalLevel.level;
 	}
 
 	/**

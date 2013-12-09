@@ -32,7 +32,7 @@ public class PlayerClass {
 
 	/* The icon used for getting the said player icon. */
 	public BufferedImage icon;
-
+	
 	/**
 	 * Creates a class in the game depending on the stats.
 	 * 
