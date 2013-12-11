@@ -181,10 +181,12 @@ public class WarDungeon extends Canvas implements Runnable {
 		final int centerY = (HEIGHT / 2) - (48 / 2);
 		final int centerX = (WIDTH / 2) - (48 / 2);
 		int x = getLevel().getXSpawn() + xMove, y = getLevel().getYSpawn() + yMove;
-		
+
+		// Clears the screen to buffer the image.
 		display.clear();
-		getLevel().render(x, y, display);
-		//display.renderMob(Mob mob, getLevel().getMobSpawnX(), getLevel().getMobSpawnY());
+
+		if (getPlayer().isColliding() == false) getLevel().render(x, y, display);
+		// display.renderMob(Mob mob, getLevel().getMobSpawnX(), getLevel().getMobSpawnY());
 		display.renderPlayer(getPlayer(), centerX, centerY);
 		display.alignPixels(pixels);
 
@@ -257,8 +259,10 @@ public class WarDungeon extends Canvas implements Runnable {
 	 * @return
 	 */
 	private final Level getLevel() {
-		if (level_select == ClassicLevel.FLOOR_1) return ClassicLevel.floor_1;
-		else return SurvivalLevel.level;
+		if (level_select == ClassicLevel.FLOOR_1)
+			return ClassicLevel.floor_1;
+		else
+			return SurvivalLevel.level;
 	}
 
 	/**
@@ -271,10 +275,10 @@ public class WarDungeon extends Canvas implements Runnable {
 		float single = 0;
 
 		// Remove to play actual game.
-		 state = 50;
+		state = 50;
 
 		if (state != 50) {
-			//Music.playTitleMusic();
+			// Music.playTitleMusic();
 		}
 
 		while (isRunning == true) {

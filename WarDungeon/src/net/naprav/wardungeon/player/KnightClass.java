@@ -19,15 +19,15 @@ public class KnightClass extends PlayerClass {
 	}
 
 	public static KnightClass knight = new KnightClass(ClassTexture.knight_south, "/textures/gui/in-game/icon/knight_icon.png", 2, 9, 20);
-	
+
 	public void setDirection(int direct) {
 		animation++;
 		direction = direct;
-		
+
 		if (direction == SOUTH) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.knight_south_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.knight_south_walk2;
 				if (animation >= 30) animation = 0;
 			} else {
@@ -36,7 +36,7 @@ public class KnightClass extends PlayerClass {
 		} else if (direction == NORTH) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.knight_north_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.knight_north_walk2;
 				if (animation > 30) animation = 0;
 			} else {
@@ -45,7 +45,7 @@ public class KnightClass extends PlayerClass {
 		} else if (direction == WEST) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.knight_west_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.knight_west_walk2;
 				if (animation > 30) animation = 0;
 			} else {
@@ -54,7 +54,7 @@ public class KnightClass extends PlayerClass {
 		} else if (direction == EAST) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.knight_east_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.knight_east_walk2;
 				if (animation > 30) animation = 0;
 			} else {
@@ -66,20 +66,15 @@ public class KnightClass extends PlayerClass {
 	}
 
 	/**
-	 * The method for allowing the class to take damage.
+	 * The method for returning the icon from the superclass.
 	 */
-	public void takesDamage(int damage) {
-		HEALTH -= damage;
+	public BufferedImage getIcon() {
+		return icon;
 	}
 
 	/**
-	 * Returns the speed of the knight.
+	 * The method from the superclass that kills the player :(
 	 */
-	public int getSpeed() {
-		return SPEED;
-	}
-	
-	public BufferedImage getIcon() {
-		return icon;
+	public void die() {
 	}
 }

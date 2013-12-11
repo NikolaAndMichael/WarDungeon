@@ -58,17 +58,15 @@ public class ArcherClass extends PlayerClass {
 	}
 	
 	/**
-	 * The method for allowing the class to take damage.
+	 * The method for returning the icon from the superclass.
 	 */
-	public void takesDamage(int damage) {
-		HEALTH -= damage;
-	}
-	
-	public int getSpeed() {
-		return SPEED;
-	}
-	
 	public BufferedImage getIcon() {
 		return icon;
+	}
+	
+	/** 
+	 * The method from the superclass that kills the player :(
+	 */
+	public void die() {
 	}
 }

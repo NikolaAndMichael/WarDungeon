@@ -19,15 +19,15 @@ public class WizardClass extends PlayerClass {
 	}
 
 	public static WizardClass wizard = new WizardClass(ClassTexture.wizard_south, "/textures/gui/in-game/icon/wizard_icon.png", 2, 7, 20);
-	
+
 	public void setDirection(int direct) {
 		animation++;
 		direction = direct;
-		
+
 		if (direction == SOUTH) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.wizard_south_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.wizard_south_walk2;
 				if (animation >= 30) animation = 0;
 			} else {
@@ -36,7 +36,7 @@ public class WizardClass extends PlayerClass {
 		} else if (direction == NORTH) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.wizard_north_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.wizard_north_walk2;
 				if (animation > 30) animation = 0;
 			} else {
@@ -45,7 +45,7 @@ public class WizardClass extends PlayerClass {
 		} else if (direction == WEST) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.wizard_west_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.wizard_west_walk2;
 				if (animation > 30) animation = 0;
 			} else {
@@ -54,7 +54,7 @@ public class WizardClass extends PlayerClass {
 		} else if (direction == EAST) {
 			if (animation < 15 && animation > 5) {
 				texture = ClassTexture.wizard_east_walk1;
-			} else if (animation > 20){
+			} else if (animation > 20) {
 				texture = ClassTexture.wizard_east_walk2;
 				if (animation > 30) animation = 0;
 			} else {
@@ -64,16 +64,17 @@ public class WizardClass extends PlayerClass {
 			System.out.println("Put in a legit direction!");
 		}
 	}
-	
-	public void takesDamage(int damage) {
-		HEALTH -= damage;
-	}
-	
-	public int getSpeed() {
-		return SPEED;
-	}
-	
+
+	/**
+	 * The method for returning the icon from the superclass.
+	 */
 	public BufferedImage getIcon() {
 		return icon;
+	}
+
+	/**
+	 * The method from the superclass that kills the player :(
+	 */
+	public void die() {
 	}
 }

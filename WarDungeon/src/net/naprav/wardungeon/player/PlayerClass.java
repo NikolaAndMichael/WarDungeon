@@ -25,6 +25,7 @@ public class PlayerClass {
 
 	/* A protected integer for marking the animations and static integers for selecting classes. */
 	protected int animation;
+	protected boolean colliding = false;
 	public static int KNIGHT = 1, WIZARD = 2, ARCHER = 3;
 
 	/* The sprite that we draw pixels from. */
@@ -32,7 +33,7 @@ public class PlayerClass {
 
 	/* The icon used for getting the said player icon. */
 	public BufferedImage icon;
-	
+
 	/**
 	 * Creates a class in the game depending on the stats.
 	 * 
@@ -115,7 +116,35 @@ public class PlayerClass {
 		return SPEED;
 	}
 
+	/**
+	 * Sets the player as to whether there is collision or not.
+	 * 
+	 * @param collision
+	 */
+	public void setCollision(boolean collision) {
+		colliding = collision;
+
+	}
+
+	/**
+	 * Checks to see if the player is colliding.
+	 * @return
+	 */
+	public boolean isColliding() {
+		return colliding;
+	}
+
+	/**
+	 * Method for returning icon of the player. Each class their own.
+	 * @return
+	 */
 	public BufferedImage getIcon() {
 		return icon;
+	}
+
+	/** 
+	 * Method for killing the player.
+	 */
+	public void die() {
 	}
 }

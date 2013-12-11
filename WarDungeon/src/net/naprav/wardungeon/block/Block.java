@@ -25,28 +25,17 @@ public abstract class Block {
 	}
 
 	/**
-	 * Sets the block as collidable or not.
-	 */
-	protected void setCollidable() {
-	}
-
-	/**
 	 * Checks to see if the block is collidable or not.
 	 */
-	protected boolean getIsCollidable() {
+	public boolean isCollidable() {
 		return isCollidable;
 	}
 
-	/**
-	 * Sets the block as to whether it can kill or not..
-	 */
-	protected void setDoesKill() {
-	}
 
 	/**
 	 * Checks to see if the block can kill or not.
 	 */
-	protected boolean getDoesKill() {
+	public boolean doesKill() {
 		return doesKill;
 	}
 

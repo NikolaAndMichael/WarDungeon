@@ -1,5 +1,6 @@
 package net.naprav.wardungeon.level;
 
+import net.naprav.wardungeon.WarDungeon;
 import net.naprav.wardungeon.block.AbyssBlock;
 import net.naprav.wardungeon.block.Block;
 import net.naprav.wardungeon.block.CobbleStoneBlock;
@@ -32,6 +33,8 @@ public class Level {
 
 	public static int FLOOR_BOSS = 8;
 
+	private boolean setWalls = false;
+
 	/**
 	 * The default constructor for all levels. It's important because it's needed to access the level's location.
 	 * 
@@ -41,8 +44,8 @@ public class Level {
 		this.width = width;
 		this.height = height;
 
-		this.xSpawn = (int) (xSpawn * 32);
-		this.ySpawn = (int) (ySpawn * 32);
+		this.xSpawn = (int) (xSpawn * 31.5);
+		this.ySpawn = (int) (ySpawn * 31);
 
 		blocks = new int[width * height];
 
@@ -116,14 +119,28 @@ public class Level {
 		int y0 = yOffset / block_size;
 		int y1 = (yOffset + display.HEIGHT + block_size) / block_size;
 
-		//int centerX = x1, centerY = y1;
+		// int centerX = x1, centerY = y1;
 		int centerX = (int) (xOffset / 32 + 7.5);
 		int centerY = (int) (yOffset / 32 + 5.5);
 
-		for (int y = y0; y < y1; y++) {
-			for (int x = x0; x < x1; x++) {
+		// Integers for the blocks above, below and to the sides of the player. (Handy for collision!)
+		int leftX = centerX - 1, leftY = centerY;
+		int rightX = centerX + 1, rightY = centerY;
+		int topX = centerX, topY = centerY - 1;
+		int bottomX = centerX, bottomY = centerY + 1;
+
+		for (int x = x0; x < x1; x++) {
+			for (int y = y0; y < y1; y++) {
 				getBlock(x, y).render(x, y, display);
-				
+
+				if (haveWallsBeenSet() == false) {
+					setLevelWalls();
+					return;
+				}
+
+				// if (getBlock(leftX, leftY).isCollidable()) WarDungeon.getPlayer().die();
+				if (getBlock(centerX, centerY).doesKill()) WarDungeon.getPlayer().die();
+
 				if (getBlock(centerX, centerY) == HealthPodBlock.block) {
 					setBlock(centerX, centerY, 0xFF4C4C4C);
 				}
@@ -172,8 +189,26 @@ public class Level {
 
 		return AbyssBlock.block;
 	}
-	
+
 	public void setBlock(int xPos, int yPos, int block_color) {
 		blocks[xPos + (yPos * width)] = block_color;
+	}
+
+	public void setLevelWalls() {
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				if (getBlock(x + 1, y) != AbyssBlock.block && getBlock(x - 1, y) == AbyssBlock.block) {
+					setBlock(x, y, 0xFFFA00FA);
+				} else if (getBlock(x - 1, y) != AbyssBlock.block && getBlock(x, y) == Wall.leftFlat && getBlock(x + 1, y) == AbyssBlock.block) {
+					setBlock(x, y, 0xFFF000F0);
+				}
+			}
+		}
+
+		setWalls = true;
+	}
+
+	public boolean haveWallsBeenSet() {
+		return setWalls;
 	}
 }
