@@ -199,7 +199,8 @@ public class Level {
 			for (int y = 0; y < height; y++) {
 				if (getBlock(x + 1, y) != AbyssBlock.block && getBlock(x - 1, y) == AbyssBlock.block) {
 					setBlock(x, y, 0xFFFA00FA);
-				} else if (getBlock(x - 1, y) != AbyssBlock.block && getBlock(x, y) == Wall.leftFlat && getBlock(x + 1, y) == AbyssBlock.block) {
+				} else if (getBlock(x - 1, y) != AbyssBlock.block && getBlock(x - 1, y) != Wall.leftFlat && getBlock(x + 1, y) == AbyssBlock.block) {
+					if (getBlock(x, y) == StoneBrickBlock.block || getBlock(x, y) == StoneBlock.block) break;
 					setBlock(x, y, 0xFFF000F0);
 				}
 			}
