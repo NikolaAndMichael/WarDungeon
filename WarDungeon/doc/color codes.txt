@@ -4,10 +4,9 @@ Abyss: 0x000000
 
 Mob Spawns: 0xFFFFFF
 Spawnpoint/Stairs: 0xA0E100
-Walls that require key: 0x9800d6 (keep it facing from the top down)
+Wall that requires key: 0x9800d6
 walls: 0xff00ff
 
-Items:
 Health Vial: 0xAC0000
 Sugar Bag: 0xC2927E
 Key: 0xD9A539
@@ -19,20 +18,9 @@ Lava: 0xFF6543
 CobbleStone: 0xA0A0A0
 MossBrick: 0x317232
 IceStoneBrick: 0xCEF0FF
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WALLS:Walls are incredibly ludicrous! Beware!
-[Flat Edges]
-____:    
-   |:
-----:
-|   :
-
-(Corner Turns Outer)  
-_|:  
--|:  
-|-:  
-|_:  
-
-(Corner Turns Inner)
+WALLS:
+Wall: 0xFF00FF
+Outer Corners: 0xAA00AA
+Inner Corners: 0x550055
