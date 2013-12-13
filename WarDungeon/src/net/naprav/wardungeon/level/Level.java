@@ -195,31 +195,39 @@ public class Level {
 	public void setLevelWalls() {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
+				if (blocks[x + (y * width)] == 0xFFAA00AA) {
+					if (getBlock(x + 1, y - 1) == AbyssBlock.block && getBlock(x - 1, y + 1) != AbyssBlock.block) {
+						// Bottom corner left sticking out.
+						setBlock(x, y, 0xFFDB00DB);
+					} else if (getBlock(x - 1, y - 1) == AbyssBlock.block && getBlock(x + 1, y + 1) != AbyssBlock.block) {
+						// Bottom corner right sticking out.
+						setBlock(x, y, 0xFFEB00EB);
+					} else if (getBlock(x - 1, y + 1) == AbyssBlock.block && getBlock(x + 1, y - 1) != AbyssBlock.block) {
+						// Top corner right sticking out.
+						setBlock(x, y, 0xFFE600E6);
+					} else if (getBlock(x + 1, y + 1) == AbyssBlock.block && getBlock(x - 1, y - 1) != AbyssBlock.block) {
+						// Top corner left sticking out.
+						setBlock(x, y, 0xFFE000E0);
+					}
+				}
+			}
+		}
+
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
 				if (blocks[x + (y * width)] == 0xFFFF00FF) {
-					if (getBlock(x + 1, y) != AbyssBlock.block && getBlock(x - 1, y) == AbyssBlock.block) {
+					if (getBlock(x, y - 1) != AbyssBlock.block && getBlock(x, y - 1) != Wall.leftFlat && getBlock(x, y + 1) == AbyssBlock.block) {
+						// Flat top.
+						setBlock(x, y, 0xFFF500F5);
+					} else if (getBlock(x, y + 1) != AbyssBlock.block && getBlock(x, y - 1) != Wall.rightFlat && getBlock(x, y - 1) == AbyssBlock.block) {
+						// Flat bottom.
+						setBlock(x, y, 0xFFFF00FF);
+					} else if (getBlock(x + 1, y) != AbyssBlock.block && getBlock(x - 1, y) == AbyssBlock.block) {
 						// Flat right.
 						setBlock(x, y, 0xFFFA00FA);
 					} else if (getBlock(x - 1, y) != AbyssBlock.block && getBlock(x + 1, y) == AbyssBlock.block) {
 						// Flat left.
 						setBlock(x, y, 0xFFF000F0);
-					} else if (getBlock(x, y - 1) != AbyssBlock.block && getBlock(x, y + 1) == AbyssBlock.block) {
-						// Flat top.
-						setBlock(x, y, 0xFFF500F5);
-					} else if (getBlock(x, y + 1) != AbyssBlock.block && getBlock(x, y - 1) == AbyssBlock.block) {
-						// Flat bottom.
-						setBlock(x, y, 0xFFFF00FF);
-					} else if (getBlock(x + 1, y - 1) == AbyssBlock.block) {
-						// Bottom corner left sticking out.
-						setBlock(x, y, 0xFFDB00DB);
-					} else if (getBlock(x - 1, y - 1) == AbyssBlock.block) {
-						// Bottom corner right sticking out.
-						setBlock(x, y, 0xFFEB00EB);
-					} else if (getBlock(x - 1, y + 1) == AbyssBlock.block) {
-						// Top corner right sticking out.
-						setBlock(x, y, 0xFFE600E6);
-					} else if (getBlock(x + 1, y + 1) == AbyssBlock.block) {
-						// Top corner left sticking out.
-						setBlock(x, y, 0xFFE000E0);
 					}
 				}
 			}
