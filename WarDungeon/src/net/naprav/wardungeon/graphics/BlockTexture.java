@@ -40,7 +40,10 @@ public class BlockTexture {
 	public static BlockTexture mossbrick = new BlockTexture(TextureSheet.block, 2, 0, 32);
 	public static BlockTexture cobblestone = new BlockTexture(TextureSheet.block, 3, 0, 32);
 	public static BlockTexture icestonebrick = new BlockTexture(TextureSheet.block, 4, 0, 32);
-
+	public static BlockTexture slush = new BlockTexture(TextureSheet.block, 5, 0, 32);
+	
+	public static BlockTexture mob_spawn = new BlockTexture(TextureSheet.block, 6, 0, 32);
+	public static BlockTexture removed = new BlockTexture(TextureSheet.block, 7, 0, 32);
 	public static BlockTexture empty = new BlockTexture(0x000000, 32);
 
 	public static BlockTexture lava_1 = new BlockTexture(TextureSheet.lava, 0, 0, 32);
@@ -52,13 +55,17 @@ public class BlockTexture {
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	
-	public static BlockTexture mob_spawn = new BlockTexture(TextureSheet.block, 6, 0, 32);
-	
 	public static BlockTexture health = new BlockTexture(TextureSheet.item, 0, 0, 32);
 	public static BlockTexture health_2 = new BlockTexture(TextureSheet.item, 0, 1, 32);
 	//public static BlockTexture health_3 = new BlockTexture(TextureSheet.item, 0, 2, 32);
 	//public static BlockTexture health_4 = new BlockTexture(TextureSheet.item, 0, 3, 32);
 	//public static BlockTexture health_5 = new BlockTexture(TextureSheet.item, 0, 4, 32);
+
+	public static BlockTexture sugarbag = new BlockTexture(TextureSheet.item, 1, 0, 32);
+	public static BlockTexture sugarbag_2 = new BlockTexture(TextureSheet.item, 1, 1, 32);
+	
+	public static BlockTexture key = new BlockTexture(TextureSheet.item, 2, 0, 32);
+	public static BlockTexture key_2 = new BlockTexture(TextureSheet.item, 2, 1, 32);
 	
 	public static BlockTexture powerup = new BlockTexture(TextureSheet.item, 3, 0, 32);
 	public static BlockTexture powerup_2 = new BlockTexture(TextureSheet.item, 3, 1, 32);

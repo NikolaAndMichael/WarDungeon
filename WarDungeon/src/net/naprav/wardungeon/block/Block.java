@@ -8,6 +8,7 @@ public abstract class Block {
 	protected boolean isCollidable;
 	protected boolean doesKill;
 
+	protected int animation = 0;
 	public BlockTexture sprite;
 	protected int[] pixels;
 	

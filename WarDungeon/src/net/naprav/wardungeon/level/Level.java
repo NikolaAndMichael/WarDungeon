@@ -10,8 +10,11 @@ import net.naprav.wardungeon.block.MobSpawnBlock;
 import net.naprav.wardungeon.block.MossBrickBlock;
 import net.naprav.wardungeon.block.StoneBlock;
 import net.naprav.wardungeon.block.StoneBrickBlock;
-import net.naprav.wardungeon.block.item.HealthPodBlock;
-import net.naprav.wardungeon.block.item.PowerUpBlock;
+import net.naprav.wardungeon.block.special.HealthPodBlock;
+import net.naprav.wardungeon.block.special.KeyBlock;
+import net.naprav.wardungeon.block.special.PowerUpBlock;
+import net.naprav.wardungeon.block.special.RemovedItemBlock;
+import net.naprav.wardungeon.block.special.SugarBagBlock;
 import net.naprav.wardungeon.block.wall.Wall;
 import net.naprav.wardungeon.graphics.Display;
 
@@ -129,18 +132,25 @@ public class Level {
 		int topX = centerX, topY = centerY - 1;
 		int bottomX = centerX, bottomY = centerY + 1;
 
+		if (haveWallsBeenSet() == false) {
+			setLevelWalls();
+			return;
+		}
+
 		for (int x = x0; x < x1; x++) {
 			for (int y = y0; y < y1; y++) {
 				getBlock(x, y).render(x, y, display);
 
-				if (haveWallsBeenSet() == false) {
-					setLevelWalls();
-					return;
-				}
-
 				if (getBlock(centerX, centerY).doesKill()) WarDungeon.getPlayer().die();
+
 				if (getBlock(centerX, centerY) == HealthPodBlock.block) {
-					setBlock(centerX, centerY, 0xFF4C4C4C);
+					setBlock(centerX, centerY, 0xFF112233);
+				} else if (getBlock(centerX, centerY) == SugarBagBlock.block) {
+					setBlock(centerX, centerY, 0xFF112233);
+				} else if (getBlock(centerX, centerY) == KeyBlock.block) {
+					setBlock(centerX, centerY, 0xFF112233);
+				} else if (getBlock(centerX, centerY) == PowerUpBlock.block) {
+					setBlock(centerX, centerY, 0xFF112233);
 				}
 			}
 		}
@@ -167,7 +177,11 @@ public class Level {
 		/* Special blocks. */
 		if (blocks[xPos + (yPos * width)] == 0xFFFFFFFF) return MobSpawnBlock.block;
 		if (blocks[xPos + (yPos * width)] == 0xFFAC0000) return HealthPodBlock.block;
-		if (blocks[xPos + (yPos & width)] == 0xFFFFFF00) return PowerUpBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFFC2927E) return SugarBagBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFFD9A539) return KeyBlock.block;
+		if (blocks[xPos + (yPos * width)] == 0xFFFFFF00) return PowerUpBlock.block;
+
+		if (blocks[xPos + (yPos * width)] == 0xFF112233) return RemovedItemBlock.block;
 
 		/* Checks for walls. */
 		if (blocks[xPos + (yPos * width)] == 0xFFFF00FF) return Wall.bottomFlat;
@@ -232,7 +246,7 @@ public class Level {
 				}
 			}
 		}
-		
+
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				if (blocks[x + (y * width)] == 0xFFFF00FF) {
