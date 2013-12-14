@@ -22,5 +22,5 @@ IceStoneBrick: 0xCEF0FF
 
 WALLS:
 Wall: 0xFF00FF
-Outer Corners: 0xAA00AA
-Inner Corners: 0x550055
+Inner Corners: 0xAA00AA
+Outer Corners: 0x550055
