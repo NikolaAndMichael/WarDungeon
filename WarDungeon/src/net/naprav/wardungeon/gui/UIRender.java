@@ -4,6 +4,11 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import net.naprav.wardungeon.graphics.Display;
 import net.naprav.wardungeon.login.file.Server;
@@ -198,17 +203,16 @@ public class UIRender {
 	 * @param canvas
 	 */
 	public static void renderPlayerBar(int[] screen, Display display) {
-		WScreen bar = new WScreen("/textures/gui/in-game/player_bar.png", 100, 50);
-
-		int width = bar.getWidth(), height = bar.getHeight();
-		// int yPos = display.HEIGHT - height;
-
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				int index = x + (y * display.WIDTH), barIndex = x + (y * width);
-				if (barIndex < 5000) {
-					screen[index] = bar.pixels[barIndex];
-				}
+		WScreen bar = new WScreen("/textures/gui/in-game/player_bar.png", 100, 100);
+		int width = bar.image.getWidth(), height = bar.image.getHeight();
+		
+		int xPos = 0, yPos = display.HEIGHT - height;
+		
+		for (int x = 0; x < 100; x++) {
+			int xAbsol = x + xPos;
+			for (int y = 0; y < 100; y++) {
+				int yAbsol = y + yPos;
+				screen[xAbsol + (yAbsol * display.WIDTH)] = bar.pixels[xAbsol + (yAbsol * width)];
 			}
 		}
 	}

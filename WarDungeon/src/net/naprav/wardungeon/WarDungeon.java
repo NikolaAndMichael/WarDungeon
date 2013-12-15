@@ -36,7 +36,7 @@ public class WarDungeon extends Canvas implements Runnable {
 	private static final long serialVersionUID = 6601282971656374659L;
 
 	/* The version of the game, will be updates with annotation later! It also has the location to the game path! */
-	public static final String version = "Version: 0.1 Alpha";
+	public static final String version = "WarDungeon Alpha 0.1";
 	private static final String GAME_PATH = System.getProperty("user.home") + "\\AppData\\Roaming\\[WarDungeon]";
 
 	/* Basic integers and Dimensions for the JFrame and Canvas */

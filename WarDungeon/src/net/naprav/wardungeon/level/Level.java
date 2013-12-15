@@ -211,16 +211,16 @@ public class Level {
 			for (int y = 0; y < height; y++) {
 				if (blocks[x + (y * width)] == 0xFFAA00AA) {
 					if (getBlock(x + 1, y - 1) == AbyssBlock.block && getBlock(x - 1, y + 1) != AbyssBlock.block) {
-						// Bottom corner left sticking out.
+						// Bottom corner left sticking in.
 						setBlock(x, y, 0xFFDB00DB);
 					} else if (getBlock(x - 1, y - 1) == AbyssBlock.block && getBlock(x + 1, y + 1) != AbyssBlock.block) {
-						// Bottom corner right sticking out.
+						// Bottom corner right sticking in.
 						setBlock(x, y, 0xFFEB00EB);
 					} else if (getBlock(x - 1, y + 1) == AbyssBlock.block && getBlock(x + 1, y - 1) != AbyssBlock.block) {
-						// Top corner right sticking out.
+						// Top corner right sticking in.
 						setBlock(x, y, 0xFFE600E6);
 					} else if (getBlock(x + 1, y + 1) == AbyssBlock.block && getBlock(x - 1, y - 1) != AbyssBlock.block) {
-						// Top corner left sticking out.
+						// Top corner left sticking in.
 						setBlock(x, y, 0xFFE000E0);
 					}
 				}
@@ -232,16 +232,16 @@ public class Level {
 				if (blocks[x + (y * width)] == 0xFF550055) {
 					if (getBlock(x + 1, y - 1) == AbyssBlock.block && getBlock(x - 1, y + 1) != AbyssBlock.block) {
 						// Bottom corner left sticking out.
-						setBlock(x, y, 0xFFDB00DB);
+						setBlock(x, y, 0xFFD600AB);
 					} else if (getBlock(x - 1, y - 1) == AbyssBlock.block && getBlock(x + 1, y + 1) != AbyssBlock.block) {
 						// Bottom corner right sticking out.
-						setBlock(x, y, 0xFFEB00EB);
+						setBlock(x, y, 0xFFCC00A3);
 					} else if (getBlock(x - 1, y + 1) == AbyssBlock.block && getBlock(x + 1, y - 1) != AbyssBlock.block) {
 						// Top corner right sticking out.
-						setBlock(x, y, 0xFFE600E6);
+						setBlock(x, y, 0xFFC7009F);
 					} else if (getBlock(x + 1, y + 1) == AbyssBlock.block && getBlock(x - 1, y - 1) != AbyssBlock.block) {
 						// Top corner left sticking out.
-						setBlock(x, y, 0xFFE000E0);
+						setBlock(x, y, 0xFFD100A7);
 					}
 				}
 			}

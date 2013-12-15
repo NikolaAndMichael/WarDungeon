@@ -3,6 +3,7 @@ package net.naprav.wardungeon.graphics;
 import java.awt.image.BufferedImage;
 
 import net.naprav.wardungeon.block.Block;
+import net.naprav.wardungeon.gui.UIRender;
 import net.naprav.wardungeon.mob.Mob;
 import net.naprav.wardungeon.player.PlayerClass;
 
@@ -101,8 +102,8 @@ public class Display {
 	 * @param screen
 	 */
 	public void alignPixels(int[] screen) {
-		// UIRender.renderPlayerBar(pixels, this);
-
+		//UIRender.renderPlayerBar(pixels, this);
+		
 		for (int a = 0; a < screen.length; a++) {
 			if (screen.length == pixels.length) {
 				screen[a] = pixels[a];
